@@ -3,7 +3,7 @@ This project is used to integrate the desired driver pack inside a USB flash dri
 
 ### What you will need
  1. A place where you can get a [genuine Windows OS copy](https://www.microsoft.com/en-us/software-download/windows10).
- 2. A [flash drive](https://www.google.com/search?q=8GB+flash+drive&client=firefox-b-d&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjVuLbgodLhAhUR0aYKHaryAwAQ_AUIDigB&biw=1536&bih=711) with more than 8 GB of memory available
+ 2. A [flash drive](https://www.google.com/search?q=8GB+flash+drive) with more than 8 GB of memory available
  3. A USB flash drive MBR/GPT OS image transferring [tool like Rufus](https://rufus.ie/)
  4. A proper version of [DISM](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism---deployment-image-servicing-and-management-technical-reference-for-windows) integrated with Win7 and above
  
