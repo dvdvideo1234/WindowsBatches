@@ -28,22 +28,22 @@ You have to modify both files for this to work, then let's start with `boot.wim`
 Type `print boot` and hit `ENTER` and you will have an output like this:
 
 ```
-Index 1
+Index <ID>
 Details for image : boot.wim
 ```
 
 Type `print install` and hit `ENTER` and you will have an output like this:
 
 ```
-Index 1
+Index <ID>
 Details for image : install.wim
 ```
 
 As you see above, you've obtained the internal indexes of the image you want to modify
-to start the integration process just type the following `apply boot 1` where `1` is
-your internal index. Wait for it to finish and unmount itself from the mount folder
-and repeat the same procedure `apply install 1`. Wait for it to get done and unmount
-the image, then copy `boot.wim` and `install.wim` to `$LETTER\sources`.
+to start the integration process just type the following `apply boot <ID>` where `<ID>` is
+your internal installation index and may vary like 1,2,3,4,5 and so on if you have multiple windows installation in the drive.
+Wait for it to finish and unmount itself from the mount folder and repeat the same procedure `apply install <ID>`.
+Wait for it to get done and unmount the image, then copy `boot.wim` and `install.wim` to `$LETTER\sources`.
 
 ### Additional information
 The entire process is [described here](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/mount-and-modify-a-windows-image-using-dism) and this project just automates it.
