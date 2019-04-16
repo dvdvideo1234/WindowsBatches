@@ -39,10 +39,13 @@ Index <ID>
 Details for image : install.wim
 ```
 
-As you see above, you've obtained the internal indexes of the image you want to modify
+As you see above, you've obtained the internal indexes of the image you want to modify and
 to start the integration process just type the following `apply boot <ID>` where `<ID>` is
 your internal installation index and may vary like 1,2,3,4,5 and so on if you have multiple windows installation in the drive.
 Wait for it to finish and unmount itself from the mount folder and repeat the same procedure `apply install <ID>`.
+While it does its thinng it will search for the driver list to install and will outpout like the folowing
+
+
 Wait for it to get done and unmount the image, then copy `boot.wim` and `install.wim` to `$LETTER\sources`.
 
 ### Additional information
