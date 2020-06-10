@@ -1,8 +1,5 @@
-:: Switch drive
-K:
-
-:: Switch folder
-cd "K:\"
+:: Switch drive folder
+cd /d "K:\"
 
 :: Populate path
 md CACHEFILES
