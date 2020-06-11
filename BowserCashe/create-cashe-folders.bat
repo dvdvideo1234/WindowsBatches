@@ -9,5 +9,6 @@ md "OPERA"
 md "OPERAGX"
 md "FIREFOX"
 md "INTERNET EXPLORER"
+md "CHROME"
 
 exit 0
