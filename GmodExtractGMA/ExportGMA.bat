@@ -2,15 +2,16 @@
 
 setlocal EnableDelayedExpansion
 
-set FileExt=gma
 set BinPath="F:\Games\Steam\steamapps\common\GarrysMod\bin"
-set OutPath="K:\Test"
-set OnlyAddons=(gm_garage_270610222,train_hopper_car_550767658,train_open_wagon_545309996)
-set SkipAddons=(train_open_wagon_545309996)
+set OutPath="O:\Documents\GmodAddons12-13\Gmod13\GMAD_EXTRACTED"
+set OnlyAddons=()
+set SkipAddons=()
 
 set OnlyAddonsCount=0
 set SkipAddonsCount=0
-set StartTime=%time%
+set "StartTime=%date% %time%"
+set FilePathCD=%~dp0
+set FileExt=gma
 
 for %%i in %OnlyAddons% do (
   set SkipAddonsCount=0
@@ -20,8 +21,8 @@ for %%i in %OnlyAddons% do (
     )
   )
   if /I "!SkipAddonsCount!" EQU "0" (
-    echo Processing [%CD%\%%i.!FileExt!]
-    call Processor.bat %BinPath%, %CD%\%%i.!FileExt!, %OutPath%
+    echo Processing [%FilePathCD%\%%i.!FileExt!]
+    call Processor.bat %BinPath%, %FilePathCD%\%%i.!FileExt!, %OutPath%
     set /A OnlyAddonsCount=!OnlyAddonsCount!+1
   ) else (
     echo Skipped [%%i.!FileExt!]
@@ -32,14 +33,14 @@ if /I "!OnlyAddonsCount!" NEQ "0" (
   echo "Selected addons extracted !"
   timeout 100
 ) else (
-  for /r %%i in (*.gma) do (
+  for /r %%i in (*.!FileExt!) do (
     set SkipAddonsCount=0
     for %%j in %SkipAddons% do (
 
       echo II %%i
-      echo JJ %CD%\%%j.!FileExt!
+      echo JJ %FilePathCD%\%%j.!FileExt!
 
-      if /I "%%i" EQU "%CD%\%%j.!FileExt!" (
+      if /I "%%i" EQU "%FilePathCD%\%%j.!FileExt!" (
         set /A SkipAddonsCount=!SkipAddonsCount!+1
       )
     )
