@@ -19,4 +19,8 @@ The only file that you must edit to fit your needs is `ExportGMA.bat`. Setup it 
 ### External links
 1) [Garry's GMAD git repo](https://github.com/garrynewman/gmad)
 2) [Facepunch tread of GMAD](https://gmod.facepunch.com/f/gmoddev/lzyb/GMad-command-line-addon-creator-extractor/1/)
-3) [The GMA batch in action](https://youtu.be/PGxDcOWdCOE)
+3) [The GMA batch in action](https://www.youtube.com/watch?v=PGxDcOWdCOE)
+
+[![](https://img.youtube.com/vi/PGxDcOWdCOE/1.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
+[![](https://img.youtube.com/vi/PGxDcOWdCOE/2.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
+[![](https://img.youtube.com/vi/PGxDcOWdCOE/3.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
