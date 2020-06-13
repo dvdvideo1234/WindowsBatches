@@ -1,17 +1,25 @@
 @echo off
 
+:: Enable delayed expression for use of aritmetic stuff
+
 setlocal EnableDelayedExpansion
+
+:: The user configures the following
 
 set BinPath="F:\Games\Steam\steamapps\common\GarrysMod\bin"
 set OutPath="O:\Documents\GmodAddons12-13\Gmod13\GMAD_EXTRACTED"
 set OnlyAddons=()
 set SkipAddons=()
 
+:: The rest of the file is automatic
+
 set OnlyAddonsCount=0
 set SkipAddonsCount=0
 set "StartTime=%date% %time%"
 set FilePathCD=%~dp0
 set FileExt=gma
+
+del /f /q %OutPath%\*.log
 
 for %%i in %OnlyAddons% do (
   set SkipAddonsCount=0
