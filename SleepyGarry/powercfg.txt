@@ -1,0 +1,297 @@
+
+POWERCFG <command line options>
+Description:
+  This command line tool enables users to control the power settings
+  on a system.
+
+Parameter List:
+  -LIST, -L   Lists all power schemes in the current user's environment.
+
+              Usage: POWERCFG -LIST
+
+  -QUERY, -Q  Displays the contents of the specified power scheme.
+
+              Usage: POWERCFG -QUERY <SCHEME_GUID> <SUB_GUID>
+
+              <SCHEME_GUID>  (optional) Specifies the GUID of the power scheme
+                             to display, can be obtained by using powercfg -l.
+              <SUB_GUID>     (optional) Specifies the GUID of the subgroup
+                             to display.  Requires a SCHEME_GUID to be provided.
+
+              If neither SCHEME_GUID or SUB_GUID are provided, the settings
+              of the current user's active power scheme are displayed.
+              If SUB_GUID is not specified, all settings in the specified 
+              power scheme are displayed.
+
+  -CHANGE, -X Modifies a setting value in the current power scheme.
+
+              Usage: POWERCFG -X <SETTING> <VALUE>
+
+              <SETTING>   Specifies one of the following options:
+                          -monitor-timeout-ac <minutes>
+                          -monitor-timeout-dc <minutes>
+                          -disk-timeout-ac <minutes>
+                          -disk-timeout-dc <minutes>
+                          -standby-timeout-ac <minutes>
+                          -standby-timeout-dc <minutes>
+                          -hibernate-timeout-ac <minutes>
+                          -hibernate-timeout-dc <minutes>
+
+              Example:
+                  POWERCFG -Change -monitor-timeout-ac 5
+
+              This would set the monitor idle timeout value to 5 minutes
+              when on AC power.
+
+  -CHANGENAME Modifies the name of a power scheme and optionally it's 
+              description.
+
+              Usage: POWERCFG -CHANGENAME <GUID> <name> <scheme description> 
+
+              If the description is omitted only the name will be changed.
+
+  -DUPLICATESCHEME 
+              Duplicates the specified power scheme.  The resulting 
+              GUID which represents the new scheme will be displayed.
+
+              Usage: POWERCFG -DUPLICATESCHEME <GUID> <destination GUID>
+
+              <GUID>  Specifies a scheme GUID obtained by using the powercfg -l.
+
+              If <destination GUID> is omitted, a new GUID will be
+              created for the duplicated scheme.
+
+  -DELETE, -D Deletes the power scheme with the specified GUID.
+
+              Usage: POWERCFG -DELETE <GUID>
+
+              <GUID>  obtained by using the LIST parameter.
+
+  -DELETESETTING 
+              Deletes a power setting.
+
+              Usage: POWERCFG -DELETESETTING <SUB_GUID> <SETTING_GUID> 
+
+              <SUB_GUID>      Specifies the subgroup GUID.
+              <SETTING_GUID>  Specifies the power setting guid.
+
+  -SETACTIVE, -S 
+              Makes the specified power scheme active on the system.
+
+              Usage: POWERCFG -SETACTIVE <SCHEME_GUID>
+
+              <SCHEME_GUID>  Specifies the scheme guid.
+
+  -GETACTIVESCHEME 
+              Retrieve the currently active power scheme.
+
+              Usage: POWERCFG -GETACTIVESCHEME 
+
+  -SETACVALUEINDEX
+              Sets a value associated with a specified power setting
+              while the system is powered by AC power.
+
+              Usage: POWERCFG -SETACVALUEINDEX <SCHEME_GUID> <SUB_GUID>
+                                               <SETTING_GUID> <SettingIndex>
+
+              <SCHEME_GUID>   Specifies a power scheme GUID and may be
+                              obtained by using PowerCfg /L.
+              <SUB_GUID>      Specifies a subgroup of power setting GUID and may
+                              be obtained by using "PowerCfg /Q."
+              <SETTING_GUID>  Specifies an individual power setting GUID and may
+                              be obtained by using "PowerCfg /Q".
+              <SettingIndex>  Specifies which of the list of of possible values
+                              this power setting will be set to.
+
+              Example:
+                  POWERCFG -SetAcValueIndex <GUID> <GUID> <GUID> 5
+                  This would set the power setting's AC value to the 5th entry
+                  in the list of possible values for this power setting.
+
+  -SETDCVALUEINDEX 
+              Sets a value associated with a specified power setting
+              while the system is powered by DC power.
+
+              Usage: POWERCFG -SETDCVALUEINDEX <SCHEME_GUID> <SUB_GUID>
+                                               <SETTING_GUID> <SettingIndex>
+              <SCHEME_GUID>   Specifies a power scheme GUID and may be
+                              obtained by using PowerCfg /L.
+              <SUB_GUID>      Specifies a subgroup of power setting GUID and may
+                              be obtained by using "PowerCfg /Q."
+              <SETTING_GUID>  Specifies an individual power setting GUID and may
+                              be obtained by using "PowerCfg /Q".
+              <SettingIndex>  Specifies which of the list of possible values
+                              this setting will be set to.
+
+              Example:
+                  POWERCFG -SetDcValueIndex <GUID> <GUID> <GUID> 5
+                  This would set the power setting's DC value to the 5th entry
+                  in the list of possible values for this power setting.
+
+  -HIBERNATE, -H
+              Enables-Disables the hibernate feature.  Hibernate timeout is not
+              supported on all systems.
+
+              Usage: POWERCFG -H <ON|OFF>
+                     POWERCFG -H -Size <PercentSize>
+              -Size  Specifies the desired hiberfile size in percentage of the
+                     total memory. The default size cannot be smaller than 50.
+                     This switch will also enable the hiberfile automatically.
+
+  -AVAILABLESLEEPSTATES, -A  
+              Reports the sleep states available on the system
+              Attempts to report reasons why sleep states are unavailable.
+
+  -DEVICEQUERY
+              Return a list of devices that meet the specified criteria.
+
+              Usage: POWERCFG -DEVICEQUERY <queryflags>
+
+              <queryflags>  Secifies one of the following criteria:
+
+              wake_from_S1_supported  Return all devices that support waking the
+                                      system from a light sleep state.
+              wake_from_S2_supported  Return all devices that support waking the
+                                      system from a deeper sleep state.
+              wake_from_S3_supported  Return all devices that support waking the 
+                                      system from the deepest sleep state.
+              wake_from_any           Return all devices that support waking the 
+                                      system from any sleep state.
+              S1_supported            List devices supporting light sleep.
+              S2_supported            List devices supporting deeper sleep.
+              S3_supported            List devices supporting deepest sleep.
+              S4_supported            List devices supporting hibernation.
+              wake_programmable       List devices that are user-configurable
+                                      to wake the system from a sleep state.
+              wake_armed              List devices that are currently configured
+                                      to wake the system from any sleep state.
+              all_devices             Return all devices present in the system.
+              all_devices_verbose     Return verbose list of devices.
+              Example:
+                  POWERCFG -DEVICEQUERY wake_armed
+
+  -DEVICEENABLEWAKE
+              Enable the device to wake the system from a sleep state.
+
+              Usage: POWERCFG -DEVICEENABLEWAKE <devicename>
+
+              <devicename>  Specifies a device retrieved using
+                            "PowerCfg -DEVICEQUERY wake_programmable".
+
+              Example:
+                  POWERCFG -DEVICEENABLEWAKE
+                                       "Microsoft USB IntelliMouse Explorer"
+
+  -DEVICEDISABLEWAKE <devicename> disable the device from waking the system
+              Disable the device from waking the system from a sleep state
+
+              Usage: POWERCFG -DEVICEDISABLEWAKE 
+
+              <devicename>  Specifies a device retrieved using
+                            "PowerCfg -DEVICEQUERY wake_armed".
+
+  -IMPORT     Imports all power settings from the specified file.
+
+              Usage: POWERCFG -IMPORT <filename> <GUID> 
+
+              <filename>  Specify a fully-qualified path to a file generated by
+                          using "PowerCfg -EXPORT parameter".
+              <GUID>      (optional) The settings are loaded into a power scheme
+                          represented by this GUID. If not supplied, powercfg
+                          will generate and use a new GUID
+
+              Example:
+                  POWERCFG -IMPORT c:\scheme.pow
+
+  -EXPORT     Exports power scheme, represented by the specified GUID, to the 
+              specified file.
+
+              Usage: POWERCFG -EXPORT <filename> <GUID> 
+
+              <filename>  Specify a fully-qualified path to a destination file.
+              <GUID>      specifies a power scheme GUID and may be obtained by
+                          using "PowerCfg /L"
+
+              Example:
+                  POWERCFG -EXPORT c:\scheme.pow
+                                   381b4222-f694-41f0-9685-ff5bb260df2e
+
+  -LASTWAKE   Reports information about what woke the system from the last
+              sleep transition
+
+  -HELP, -?   Displays information on command-line parameters.
+
+  -ALIASES    Displays all aliases and their corresponding GUIDs.
+              The user may use these aliases in place of any GUID on
+              the commandline.
+
+  -SETSECURITYDESCRIPTOR
+              Sets a security descriptor associated with a specified
+              power setting, power scheme, or action.
+
+              Usage: POWERCFG -SETSECURITYDESCRIPTOR <GUID|ACTION> <SDDL>
+
+              <GUID>       Specifies a power scheme or a power setting GUID.
+              <ACTION>     Can be one of the following strings:
+                           ActionSetActive, ActionCreate, ActionDefault
+              <SDDL>       Specifies a valid security descriptor string in SDDL
+                           format. Call POWERCFG -GETSECURITYDESCRIPTOR to see
+                           an example SDDL STRING.
+
+  -GETSECURITYDESCRIPTOR
+              Gets a security descriptor associated with a specified 
+              power setting, power scheme, or action.
+
+              Usage: POWERCFG -GETSECURITYDESCRIPTOR <GUID|ACTION> 
+              <GUID>       Specifies a power scheme or a power setting GUID.
+              <ACTION>     Can be one of the following strings:
+                           ActionSetActive, ActionCreate, ActionDefault
+
+  -REQUESTS
+              Enumerate application and driver Power Requests. Power 
+              Requests prevent the computer from automatically powering off 
+              the display or entering a low-power sleep mode. 
+
+  -REQUESTSOVERRIDE
+              Sets a Power Request override for a particular Process, Service,
+              or Driver. If no parameters are specified, this command displays
+              the current list of Power Request Overrides. 
+
+              Usage: POWERCFG -REQUESTSOVERRIDE <CALLER_TYPE> <NAME> <REQUEST> 
+              <CALLER_TYPE>    Specifies one of the following caller type:
+                               PROCESS, SERVICE, DRIVER. This is obtained by 
+                               calling the POWERCFG -REQUESTS command. 
+              <NAME>           Specifies the caller name. This is the name 
+                               returned from calling POWERCFG -REQUESTS command.
+              <REQUEST>        Specifies one or more of the following Power
+                               Request Types: Display, System, Awaymode.
+              Example:
+                  POWERCFG -REQUESTSOVERRIDE PROCESS wmplayer.exe Display System
+
+  -ENERGY
+              Analyze the system for common energy-efficiency and battery life
+              problems. The ENERGY command should be used when the computer is
+              idle and with no open programs or documents. The ENERGY command
+              will generate an HTML report file in the current path. The ENERGY
+              command supports the following optional parameters:
+
+              Usage: POWERCFG -ENERGY [-OUTPUT <FILENAME>] [-XML]
+                                      [-DURATION <SECONDS>]
+                     POWERCFG -ENERGY -TRACE [-D <FILEPATH>]
+                                             [-DURATION <SECONDS>]
+              -OUTPUT <FILENAME>   - Specify the path and filename to store the
+                                     energy report HTML file.
+              -XML                 - Format the report file as XML.
+              -TRACE               - Record system behavior and do not perform
+                                     analysis. Trace files will be generated in
+                                     the current path unless the -D parameter
+                                     is specified.
+              -D <FILEPATH>        - Specify the directory to store trace data.
+                                     May only be used with the -TRACE parameter.
+              -DURATION <SECONDS>  - Specify the number of seconds to observe
+                                     system behavior.  Default is 60 seconds.
+  -WAKETIMERS
+              Enumerate the active wake timers. If enabled, the expiration of a
+              wake timer wakes the system from sleep and hibernate states.
+
+
