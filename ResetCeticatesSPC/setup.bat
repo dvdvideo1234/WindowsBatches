@@ -2,23 +2,23 @@
 
 set "OS_VERSION=Microsoft"
 
-FOR /F "usebackq tokens=3,4,5" %%i IN (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v ProductName`) DO (
+for /F "usebackq tokens=3,4,5" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v ProductName`) do (
   set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
 )
 
-FOR /F "usebackq tokens=3,4,5" %%i IN (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDVersion`) DO (
+for /F "usebackq tokens=3,4,5" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDVersion`) do (
   set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
 )
 
-FOR /F "usebackq tokens=3" %%i IN (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentVersion`) DO (
+for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentVersion`) do (
   set "OS_VERSION=%OS_VERSION% %%i"
 )
 
-FOR /F "usebackq tokens=3" %%i IN (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentBuild`) DO (
+for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentBuild`) do (
   set "OS_VERSION=%OS_VERSION%.%%i"
 )
 
-FOR /F "usebackq tokens=3" %%i IN (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDBuildNumber`) DO (
+for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDBuildNumber`) do (
   set "OS_VERSION=%OS_VERSION% [%%i]"
 )
 
