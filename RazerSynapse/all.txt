@@ -1,31 +1,21 @@
 
-SERVICE_NAME: 2143A523
-DISPLAY_NAME: 2143A523
-        TYPE               : 110  WIN32_OWN_PROCESS  (interactive)
-        STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
-        SERVICE_EXIT_CODE  : 0  (0x0)
-        CHECKPOINT         : 0x0
-        WAIT_HINT          : 0x0
-        PID                : 0
-        FLAGS              : 
-
 SERVICE_NAME: AdobeARMservice
 DISPLAY_NAME: Adobe Acrobat Update Service
         TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 0
+        PID                : 1988
         FLAGS              : 
 
 SERVICE_NAME: AdobeFlashPlayerUpdateSvc
 DISPLAY_NAME: Adobe Flash Player Update Service
         TYPE               : 10  WIN32_OWN_PROCESS  
         STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
@@ -35,13 +25,12 @@ DISPLAY_NAME: Adobe Flash Player Update Service
 SERVICE_NAME: AeLookupSvc
 DISPLAY_NAME: Application Experience
         TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        STATE              : 1  STOPPED 
         WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: ALG
@@ -64,7 +53,7 @@ DISPLAY_NAME: AMD External Events Utility
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1116
+        PID                : 1120
         FLAGS              : 
 
 SERVICE_NAME: AMD Log Utility
@@ -76,7 +65,19 @@ DISPLAY_NAME: AMD Log Utility
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1164
+        PID                : 1168
+        FLAGS              : 
+
+SERVICE_NAME: AnyDesk
+DISPLAY_NAME: AnyDesk Service
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 2100
         FLAGS              : 
 
 SERVICE_NAME: AppHostSvc
@@ -88,7 +89,7 @@ DISPLAY_NAME: Application Host Helper Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1572
+        PID                : 2252
         FLAGS              : 
 
 SERVICE_NAME: AppIDSvc
@@ -111,7 +112,7 @@ DISPLAY_NAME: Application Information
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: AppMgmt
@@ -157,7 +158,7 @@ DISPLAY_NAME: Windows Audio
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: AVP20.0
@@ -169,7 +170,7 @@ DISPLAY_NAME: Kaspersky Anti-Virus Service 20.0
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1816
+        PID                : 2276
         FLAGS              : 
 
 SERVICE_NAME: AxInstSV
@@ -237,7 +238,7 @@ DISPLAY_NAME: Background Intelligent Transfer Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: Browser
@@ -260,7 +261,7 @@ DISPLAY_NAME: Bluetooth Support Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2184
+        PID                : 2380
         FLAGS              : 
 
 SERVICE_NAME: CertPropSvc
@@ -327,7 +328,7 @@ DISPLAY_NAME: COM+ System Application
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 4848
+        PID                : 4988
         FLAGS              : 
 
 SERVICE_NAME: CryptSvc
@@ -339,7 +340,7 @@ DISPLAY_NAME: Cryptographic Services
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1544
+        PID                : 1548
         FLAGS              : 
 
 SERVICE_NAME: CscService
@@ -363,7 +364,7 @@ DISPLAY_NAME: Debug Diagnostic Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2216
+        PID                : 2408
         FLAGS              : 
 
 SERVICE_NAME: DcomLaunch
@@ -382,7 +383,7 @@ SERVICE_NAME: defragsvc
 DISPLAY_NAME: Disk Defragmenter
         TYPE               : 10  WIN32_OWN_PROCESS  
         STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
@@ -398,7 +399,7 @@ DISPLAY_NAME: DHCP Client
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: DiagTrack
@@ -410,7 +411,7 @@ DISPLAY_NAME: Diagnostics Tracking Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2252
+        PID                : 2468
         FLAGS              : 
 
 SERVICE_NAME: Digital Media Server
@@ -433,7 +434,7 @@ DISPLAY_NAME: DNS Client
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1544
+        PID                : 1548
         FLAGS              : 
 
 SERVICE_NAME: dot3svc
@@ -469,7 +470,7 @@ DISPLAY_NAME: Extensible Authentication Protocol
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: EasyAntiCheat
@@ -504,7 +505,7 @@ DISPLAY_NAME: Windows Event Log
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: EventSystem
@@ -516,7 +517,7 @@ DISPLAY_NAME: COM+ Event System
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: Fax
@@ -539,7 +540,7 @@ DISPLAY_NAME: Function Discovery Provider Host
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: FDResPub
@@ -551,7 +552,7 @@ DISPLAY_NAME: Function Discovery Resource Publication
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2772
+        PID                : 2856
         FLAGS              : 
 
 SERVICE_NAME: FLEXnet Licensing Service
@@ -585,7 +586,7 @@ DISPLAY_NAME: Windows Font Cache Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: FontCache3.0.0.0
@@ -597,7 +598,7 @@ DISPLAY_NAME: Windows Presentation Foundation Font Cache 3.0.0.0
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2304
+        PID                : 2524
         FLAGS              : 
 
 SERVICE_NAME: Futuremark SystemInfo Service
@@ -631,7 +632,7 @@ DISPLAY_NAME: Group Policy Client
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1416
+        PID                : 1408
         FLAGS              : 
 
 SERVICE_NAME: gupdate
@@ -665,7 +666,7 @@ DISPLAY_NAME: Handsfree Headset Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2504
+        PID                : 2692
         FLAGS              : 
 
 SERVICE_NAME: hidserv
@@ -711,7 +712,7 @@ DISPLAY_NAME: HomeGroup Provider
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: idsvc
@@ -745,7 +746,7 @@ DISPLAY_NAME: IKE and AuthIP IPsec Keying Modules
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: IPBusEnum
@@ -769,7 +770,7 @@ DISPLAY_NAME: IP Helper
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: KeyIso
@@ -815,7 +816,7 @@ DISPLAY_NAME: Server
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: LanmanWorkstation
@@ -827,7 +828,7 @@ DISPLAY_NAME: Workstation
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1544
+        PID                : 1548
         FLAGS              : 
 
 SERVICE_NAME: LightScribeService
@@ -861,19 +862,18 @@ DISPLAY_NAME: TCP/IP NetBIOS Helper
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: MMCSS
 DISPLAY_NAME: Multimedia Class Scheduler
         TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        STATE              : 1  STOPPED 
         WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: MozillaMaintenance
@@ -907,7 +907,7 @@ DISPLAY_NAME: Distributed Transaction Coordinator
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 4180
+        PID                : 4300
         FLAGS              : 
 
 SERVICE_NAME: MSiSCSI
@@ -925,7 +925,7 @@ SERVICE_NAME: msiserver
 DISPLAY_NAME: Windows Installer
         TYPE               : 10  WIN32_OWN_PROCESS  
         STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
@@ -986,7 +986,7 @@ DISPLAY_NAME: Net.Pipe Listener Adapter
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 3084
+        PID                : 3188
         FLAGS              : 
 
 SERVICE_NAME: netprofm
@@ -998,7 +998,7 @@ DISPLAY_NAME: Network List Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: NetTcpActivator
@@ -1010,7 +1010,7 @@ DISPLAY_NAME: Net.Tcp Listener Adapter
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 3084
+        PID                : 3188
         FLAGS              : 
 
 SERVICE_NAME: NetTcpPortSharing
@@ -1022,7 +1022,7 @@ DISPLAY_NAME: Net.Tcp Port Sharing Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2528
+        PID                : 2720
         FLAGS              : 
 
 SERVICE_NAME: NlaSvc
@@ -1034,7 +1034,7 @@ DISPLAY_NAME: Network Location Awareness
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1544
+        PID                : 1548
         FLAGS              : 
 
 SERVICE_NAME: NMIndexingService
@@ -1057,7 +1057,7 @@ DISPLAY_NAME: Network Store Interface Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: ose64
@@ -1091,7 +1091,7 @@ DISPLAY_NAME: Peer Networking Identity Manager
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 6456
+        PID                : 5112
         FLAGS              : 
 
 SERVICE_NAME: p2psvc
@@ -1103,7 +1103,7 @@ DISPLAY_NAME: Peer Networking Grouping
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 6456
+        PID                : 5112
         FLAGS              : 
 
 SERVICE_NAME: PcaSvc
@@ -1183,7 +1183,7 @@ DISPLAY_NAME: Peer Name Resolution Protocol
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 6456
+        PID                : 5112
         FLAGS              : 
 
 SERVICE_NAME: PolicyAgent
@@ -1218,7 +1218,7 @@ DISPLAY_NAME: User Profile Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: ProtectedStorage
@@ -1235,13 +1235,12 @@ DISPLAY_NAME: Protected Storage
 SERVICE_NAME: QWAVE
 DISPLAY_NAME: Quality Windows Audio Video Experience
         TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
+        STATE              : 1  STOPPED 
+        WIN32_EXIT_CODE    : 1077  (0x435)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2772
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: RapiMgr
@@ -1253,7 +1252,7 @@ DISPLAY_NAME: Windows Mobile-based device connectivity
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2848
+        PID                : 1424
         FLAGS              : 
 
 SERVICE_NAME: RasAuto
@@ -1281,25 +1280,23 @@ DISPLAY_NAME: Remote Access Connection Manager
 SERVICE_NAME: Razer Chroma SDK Server
 DISPLAY_NAME: Razer Chroma SDK Server
         TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, PAUSABLE, IGNORES_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
+        STATE              : 1  STOPPED 
+        WIN32_EXIT_CODE    : 1077  (0x435)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 11160
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: Razer Chroma SDK Service
 DISPLAY_NAME: Razer Chroma SDK Service
         TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, PAUSABLE, IGNORES_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
+        STATE              : 1  STOPPED 
+        WIN32_EXIT_CODE    : 1077  (0x435)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 10296
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: Razer Game Manager Service
@@ -1311,7 +1308,19 @@ DISPLAY_NAME: Razer Game Manager
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 9664
+        PID                : 7236
+        FLAGS              : 
+
+SERVICE_NAME: Razer Synapse Service
+DISPLAY_NAME: Razer Synapse Service
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 8356
         FLAGS              : 
 
 SERVICE_NAME: RemoteAccess
@@ -1356,7 +1365,7 @@ DISPLAY_NAME: RPC Endpoint Mapper
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1056
+        PID                : 1060
         FLAGS              : 
 
 SERVICE_NAME: RpcLocator
@@ -1379,7 +1388,19 @@ DISPLAY_NAME: Remote Procedure Call (RPC)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1056
+        PID                : 1060
+        FLAGS              : 
+
+SERVICE_NAME: RzActionSvc
+DISPLAY_NAME: Razer Central Service
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 7524
         FLAGS              : 
 
 SERVICE_NAME: SamSs
@@ -1414,7 +1435,7 @@ DISPLAY_NAME: Task Scheduler
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: SCPolicySvc
@@ -1437,7 +1458,7 @@ DISPLAY_NAME: Windows Backup
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2696
+        PID                : 2808
         FLAGS              : 
 
 SERVICE_NAME: seclogon
@@ -1460,7 +1481,7 @@ DISPLAY_NAME: System Event Notification Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: SensrSvc
@@ -1505,7 +1526,7 @@ DISPLAY_NAME: Shell Hardware Detection
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: SNMPTRAP
@@ -1522,13 +1543,12 @@ DISPLAY_NAME: SNMP Trap
 SERVICE_NAME: spacedeskService
 DISPLAY_NAME: spacedeskService
         TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
+        STATE              : 1  STOPPED 
+        WIN32_EXIT_CODE    : 1077  (0x435)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2716
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: Spooler
@@ -1540,7 +1560,7 @@ DISPLAY_NAME: Print Spooler
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1868
+        PID                : 1844
         FLAGS              : 
 
 SERVICE_NAME: sppsvc
@@ -1574,7 +1594,7 @@ DISPLAY_NAME: SQL Server VSS Writer
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2752
+        PID                : 2828
         FLAGS              : 
 
 SERVICE_NAME: SSDPSRV
@@ -1586,7 +1606,7 @@ DISPLAY_NAME: SSDP Discovery
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2772
+        PID                : 2856
         FLAGS              : 
 
 SERVICE_NAME: SstpSvc
@@ -1609,7 +1629,7 @@ DISPLAY_NAME: SAMSUNG Mobile Connectivity Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2808
+        PID                : 2892
         FLAGS              : 
 
 SERVICE_NAME: Steam Client Service
@@ -1621,7 +1641,7 @@ DISPLAY_NAME: Steam Client Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 6132
+        PID                : 5588
         FLAGS              : 
 
 SERVICE_NAME: stisvc
@@ -1633,7 +1653,7 @@ DISPLAY_NAME: Windows Image Acquisition (WIA)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2840
+        PID                : 2924
         FLAGS              : 
 
 SERVICE_NAME: swprv
@@ -1651,7 +1671,7 @@ SERVICE_NAME: SysMain
 DISPLAY_NAME: Superfetch
         TYPE               : 20  WIN32_SHARE_PROCESS  
         STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        WIN32_EXIT_CODE    : 2  (0x2)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
@@ -1661,13 +1681,12 @@ DISPLAY_NAME: Superfetch
 SERVICE_NAME: TabletInputService
 DISPLAY_NAME: Tablet PC Input Service
         TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
+        STATE              : 1  STOPPED 
+        WIN32_EXIT_CODE    : 1077  (0x435)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1232
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: TapiSrv
@@ -1690,7 +1709,7 @@ DISPLAY_NAME: TeamViewer
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2876
+        PID                : 2964
         FLAGS              : 
 
 SERVICE_NAME: TermService
@@ -1713,7 +1732,7 @@ DISPLAY_NAME: Themes
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: THREADORDER
@@ -1781,7 +1800,7 @@ DISPLAY_NAME: UPnP Device Host
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2772
+        PID                : 2856
         FLAGS              : 
 
 SERVICE_NAME: UxSms
@@ -1843,13 +1862,12 @@ DISPLAY_NAME: Volume Shadow Copy
 SERVICE_NAME: W32Time
 DISPLAY_NAME: Windows Time
         TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        STATE              : 1  STOPPED 
         WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 0
         FLAGS              : 
 
 SERVICE_NAME: W3SVC
@@ -1861,7 +1879,7 @@ DISPLAY_NAME: World Wide Web Publishing Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2972
+        PID                : 3036
         FLAGS              : 
 
 SERVICE_NAME: WAS
@@ -1873,7 +1891,7 @@ DISPLAY_NAME: Windows Process Activation Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2972
+        PID                : 3036
         FLAGS              : 
 
 SERVICE_NAME: WatAdminSvc
@@ -1918,7 +1936,7 @@ DISPLAY_NAME: Windows Mobile-2003-based device connectivity
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2848
+        PID                : 1424
         FLAGS              : 
 
 SERVICE_NAME: wcncsvc
@@ -1930,7 +1948,7 @@ DISPLAY_NAME: Windows Connect Now - Config Registrar
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2772
+        PID                : 2856
         FLAGS              : 
 
 SERVICE_NAME: WcsPlugInService
@@ -1953,7 +1971,7 @@ DISPLAY_NAME: Diagnostic Service Host
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: WdiSystemHost
@@ -2009,7 +2027,7 @@ DISPLAY_NAME: Windows Error Reporting Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 3024
+        PID                : 1968
         FLAGS              : 
 
 SERVICE_NAME: WiaRpc
@@ -2043,7 +2061,7 @@ DISPLAY_NAME: WinHTTP Web Proxy Auto-Discovery Service
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1268
+        PID                : 1272
         FLAGS              : 
 
 SERVICE_NAME: Winmgmt
@@ -2055,7 +2073,7 @@ DISPLAY_NAME: Windows Management Instrumentation
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: WinRM
@@ -2090,7 +2108,7 @@ DISPLAY_NAME: WMI Performance Adapter
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 3064
+        PID                : 952
         FLAGS              : 
 
 SERVICE_NAME: WMPNetworkSvc
@@ -2135,7 +2153,7 @@ DISPLAY_NAME: Security Center
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1196
+        PID                : 1200
         FLAGS              : 
 
 SERVICE_NAME: WSearch
@@ -2147,7 +2165,7 @@ DISPLAY_NAME: Windows Search
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 2456
+        PID                : 3112
         FLAGS              : 
 
 SERVICE_NAME: wuauserv
@@ -2159,7 +2177,7 @@ DISPLAY_NAME: Windows Update
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-        PID                : 1304
+        PID                : 1300
         FLAGS              : 
 
 SERVICE_NAME: wudfsvc
@@ -2183,28 +2201,4 @@ DISPLAY_NAME: WWAN AutoConfig
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
         PID                : 1744
-        FLAGS              : 
-
-SERVICE_NAME: RzActionSvc
-DISPLAY_NAME: Razer Central Service
-        TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
-        SERVICE_EXIT_CODE  : 0  (0x0)
-        CHECKPOINT         : 0x0
-        WAIT_HINT          : 0x0
-        PID                : 9472
-        FLAGS              : 
-
-SERVICE_NAME: Razer Synapse Service
-DISPLAY_NAME: Razer Synapse Service
-        TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, PAUSABLE, ACCEPTS_SHUTDOWN)
-        WIN32_EXIT_CODE    : 0  (0x0)
-        SERVICE_EXIT_CODE  : 0  (0x0)
-        CHECKPOINT         : 0x0
-        WAIT_HINT          : 0x0
-        PID                : 10964
         FLAGS              : 

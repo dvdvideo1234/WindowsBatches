@@ -1,9 +1,4 @@
 SERVICE_NAME: Razer Chroma SDK Server
-DISPLAY_NAME: Razer Chroma SDK Server
 SERVICE_NAME: Razer Chroma SDK Service
-DISPLAY_NAME: Razer Chroma SDK Service
 SERVICE_NAME: Razer Game Manager Service
-DISPLAY_NAME: Razer Game Manager
-DISPLAY_NAME: Razer Central Service
 SERVICE_NAME: Razer Synapse Service
-DISPLAY_NAME: Razer Synapse Service
