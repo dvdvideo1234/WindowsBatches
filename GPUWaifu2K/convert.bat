@@ -21,9 +21,9 @@ setlocal EnableDelayedExpansion
 set "waifuBase=D:\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
-set "waifuNoise=0"
+set "waifuNoise=2"
 set "waifuScale=2"
-set "waifuTile=256"
+set "waifuTile=128"
 set "waifuModel=cunet"
 set "waifuGPUID=0"
 
