@@ -6,20 +6,12 @@ for /F "usebackq tokens=3,4,5" %%i in (`REG query "hklm\software\microsoft\windo
   set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
 )
 
-for /F "usebackq tokens=3,4,5" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDVersion`) do (
-  set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
-)
-
 for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentVersion`) do (
   set "OS_VERSION=%OS_VERSION% %%i"
 )
 
 for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentBuild`) do (
   set "OS_VERSION=%OS_VERSION%.%%i"
-)
-
-for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows NT\CurrentVersion" /v CSDBuildNumber`) do (
-  set "OS_VERSION=%OS_VERSION% [%%i]"
 )
 
 echo %OS_VERSION%
