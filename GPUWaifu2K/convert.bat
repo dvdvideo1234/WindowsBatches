@@ -23,7 +23,7 @@ setlocal EnableDelayedExpansion
 :: Manual FFMpeg
 
 set "waifuFFMpg=D:\FFmpeg\bin"
-set "waifuFFCom=2"
+set "waifuFFCom=0"
 set "waifuQualy=100"
 
 :: Manual Waifu2X
@@ -65,12 +65,26 @@ if %waifuConv% equ 1 (
   set /a "waifuCnt2=2"
   
   %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>&1
+
+  if defined waifuFFMpg (
+    %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
+    call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG%
+    echo.
+    echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+  )
   
   for /l %%k in (2, 1, %waifuConv%) do (
     echo.
     echo From: !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG%
     echo Dest: !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG%
     %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1
+
+    if defined waifuFFMpg (
+      %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
+      call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%
+      echo.
+      echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+    )
 
     set /a "waifuCnt1+=1"
     set /a "waifuCnt2+=1"
@@ -80,22 +94,21 @@ if %waifuConv% equ 1 (
 )
 
 if defined waifuFFMpg (
-  %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% out_%waifuFFCom%%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-  call :waifuGetRatio %waifuFile% out_%waifuFFCom%%waifuExtIMG%
+  %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_%waifuFFCom%%waifuExtIMG% 1>> %waifuLogs% 2>>&1
+  call :waifuGetRatio out%waifuExtIMG% out_%waifuFFCom%%waifuExtIMG%
   echo.
   echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
 )
 
 timeout 100
 
-goto :eof
-
 :: Functions
 
+goto :eof
+
 :waifuGetRatio
-echo %1 %~z1
-echo %2 %~z2
 set /A waifuRatio=0
 set /A "waifuRatio=%~z2*100"
 set /A "waifuRatio/=%~z1"
+
 goto :eof
