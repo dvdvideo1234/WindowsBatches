@@ -33,7 +33,7 @@ set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
 set "waifuNoise=2"
 set "waifuScale=2"
-set "waifuTile=128"
+set "waifuTile=256"
 set "waifuModel=cunet"
 set "waifuGPUID=0"
 
@@ -47,6 +47,7 @@ set "waifuExtIMG=%~x1"
 cd /d %waifuCurr%
 
 echo Directory: %waifuCurr%
+echo WARNING: Do not push Ctrl+C while the PREVIEW is opened^^!
 
 if "%waifuConv%" leq "" (
   set /a "waifuConv=1"
@@ -94,8 +95,8 @@ if %waifuConv% equ 1 (
 )
 
 if defined waifuFFMpg (
-  %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_%waifuFFCom%%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-  call :waifuGetRatio out%waifuExtIMG% out_%waifuFFCom%%waifuExtIMG%
+  %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
+  call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtIMG%
   echo.
   echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
 )
