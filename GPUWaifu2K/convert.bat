@@ -40,21 +40,25 @@ set "waifuGPUID=0"
 :: Automatic ( Dont touch )
 set "waifuLogs=waifu.log"
 set "waifuFile=%1"
-set "waifuConv=%2"
+set /a "waifuConv=%2"
 set "waifuCurr=%~dp0"
 set "waifuExtIMG=%~x1"
 
 cd /d %waifuCurr%
 
 echo Directory: %waifuCurr%
-echo WARNING: Do not push Ctrl+C while the PREVIEW is opened^^!
+echo WARNING: Do not push Ctrl+C while the image PREVIEW is opened^^!
 
-if "%waifuConv%" leq "" (
+if not defined waifuConv (
+  echo Conversion stage [%waifuConv%]^^!
   set /a "waifuConv=1"
+  echo Not defined using [1] instead^^!
 )
 
-if %waifuConv% leq 1 (
+if /I "%waifuConv%" LEQ "0" (
+  echo Conversion stage [%waifuConv%]^^!
   set /a "waifuConv=1"
+  echo Mismatch using [1] instead^^!
 )
 
 if %waifuConv% equ 1 (
@@ -68,6 +72,7 @@ if %waifuConv% equ 1 (
   %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>&1
 
   if defined waifuFFMpg (
+    echo %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
     %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
     call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG%
     echo.
@@ -81,6 +86,7 @@ if %waifuConv% equ 1 (
     %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1
 
     if defined waifuFFMpg (
+      echo %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%  1>> %waifuLogs% 2>>&1
       %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
       call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%
       echo.
@@ -95,6 +101,7 @@ if %waifuConv% equ 1 (
 )
 
 if defined waifuFFMpg (
+  echo %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
   %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
   call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtIMG%
   echo.
