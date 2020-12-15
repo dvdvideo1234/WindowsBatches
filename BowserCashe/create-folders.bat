@@ -1,7 +1,10 @@
 :: Switch drive folder
 cd /d "K:\"
 
-:: Populate path
+:: Populate root
+md "TEMP"
+
+:: Populate cache
 md CACHEFILES
 cd CACHEFILES
 
