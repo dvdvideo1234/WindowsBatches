@@ -58,15 +58,7 @@ cd /d "C:\Windows\System32"
 
 if not exist "oobe" mkdir "oobe"
 if not exist "oobe\info" mkdir "oobe\info"
-
-:: Advance to `info`
-cd /d "C:\Windows\System32\oobe\info"
-
-:: Wipe out the backdrounds folder
-rd /S /Q "C:\Windows\System32\oobe\info\backgrounds"
-
-:: Create empty backgrounds folder
-if not exist "backgrounds" mkdir "backgrounds"
+if not exist "oobe\info\backgrounds" mkdir "oobe\info\backgrounds"
 
 xcopy "!changeBase!!changeFile!!changeExtn!" "C:\Windows\System32\oobe\info\backgrounds\!changeBack!!changeExtn!"* /i /c /f /y /h /r
 

@@ -1,17 +1,18 @@
 ### Description
 This is used to automatically setup your lock screen background image!
 
-### Reqirements
+### Requirements
 1. Image extension must be `*.jpg`
-2. Image size must be less than 250KB
+2. Image size must be less than `250KB`
 
 ### Install
-1. Bring up an eleveted rights command prompt via `Start` > `cmd` > `Right Click` > `Run as Administrator`
+1. Bring up an elevated rights command prompt via `Start` > `cmd` > `Right Click` > `Run as Administrator`
 2. Navigate to where you've stored the script. Mine is `E:\GIT\WindowsBatches\ChangeBackground`
 3. Evaluate `E:\GIT\WindowsBatches\ChangeBackground>change.bat image.jpg`
 4. Answer `y` to `Apply picture change [y/N] ?` for replacing or updating the image file
-5. Answer `y` to `Enable custom background [y/N] ?` for emabling `OEM` backgrounds in the registry
-**Note: When you answer the second question with `y` you will disable the `OEM` backdround!**
+5. Answer `y` to `Enable custom background [y/N] ?` for enabling `OEM` background in the registry
+
+**Note: When you answer the second question with `n` you will disable the `OEM` background!**
 
 ### Examples
 Check out the following example applied on my personal machine at home
