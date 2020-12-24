@@ -1,5 +1,5 @@
 ### Description
-This is used to automatically setup your lock screen background image!
+This automatically setups your `Windows 7` login screen background image!
 
 ### Requirements
 1. Image extension must be `*.jpg`
