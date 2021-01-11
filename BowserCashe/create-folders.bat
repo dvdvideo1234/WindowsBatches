@@ -5,8 +5,8 @@ cd /d "K:\"
 md "TEMP"
 
 :: Populate cache
-md CACHEFILES
-cd CACHEFILES
+md "CACHEFILES"
+cd "CACHEFILES"
 
 md "OPERA"
 md "OPERAGX"
