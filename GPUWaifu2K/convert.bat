@@ -41,6 +41,7 @@ set "waifuGPUID=0"
 set "waifuLogs=waifu.log"
 set "waifuFile=%1"
 set /a "waifuConv=%2"
+set "waifuWait=%3"
 set "waifuCurr=%~dp0"
 set "waifuExtIMG=%~x1"
 
@@ -48,6 +49,10 @@ cd /d %waifuCurr%
 
 echo Directory: %waifuCurr%
 echo WARNING: Do not push Ctrl+C while the image PREVIEW is opened^^!
+
+if not defined waifuWait (
+  set "waifuWait=Y"
+)
 
 if not defined waifuConv (
   echo Conversion stage [%waifuConv%]^^!
@@ -62,14 +67,14 @@ if /I "%waifuConv%" LEQ "0" (
 )
 
 if %waifuConv% equ 1 (
-  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>&1
+  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1
 ) else (
   if not exist %waifuTemp% mkdir %waifuTemp%
 
   set /a "waifuCnt1=1"
   set /a "waifuCnt2=2"
-  
-  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>&1
+
+  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1
 
   if defined waifuFFMpg (
     echo %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
@@ -78,7 +83,7 @@ if %waifuConv% equ 1 (
     echo.
     echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
   )
-  
+
   for /l %%k in (2, 1, %waifuConv%) do (
     echo.
     echo From: !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG%
@@ -96,7 +101,7 @@ if %waifuConv% equ 1 (
     set /a "waifuCnt1+=1"
     set /a "waifuCnt2+=1"
   )
-  
+
   copy /v !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% %waifuCurr%\out%waifuExtIMG%
 )
 
@@ -108,7 +113,13 @@ if defined waifuFFMpg (
   echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
 )
 
-timeout 100
+if /I "%waifuWait%" EQU "y" (
+  timeout 100
+) else (
+  if /I "%waifuWait%" EQU "Y" (
+    timeout 100
+  )
+)
 
 :: Functions
 
