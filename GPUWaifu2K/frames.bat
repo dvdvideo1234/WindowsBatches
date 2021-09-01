@@ -2,12 +2,20 @@
 
 setlocal EnableDelayedExpansion
 
+:: Manual
+set "framesOut=out_f"
+set "framesWait=N"
+
 :: Automatic ( Dont touch )
 set "framesCurr=%~dp0"
 set "framesBase=%1"
 set /a "framesConv=%2"
 call :framesGetFolder !framesCurr!
-del *.log
+del *.log >nul
+echo.
+echo Sors: !framesBase!
+echo Dest: "!framesCurr!!framesFold!"
+timeout 25
 
 if not defined framesConv (
   echo Conversion stage [!framesConv!]^^!
@@ -25,13 +33,14 @@ if not exist !framesFold! mkdir !framesFold!
 
 for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   set "var=%%a"
+  echo !var!
   call :frameGetExtension !var!
   call :framesGetName !var!
   call :framesGetFile !var!
-  call copy /v /y "!var!" "!framesFile!"
-  call convert.bat !framesFile! !framesConv! N
-  call copy /v /y "out_f!framesExt!" "!framesFold!\!framesFile!"
-  call del "!framesFile!"
+  call copy /v /y "!var!" "!framesFile!" >nul
+  call convert.bat !framesFile! !framesConv! !framesWait! >nul
+  call copy /v /y "!framesOut!!framesExt!" "!framesFold!\!framesFile!" >nul
+  call del "!framesFile!" >nul
 )
 
 del out*.*
