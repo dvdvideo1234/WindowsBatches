@@ -2,8 +2,6 @@
 
 setlocal EnableDelayedExpansion
 
-
-
 :: Automatic ( Dont touch )
 set "framesCurr=%~dp0"
 set "framesBase=%1"
@@ -30,15 +28,13 @@ for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   call :frameGetExtension !var!
   call :framesGetName !var!
   call :framesGetFile !var!
-  set "src=out_f!framesExt!"
-  set "des=!framesCurr!!framesFold!\!framesFile!"
-  call copy /v /y "!var!" "!framesName!.jpg"
-  call convert.bat !framesName!.jpg !framesConv! N
-  call copy /v /y "out_f.jpg" "!framesFold!\!framesName!.jpg"
-  del "!framesName!.jpg"
+  call copy /v /y "!var!" "!framesFile!"
+  call convert.bat !framesFile! !framesConv! N
+  call copy /v /y "out_f!framesExt!" "!framesFold!\!framesFile!"
+  call del "!framesFile!"
 )
 
-del out*.jpg
+del out*.*
 
 :: Functions
 
