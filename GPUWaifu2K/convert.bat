@@ -31,10 +31,10 @@ set "waifuQualy=100"
 set "waifuBase=D:\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
-set "waifuNoise=2"
+set "waifuNoise=3"
 set "waifuScale=2"
-set "waifuTile=256"
-set "waifuModel=cunet"
+set "waifuTile=32"
+set "waifuModel=upconv_7_anime_style_art_rgb"
 set "waifuGPUID=0"
 
 :: Automatic ( Dont touch )
