@@ -10,12 +10,18 @@ set "framesWait=N"
 set "framesCurr=%~dp0"
 set "framesBase=%1"
 set /a "framesConv=%2"
-call :framesGetFolder !framesCurr!
+call :framesGetFolder !framesBase!
 del *.log >nul
+
 echo.
-echo Sors: !framesBase!
+echo Sors: "!framesBase!"
 echo Dest: "!framesCurr!!framesFold!"
-timeout 25
+timeout 100
+
+if /I "!framesBase!" EQU "" (
+  echo Source folder missing^^!
+  goto :eof
+)
 
 if not defined framesConv (
   echo Conversion stage [!framesConv!]^^!
@@ -35,7 +41,6 @@ for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   set "var=%%a"
   echo !var!
   call :frameGetExtension !var!
-  call :framesGetName !var!
   call :framesGetFile !var!
   call copy /v /y "!var!" "!framesFile!" >nul
   call convert.bat !framesFile! !framesConv! !framesWait! >nul
@@ -54,17 +59,12 @@ set "framesExt=%~x1"
 
 goto :eof
 
-:framesGetName
-set "framesName=%~n1"
-
-goto :eof
-
 :framesGetFile
 set "framesFile=%~nx1"
 
 goto :eof
 
 :framesGetFolder
-set "framesFold=%~n0"
+set "framesFold=%~n1"
 
 goto :eof
