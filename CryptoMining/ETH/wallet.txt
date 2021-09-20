@@ -1,0 +1,11 @@
+website:
+https://www.flexpool.io/get-started/eth/GPU
+miner:
+https://github.com/todxx/teamredminer/releases
+wallet:
+0x5f85dc88f23636B100d8C015171021cDDA7C369d
+worker:
+PhenomII
+pools:
+stratum+ssl://eth-de.flexpool.io:5555
+stratum+ssl://eth-se.flexpool.io:5555
