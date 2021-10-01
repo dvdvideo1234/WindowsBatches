@@ -1,6 +1,6 @@
 set "minePath=E:\Backup\Install\EtheriumMiner\teamredminer-v0.8.5-win"
 set "mineName=PhenomII"
-set "mineWall=0x5f85dc88f23636B100d8C015171021cDDA7C369d"
+set "mineWall=0x8BA3aB29196d93B3E09cFeD36175e7b6B7C3c99D"
 set "mineBase=stratum+ssl://eth-de.flexpool.io:5555"
 set "mineBack=stratum+ssl://eth-se.flexpool.io:5555"
 set "mineAlloc=4078"
