@@ -14,7 +14,7 @@ call :framesGetFolder !framesBase!
 del *.log >nul
 
 echo.
-echo Sors: "!framesBase!"
+echo Sors: "!framesCurr!!framesBase!"
 echo Dest: "!framesCurr!!framesFold!"
 timeout 100
 
@@ -65,6 +65,6 @@ set "framesFile=%~nx1"
 goto :eof
 
 :framesGetFolder
-set "framesFold=%~n1"
+set "framesFold=%~n1_out"
 
 goto :eof
