@@ -34,7 +34,7 @@ set "waifuTemp=TEMP"
 set "waifuNoise=1"
 set "waifuScale=2"
 set "waifuTile=256"
-set "waifuModel=upconv_7_anime_style_art_rgb"
+set "waifuModel=cunet"
 set "waifuGPUID=0"
 
 :: Automatic ( Dont touch )
