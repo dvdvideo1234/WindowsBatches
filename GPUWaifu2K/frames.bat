@@ -16,7 +16,7 @@ del *.log >nul
 echo.
 echo Sors: "!framesCurr!!framesBase!"
 echo Dest: "!framesCurr!!framesFold!"
-timeout 100
+timeout 45
 
 if /I "!framesBase!" EQU "" (
   echo Source folder missing^^!
