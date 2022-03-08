@@ -37,8 +37,6 @@ if /I "%REG_FAVOR%" EQU "y" (
   set "REG_FAVOR=Y"
 )
 
-echo REG: %REG_FAVOR%
-
 if /I "%REG_FAVOR%" EQU "Y" (
   REG ADD %REG_SPCFAV% /v "SPC" /t REG_SZ /d %REG_SCPKEY% /f
   echo Registry location added to favorites!
