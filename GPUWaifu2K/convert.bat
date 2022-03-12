@@ -8,10 +8,10 @@ setlocal EnableDelayedExpansion
 :: -i input-path        input image path (jpg/png/webp) or directory
 :: -o output-path       output image path (jpg/png/webp) or directory
 :: -n noise-level       denoise level (-1/0/1/2/3, default=0)
-:: -s scale             upscale ratio (1/2, default=2)
+:: -s scale             upscale ratio (1/2/4/8/16/32, default=2)
 :: -t tile-size         tile size (>=32/0=auto, default=0) can be 0,0,0 for multi-gpu
 :: -m model-path        waifu2x model path (default=models-cunet)
-:: -g gpu-id            gpu device to use (default=0) can be 0,1,2 for multi-gpu
+:: -g gpu-id            gpu device to use (-1=cpu, default=auto) can be 0,1,2 for multi-gpu
 :: -j load:proc:save    thread count for load/proc/save (default=1:2:2) can be 1:2,2,2:2 for multi-gpu
 :: -x                   enable tta mode
 :: -f format            output image format (jpg/png/webp, default=ext/png)
@@ -67,37 +67,51 @@ if /I "%waifuConv%" LEQ "0" (
 )
 
 if %waifuConv% equ 1 (
-  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1
+  call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
+    echo Upscaler failed at iteration [0]^^!
+    exit /B 1
+  )
 ) else (
   if not exist %waifuTemp% mkdir %waifuTemp%
 
   set /a "waifuCnt1=1"
   set /a "waifuCnt2=2"
 
-  %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1
-
+  call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
+    echo Upscaler failed at iteration [!waifuCnt1!]^^!
+    exit /B 1
+  )
   if defined waifuFFMpg (
     echo %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-    %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-    call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG%
-    echo.
-    echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+    call %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
+      call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG%
+      echo.
+      echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+    ) || (
+      echo FFMpeg failed at iteration [!waifuCnt1!]!
+      exit /B 2
+    )
   )
 
   for /l %%k in (2, 1, %waifuConv%) do (
     echo.
     echo From: !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG%
     echo Dest: !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG%
-    %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1
-
+    call %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1 || (
+      echo Upscaler failed at iteration [!waifuCnt1!]^^!
+      exit /B 1
+    )
     if defined waifuFFMpg (
       echo %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%  1>> %waifuLogs% 2>>&1
-      %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-      call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%
-      echo.
-      echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+      call %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
+        call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%
+        echo.
+        echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+      ) || (
+        echo FFMpeg failed at iteration [!waifuCnt1!]!
+        exit /B 2
+      )
     )
-
     set /a "waifuCnt1+=1"
     set /a "waifuCnt2+=1"
   )
@@ -107,10 +121,14 @@ if %waifuConv% equ 1 (
 
 if defined waifuFFMpg (
   echo %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-  %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-  call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtIMG%
-  echo.
-  echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+  call %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
+    call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtIMG%
+    echo.
+    echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
+  ) || (
+    echo FFMpeg failed at final iteration^^!
+    exit /B 2
+  )
 )
 
 if /I "%waifuWait%" EQU "y" (

@@ -3,7 +3,7 @@
 setlocal EnableDelayedExpansion
 
 :: Manual
-set "framesOut=out_f"
+set "framesOut=out"
 set "framesWait=N"
 
 :: Automatic ( Dont touch )
@@ -39,16 +39,23 @@ if not exist !framesFold! mkdir !framesFold!
 
 for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   set "var=%%a"
-  echo !var!
   call :frameGetExtension !var!
   call :framesGetFile !var!
   call copy /v /y "!var!" "!framesFile!" >nul
-  call convert.bat !framesFile! !framesConv! !framesWait! >nul
-  call copy /v /y "!framesOut!!framesExt!" "!framesFold!\!framesFile!" >nul
+  call convert.bat !framesFile! !framesConv! !framesWait! >nul && (
+    echo Success: !var!
+  ) || (
+    echo Abort convert: [!var!]^^!
+    exit /B 1
+  )
+  call copy /v /y "!framesOut!!framesExt!" "!framesFold!\!framesFile!" >nul || (
+    echo Abort extract: [!var!]^^!
+    exit /B 2
+  )
   call del "!framesFile!" >nul
 )
 
-del out*.*
+del out*.* >nul
 
 :: Functions
 
