@@ -32,7 +32,7 @@ set "waifuBase=D:\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
 set "waifuNoise=1"
-set "waifuScale=2"
+set "waifuScale=1"
 set "waifuTile=256"
 set "waifuModel=cunet"
 set "waifuGPUID=0"
@@ -67,9 +67,16 @@ if /I "%waifuConv%" LEQ "0" (
 )
 
 if %waifuConv% equ 1 (
-  call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
-    echo Upscaler failed at iteration [0]^^!
-    exit /B 1
+  if %waifuScale% equ 1 (
+    call copy /v /y "%waifuFile%" "out%waifuExtIMG%" >nul || (
+      echo Data copy failed at iteration [0]^^!
+      exit /B 1
+    )
+  ) else (
+    call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
+      echo Upscaler failed at iteration [0]^^!
+      exit /B 1
+    )
   )
 ) else (
   if not exist %waifuTemp% mkdir %waifuTemp%
