@@ -3,20 +3,19 @@
 setlocal EnableDelayedExpansion
 
 :: Manual
-set "framesOut=out_f"
+set "framesOut=out"
 set "framesWait=N"
 
 :: Automatic ( Dont touch )
 set "framesCurr=%~dp0"
 set "framesBase=%1"
-set /a "framesConv=%2"
+set "framesConv=%2"
 call :framesGetFolder !framesBase!
-del *.log >nul
+call del *.log >nul
 
 echo.
 echo Sors: "!framesCurr!!framesBase!"
 echo Dest: "!framesCurr!!framesFold!"
-timeout 45
 
 if /I "!framesBase!" EQU "" (
   echo Source folder missing^^!
@@ -24,16 +23,21 @@ if /I "!framesBase!" EQU "" (
 )
 
 if not defined framesConv (
-  echo Conversion stage [!framesConv!]^^!
+  echo Undefined using [1]^^!
   set /a "framesConv=1"
-  echo Not defined using [1] instead^^!
 )
 
-if /I "!framesConv!" LEQ "0" (
-  echo Conversion stage [!framesConv!]^^!
+echo Conversion stage [!framesConv!]^^!
+
+if /I !framesConv! LEQ 0 (
+  echo Mismatch using [1]^^!
   set /a "framesConv=1"
-  echo Mismatch using [1] instead^^!
+) else (
+  echo Arithmetic using [!framesConv!]^^!
+  set /a "framesConv=!framesConv!"
 )
+
+timeout 45
 
 if not exist !framesFold! mkdir !framesFold!
 
@@ -55,7 +59,7 @@ for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   call del "!framesFile!" >nul
 )
 
-del out*.* >nul
+call del out*.* >nul
 
 :: Functions
 

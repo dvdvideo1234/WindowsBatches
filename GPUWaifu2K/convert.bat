@@ -32,7 +32,7 @@ set "waifuBase=D:\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
 set "waifuNoise=1"
-set "waifuScale=1"
+set "waifuScale=8"
 set "waifuTile=256"
 set "waifuModel=cunet"
 set "waifuGPUID=0"
@@ -40,7 +40,7 @@ set "waifuGPUID=0"
 :: Automatic ( Dont touch )
 set "waifuLogs=waifu.log"
 set "waifuFile=%1"
-set /a "waifuConv=%2"
+set "waifuConv=%2"
 set "waifuWait=%3"
 set "waifuCurr=%~dp0"
 set "waifuExtIMG=%~x1"
@@ -55,19 +55,20 @@ if not defined waifuWait (
 )
 
 if not defined waifuConv (
-  echo Conversion stage [%waifuConv%]^^!
+  echo Undefined using [1]^^!
   set /a "waifuConv=1"
-  echo Not defined using [1] instead^^!
 )
 
-if /I "%waifuConv%" LEQ "0" (
-  echo Conversion stage [%waifuConv%]^^!
+if /I !waifuConv! LEQ 0 (
+  echo Mismatch using [1]^^!
   set /a "waifuConv=1"
-  echo Mismatch using [1] instead^^!
+) else (
+  echo Arithmetic using [!waifuConv!]^^!
+  set /a "waifuConv=!waifuConv!"
 )
 
-if %waifuConv% equ 1 (
-  if %waifuScale% equ 1 (
+if %waifuConv% EQU 1 (
+  if %waifuScale% EQU 1 (
     call copy /v /y "%waifuFile%" "out%waifuExtIMG%" >nul || (
       echo Data copy failed at iteration [0]^^!
       exit /B 1
