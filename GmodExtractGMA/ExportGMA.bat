@@ -6,61 +6,75 @@ setlocal EnableDelayedExpansion
 
 :: The user configures the following
 
-set BinPath="F:\Games\Steam\steamapps\common\GarrysMod\bin"
-set OutPath="O:\Documents\GmodAddons12-13\Gmod13\GMAD_EXTRACTED"
+set BinPath=F:\Games\Steam\steamapps\common\GarrysMod\bin
+set SrcPath=E:\GIT\WindowsBatches\GmodExtractGMA\DATA
 set OnlyAddons=()
-set SkipAddons=()
+set SkipAddons=(1469532899)
 
 :: The rest of the file is automatic
 
+set FileExt=gma
+set OutPath=%~dp0
 set OnlyAddonsCount=0
 set SkipAddonsCount=0
 set "StartTime=%date% %time%"
-set FilePathCD=%~dp0
-set FileExt=gma
 
-del /f /q %OutPath%\*.log
+del /f /q %OutPath%*.log
+
+echo Processing addons has started^^! >> %OutPath%process.log
 
 for %%i in %OnlyAddons% do (
-  set SkipAddonsCount=0
-  for %%j in %SkipAddons% do (
-    if /I "%%i" EQU "%%j" (
-      set /A SkipAddonsCount=!SkipAddonsCount!+1
-    )
-  )
-  if /I "!SkipAddonsCount!" EQU "0" (
-    echo Processing [%FilePathCD%\%%i.!FileExt!]
-    call Processor.bat %BinPath%, %FilePathCD%\%%i.!FileExt!, %OutPath%
-    set /A OnlyAddonsCount=!OnlyAddonsCount!+1
-  ) else (
-    echo Skipped [%%i.!FileExt!]
-  )
+  set /A OnlyAddonsCount=!OnlyAddonsCount!+1
 )
 
-if /I "!OnlyAddonsCount!" NEQ "0" (
-  echo "Selected addons extracted !"
-  timeout 100
-) else (
-  for /r %%i in (*.!FileExt!) do (
-    set SkipAddonsCount=0
+for %%j in %SkipAddons% do (
+  set /A SkipAddonsCount=!SkipAddonsCount!+1
+)
+
+echo ONLY: %OnlyAddonsCount% >> %OutPath%process.log
+echo SKIP: %SkipAddonsCount% >> %OutPath%process.log
+
+echo CHECK: dir !SrcPath!\*.!FileExt! /b /s >> %OutPath%process.log
+
+for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
+  echo ADDON BASE: %%k >> !OutPath!process.log
+  set /A OnlyAddonsMatch=0
+  set /A SkipAddonsMatch=0
+  if !SkipAddonsCount! GTR 0 (
     for %%j in %SkipAddons% do (
+      call Contain.bat %%k %%j
 
-      echo II %%i
-      echo JJ %FilePathCD%\%%j.!FileExt!
+      echo K: %%k >> !OutPath!process.log
+      echo K: %%j >> !OutPath!process.log
 
-      if /I "%%i" EQU "%FilePathCD%\%%j.!FileExt!" (
-        set /A SkipAddonsCount=!SkipAddonsCount!+1
+      if !ERRORLEVEL! EQU 1 (
+        echo ADDON SKIP: %%k >> !OutPath!process.log
+        set /A SkipAddonsMatch=!SkipAddonsMatch!+1
       )
     )
-    if /I "!SkipAddonsCount!" EQU "0" (
-      echo Processing [%%i]
-      call Processor.bat %BinPath%, %%i, %OutPath%
-    ) else (
-      echo Skipped [%%i]
+  )
+
+  echo SKIP: !SkipAddonsMatch!
+
+  if !OnlyAddonsCount! GTR 0 (
+    for %%i in %OnlyAddons% do (
+      call Contain.bat %%k %%i
+
+      if !ERRORLEVEL! EQU 1 (
+        if !SkipAddonsMatch! EQU 0 (
+          echo ADDON ONLY: %%k >> !OutPath!process.log
+          set /A OnlyAddonsMatch=!OnlyAddonsMatch!+1
+        )
+      )
+    )
+  ) else (
+    if !SkipAddonsMatch! EQU 0 (
+      echo ADDON DIRE: %%k >> !OutPath!process.log
     )
   )
-  timeout 100
 )
 
-echo Start %StartTime%
-echo End   %time%
+timeout 100
+
+echo Start: %StartTime% >> %OutPath%process.log
+echo End  : %date% %time% >> %OutPath%process.log
