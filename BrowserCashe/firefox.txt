@@ -1,1 +1,0 @@
-browser.cache.disk.parent_directory : K:\CACHEFILES\FIREFOX
