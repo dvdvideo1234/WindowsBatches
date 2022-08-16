@@ -1,0 +1,9 @@
+[submodule "BrowserCashe/ImDisk"]
+	path = BrowserCashe/ImDisk
+	url = git@github.com:LTRData/ImDisk.git
+[submodule "BrowserCashe/RowCopy"]
+	path = BrowserCashe/RowCopy
+	url = git@github.com:LTRData/rawcopy.git
+[submodule "BrowserCashe/SwapAdd"]
+	path = BrowserCashe/SwapAdd
+	url = git@github.com:LTRData/swapadd.git
