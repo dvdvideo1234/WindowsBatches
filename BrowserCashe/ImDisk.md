@@ -19,7 +19,7 @@ formatted and ready to be used. Any additional disks can be made by simply chang
 -m's parameter to another letter, changing the size & filesystem parameters if you
 want to, and run it again.
 
-### Deleting a RAM disk [ImDisk](http://www.ltr-data.se/opencode.html/#ImDisk)
+### Deleting a RAM disk [ImDisk][imdisk]
 
 ```
 imdisk -d -m X:
@@ -105,7 +105,7 @@ Navigate to `Windows Logs` -> `System`, then look for events with the source `US
 And the reason we need to turn off `If the running task does not end when requested, force it to stop`
 option is to prevent Windows from prematurely ending `imdisk-save.cmd`, which could make rawcopy
 stopping halfway or not starting at all.
-Lastly, we need to edit the imdisk-start.cmd file again.
+Lastly, we need to edit the `imdisk-start.cmd` file again.
 Replace these lines :
 ```
 imdisk -a -s 256M -m Y: -p "/fs:fat /q /y"
@@ -116,7 +116,7 @@ With these :
 imdisk -a -t vm -f "C:\RAM disks\Y.img" -m Y:
 imdisk -a -t vm -f "C:\RAM disks\Z.img" -m Z:
 ```
-The new codes are basically telling imdisk to make RAM disks using the image
+The new codes are basically telling [ImDisk][imdisk] to make RAM disks using the image
 files that were saved when Windows was shutting down. Of course, the directory
 and image file names should be according to what you've set in imdisk-save.cmd before.
 
