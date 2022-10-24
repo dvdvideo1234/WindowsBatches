@@ -41,7 +41,7 @@ set /p SteamAppConfirm="Continue with deletion [y/N] ? "
 if /I "%SteamAppConfirm%" EQU "y" (
   set "SteamAppConfirm=Y"
 )
-:: Steam_SourceMods_MKLink.bat "F:\Games\Steam\steamapps\sourcemods"
+
 echo [%SteamAppOut%]
 
 if exist %1 (
