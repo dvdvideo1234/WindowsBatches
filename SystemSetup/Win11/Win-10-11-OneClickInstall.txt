@@ -17,9 +17,11 @@ Limit updates HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows > Key > Win
     5 — Allow local admin to choose settings.
     7 — Auto Download, Notify to install, Notify to Restart.
 
-These options work exactly like the Group Policy settings, and option number 2 is the closest to disable Windows Update on Windows 10 permanently.
+These options work exactly like the Group Policy settings, and option
+number 2 is the closest to disable Windows Update on Windows 10 permanently.
 
-ms-settings:windowsupdate?activationSource=SMC-IA-4027667 open in web browser windows uptomatic update
+ms-settings:windowsupdate?activationSource=SMC-IA-4027667
+open in web browser windows uptomatic update
 
 type in run MRT for virus scan
 
