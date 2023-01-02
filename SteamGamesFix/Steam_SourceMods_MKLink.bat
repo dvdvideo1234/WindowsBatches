@@ -22,7 +22,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 echo Version: %OS_VERSION%
 
-set "SteamAppPWD=%CD%"
+set "SteamAppPWD=%~dp0"
 set "SteamAppPth="
 set "SteamAppMod="
 set "SteamAppOut=%1"

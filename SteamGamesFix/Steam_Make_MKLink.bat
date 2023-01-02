@@ -1,6 +1,6 @@
 @echo off
 
-set "SteamAppPWD=%CD%"
+set "SteamAppPWD=%~dp0"
 set "SteamAppExe="
 set "SteamAppPth="
 
