@@ -9,7 +9,7 @@ for %%i in (*.vdi) do (
   IF DEFINED mgrMB (
     echo "Resizing %%i to %mgrMB% MB..."
     
-    call "%mgrPath%VBoxManage.exe" modifyhd "%%i" --resize "%mgrMB%"
+    call "%mgrPath%VBoxManage.exe" modifymedium disk "%%i" --resize "%mgrMB%"
     
   ) ELSE (
     echo "Skipping %%i due to user request !"
