@@ -1,20 +1,9 @@
 Processing addons has started! 
 ONLY: 0 
-SKIP: 1 
-CHECK: dir E:\GIT\WindowsBatches\GmodExtractGMA\DATA\*.gma /b /s 
-ADDON BASE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearance_miku_(colorful_drop)_1358373278.gma 
-K: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearance_miku_(colorful_drop)_1358373278.gma 
-K: 1469532899 
-ADDON DIRE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearance_miku_(colorful_drop)_1358373278.gma 
-ADDON BASE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearence_miku_(stroll)_p.m._&_npc_854634173.gma 
-K: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearence_miku_(stroll)_p.m._&_npc_854634173.gma 
-K: 1469532899 
-ADDON DIRE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\appearence_miku_(stroll)_p.m._&_npc_854634173.gma 
-ADDON BASE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\area_51_136780603.gma 
-K: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\area_51_136780603.gma 
-K: 1469532899 
-ADDON DIRE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\area_51_136780603.gma 
-ADDON BASE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\ashland_&_olive_hill__(in-dev)_1469532899.gma 
-K: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\ashland_&_olive_hill__(in-dev)_1469532899.gma 
-K: 1469532899 
-ADDON DIRE: E:\GIT\WindowsBatches\GmodExtractGMA\DATA\ashland_&_olive_hill__(in-dev)_1469532899.gma 
+SKIP: 0 
+CHECK: dir F:\GIT\WindowsBatches\GmodExtractGMA\DATA\*.gma /b /s 
+ADDON BASE: F:\GIT\WindowsBatches\GmodExtractGMA\DATA\sw_base.gma 
+ADDON DIRE: F:\GIT\WindowsBatches\GmodExtractGMA\DATA\sw_base.gma 
+Delete: F:\GIT\WindowsBatches\GmodExtractGMA\sw_base 
+Start: 05.01.2023 £. 17:18:25.99 
+End  : 05.01.2023 £. 17:18:26.57 

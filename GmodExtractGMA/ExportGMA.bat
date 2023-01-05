@@ -6,10 +6,10 @@ setlocal EnableDelayedExpansion
 
 :: The user configures the following
 
-set BinPath=F:\Games\Steam\steamapps\common\GarrysMod\bin
-set SrcPath=E:\GIT\WindowsBatches\GmodExtractGMA\DATA
+set BinPath=D:\Games\Steam\steamapps\common\GarrysMod\bin
+set SrcPath=F:\GIT\WindowsBatches\GmodExtractGMA\DATA
 set OnlyAddons=()
-set SkipAddons=(1469532899)
+set SkipAddons=()
 
 :: The rest of the file is automatic
 
@@ -63,13 +63,14 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
       if !ERRORLEVEL! EQU 1 (
         if !SkipAddonsMatch! EQU 0 (
           echo ADDON ONLY: %%k >> !OutPath!process.log
-          set /A OnlyAddonsMatch=!OnlyAddonsMatch!+1
+          call Processor !BinPath! %%k !OutPath!
         )
       )
     )
   ) else (
     if !SkipAddonsMatch! EQU 0 (
       echo ADDON DIRE: %%k >> !OutPath!process.log
+      call Processor !BinPath! %%k !OutPath!
     )
   )
 )
