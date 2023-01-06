@@ -2,23 +2,9 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JJ8R4'))
 
 iwr -useb https://christitus.com/win | iex
 
-msinfo32 type in run command
+msinfo32 type in run command 
 
 stop automatic updates type gpedit.msc computer configuration > administrative templates > windows components > windows update
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows right click > Key > WindowsUpdate > right click > Key > AU right click > DWORD (32-bit) > NoAutoUpdate 1
-
-Limit updates HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows > Key > WindowsUpdate > Key > AU > DWORD (32-bit) > AUOptions
-
-
-    2 — Notify for download and auto install.
-    3 — Auto download and notify for install.
-    4 — Auto download and schedule the install.
-    5 — Allow local admin to choose settings.
-    7 — Auto Download, Notify to install, Notify to Restart.
-
-These options work exactly like the Group Policy settings, and option
-number 2 is the closest to disable Windows Update on Windows 10 permanently.
 
 ms-settings:windowsupdate?activationSource=SMC-IA-4027667
 open in web browser windows uptomatic update
@@ -32,33 +18,3 @@ powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 type in CMD sfc /scannow
 
 type in CMD DISM /Online /Cleanup-image /Restorehealth
-
-Computer\HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
-
-Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced  DWORD (32-bit) Value. Start_ShowClassicMode 1
-
-Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control  WaitToKillServiceTimeout 2000
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile NetworkThrottlingIndex FFFFFFF
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile SystemResponsiveness 0
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games Scheduling Category High
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games GPU Priority 8
-
-Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games Priority 6
-
-Computer\HKEY_CURRENT_USER\Control Panel\Desktop  WaitToKillAppTimeOut 2000
-
-Computer\HKEY_CURRENT_USER\Control Panel\Desktop  HungAppTimeOut 2000
-
-Computer\HKEY_CURRENT_USER\Control Panel\Desktop  AutoEndTasks 1
-
-Computer\HKEY_CURRENT_USER\Control Panel\Desktop MenuShowDelay 10
-
-Computer\HKEY_CURRENT_USER\Control Panel\Mouse MouseHoverTime 10
-
-Computer\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000  EnableUlps 0
-
-Computer\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0001  EnableUlps 0
