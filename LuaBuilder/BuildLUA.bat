@@ -7,6 +7,7 @@ setlocal
 :: You may change the following variable's value
 :: to suit the downloaded version
 set lua_version=5.4.4
+set "lua_source=https://www.lua.org/ftp/lua-%lua_version%.tar.gz"
 
 :: Install folder of the 7z archiver
 set "folder_7z=%ZIP7_HOME%"
@@ -22,10 +23,10 @@ set compiler_bin_dir=%work_dir%\tdm-gcc\bin
 set lua_build_dir=%work_dir%\lua-%lua_version%
 set path=%compiler_bin_dir%;%path%
 
-:: Cleaning up before run
-
 :: Download Lua archive by using CodeBlocks MinGW web-get
-call "%GIT_HOME%\bin\wget.exe" https://www.lua.org/ftp/lua-%lua_version%.tar.gz
+call "%GIT_HOME%\bin\wget.exe" %lua_source% || (
+  call "%GIT_HOME%\mingw64\bin\curl.exe" -O %lua_source%
+)
 
 :: Extract Lua source with 7z
 call "%folder_7z%\7z.exe" x lua-%lua_version%.tar.gz -aoa
