@@ -6,8 +6,8 @@ setlocal enableDelayedExpansion
 :: 1. https://github.com/BtbN/FFmpeg-Builds/releases
 :: 2. https://imagemagick.org/index.php
 
-set "icoFFMPEG=C:\Programs\ffmpeg-master-latest-win64-gpl\bin"
-set "icoMAGIC=C:\Program Files\ImageMagick-HDRI"
+set "icoFFMPEG=%FFMPG_HOME%\bin"
+set "icoMAGIC=%IMGMAG_HOME%"
 
 set "icoLOGS=ico.log"
 set "icoCURR=%~dp0"
@@ -32,7 +32,7 @@ if not exist %icoTEMP% mkdir %icoTEMP%
 for /L %%i in (0,1,7) do (
   echo %icoFFMPEG%\ffmpeg.exe -y -i !icoCURR!%1 -vf scale=!icoSizes[%%i]!:!icoSizes[%%i]! -compression_level %icoFFCOM% -quality %icoQUALY% !icoCURR!%icoTEMP%\!icoSizes[%%i]!!icoEXT! 1>> %icoLOGS% 2>>&1
   call %icoFFMPEG%\ffmpeg.exe -y -i !icoCURR!%1 -vf scale=!icoSizes[%%i]!:!icoSizes[%%i]! -compression_level %icoFFCOM% -quality %icoQUALY% !icoCURR!%icoTEMP%\!icoSizes[%%i]!!icoEXT! 1>> %icoLOGS% 2>>&1 && (
-    call :waifuGetRatio !icoCURR!%1 !icoCURR!%icoTEMP%\!icoSizes[%%i]!!icoEXT!
+    call :icoGetRatio !icoCURR!%1 !icoCURR!%icoTEMP%\!icoSizes[%%i]!!icoEXT!
     echo.
     echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
   ) || (
@@ -64,7 +64,7 @@ cd /d !icoCURR!
 
 goto :eof
 
-:waifuGetRatio
+:icoGetRatio
 set /A waifuRatio=0
 set /A "waifuRatio=%~z2*100"
 set /A "waifuRatio/=%~z1"
