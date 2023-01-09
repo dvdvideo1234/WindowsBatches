@@ -24,7 +24,7 @@ set path=%compiler_bin_dir%;%path%
 
 :: Cleaning up before run
 
-:: Download Lua
+:: Download Lua archive by using CodeBlocks MinGW web-get
 call "%GIT_HOME%\bin\wget.exe" https://www.lua.org/ftp/lua-%lua_version%.tar.gz
 
 :: Extract Lua source with 7z
@@ -33,6 +33,7 @@ call "%folder_7z%\7z.exe" x -ttar lua-%lua_version%.tar -aoa
 del lua*.tar 
 
 :: Build the language
+:: When compilation fails make sure MinGW is added to <Path>
 cd /D "%lua_build_dir%"
 call "%migw_dir%\mingw32-make.exe" PLAT=mingw
 
