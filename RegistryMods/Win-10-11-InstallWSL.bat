@@ -40,6 +40,7 @@ if %WSL_OS_BUILD% GEQ 18917 (
   set "WSL_VERSN=1"
 )
 
+call wsl --install -d %WSL_VERSN%
 call wsl.exe --set-default-version %WSL_VERSN%
 call wsl.exe --set-version %WSL_OS_DESTRO% %WSL_VERSN%
 
