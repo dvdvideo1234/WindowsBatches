@@ -14,3 +14,15 @@ for /F "Tokens=1,2*" %%A in ('reg query %EXPORT_REG%') do (
     )
   )
 )
+
+set /p EXPORT_LOF="Log off to apply changesregeed [y/N] ? "
+
+if /I "%EXPORT_LOF%" EQU "y" (
+  set "EXPORT_PWD=Y"
+)
+
+if /I "%EXPORT_LOF%" EQU "Y" (
+  echo Timeout until logging you off^^!
+  timeout 100
+  shutdown -l
+)
