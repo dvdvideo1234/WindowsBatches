@@ -18,17 +18,18 @@ set "gmadRevDest=Workshop"
 set "gmadTime=%date% %time%"
 set "gmadBinPath=%GMOD_HOME%\bin"
 set "gmadPathGIT=%GIT_HOME%\bin\git.exe"
-set "gmadNameLOG=!gmadRevPath!\gmad_log.txt"
-set "gmadNameGIT=!gmadRevPath!\gmad_git.txt"
-set "gmadDescPath=!gmadRevPath!\!gmadRevDesc!"
-set "gmadDestPath=!gmadRevPath!\!gmadRevDest!"
+set "gmadNameLOG=gmad_log.txt"
+set "gmadNameGIT=gmad_git.txt"
+set "gmadCopyEXC=exclude_copy.txt"
 
-if not exist "!gmadDescPath!" (
+cd /d !gmadRevPath!
+
+if not exist "!gmadRevDesc!" (
   echo Publish description required [!gmadRevDesc!]^^!
-  echo Path: !gmadDescPath!
+  echo Path: !gmadRevDesc!
 )
 
-for /f "tokens=1,2 delims=:" %%i in (!gmadDescPath!) do (
+for /f "tokens=1,2 delims=:" %%i in (!gmadRevDesc!) do (
   :: Extract workshop ID
   if "%%i" EQU "WSID" (
     set "gmadID=%%j"
@@ -53,19 +54,18 @@ for /f "tokens=1,2 delims=:" %%i in (!gmadDescPath!) do (
 
 if not defined gmadName (
   echo Please define the [REPO] parameter in [!gmadRevDesc!]^^!
-  echo Path: !gmadDescPath!
+  echo Path: !gmadRevPath!\!gmadRevDesc!
 )
+
+title Addon !gmadName! updater/publisher
 
 if not defined gmadNameItem (
   echo Please define the [ADDN] parameter in [!gmadRevDesc!]^^!
-  echo Path: !gmadDescPath!
+  echo Path: !gmadRevPath!\!gmadRevDesc!
 )
 
 set "gmadCommits=https://github.com/dvdvideo1234/!gmadName!/commit/"
 set "gmadRevTools=data\!gmadNameItem!\tools"
-set "gmadADTools=!gmadRevPath!\!gmadRevTools!"
-
-title Addon !gmadName! updater/publisher
 
 echo Press Crtl+C to terminate^^!
 echo Press a key if you do not want to wait^^!
@@ -74,39 +74,43 @@ echo Npp Find --\h{1,}\n-- replace --\n-- in dos format before commit^^!
 echo Extracting repository source contents^^!
 if exist "!gmadNameLOG!" del "!gmadNameLOG!"
 if exist "!gmadNameGIT!" del "!gmadNameGIT!"
-if exist "!gmadDestPath!" rd /S /Q "!gmadDestPath!"
+if exist "!gmadRevDest!" rd /S /Q "!gmadRevDest!"
 
 timeout 10
 
-md "!gmadDestPath!\!gmadName!" >> !gmadNameLOG!
-for %%i in %gmadDirs% do ( :: Keep percent instead exclamation mark here
-  echo Exporting addon content: %%i
-  call xcopy "!gmadRevPath!\%%i" "!gmadDestPath!\!gmadName!\%%i" /EXCLUDE:!gmadADTools!\workshop\key.txt /E /C /I /F /R /Y >> !gmadNameLOG!
+if not exist "!gmadRevPath!\!gmadRevTools!\workshop\!gmadCopyEXC!" (
+  echo Utilizing the global copy exclude^^!
+  echo Exclude: !gmadBasePath!!gmadCopyEXC!
+  set "gmadCopyEXC=!gmadBasePath!!gmadCopyEXC!"
+) else (
+  echo Utilizing the local copy exclude^^!
+  echo Exclude: !gmadRevTools!\workshop\!gmadCopyEXC!
+  set "gmadCopyEXC=!gmadRevTools!\workshop\!gmadCopyEXC!"
 )
 
-call copy "!gmadADTools!\workshop\addon.json" "!gmadDestPath!\!gmadName!\addon.json" >> !gmadNameLOG!
-call "!gmadBinPath!\gmad.exe" create -folder "!gmadDestPath!\!gmadName!" -out "!gmadDestPath!\!gmadName!.gma" >> !gmadNameLOG!
+md "!gmadRevDest!\!gmadName!" >> !gmadNameLOG!
+for %%i in %gmadDirs% do ( :: Keep percent instead exclamation mark here
+  echo Exporting addon content: %%i
+  call xcopy "!gmadRevPath!\%%i" "!gmadRevDest!\!gmadName!\%%i" /EXCLUDE:!gmadCopyEXC! /E /C /I /F /R /Y >> !gmadNameLOG!
+)
+
+call copy "!gmadRevTools!\workshop\addon.json" "!gmadRevDest!\!gmadName!\addon.json" >> !gmadNameLOG!
+call "!gmadBinPath!\gmad.exe" create -folder "!gmadRevDest!\!gmadName!" -out "!gmadRevDest!\!gmadName!.gma" >> !gmadNameLOG!
 
 echo Obtain the latest repository commit log^^!
 
-cd /d !gmadRevPath!
 for /F "tokens=*" %%i in ('call "!gmadPathGIT!" rev-parse HEAD') do (set "gmadGitHEAD=%%i")
-cd /d !gmadBasePath!
 
 call echo !gmadTime! >> !gmadNameGIT!
 call echo. >> !gmadNameGIT!
 call echo !gmadCommits!!gmadGitHEAD! >> !gmadNameGIT!
 call echo. >> !gmadNameGIT!
 
-cd /d !gmadRevPath!
 call "!gmadPathGIT!" log -1 >> !gmadNameGIT!
-cd /d !gmadBasePath!
 
 call "%WINDIR%\System32\notepad.exe" "!gmadNameGIT!"
 
 timeout 10
-
-cd /d !gmadRevPath!
 
 if defined gmadID (
   echo Updating addon [!gmadName!]^^!
@@ -140,6 +144,9 @@ echo Cleaning up after publush [!gmadName!]^^!
 
 timeout 500
 
-rd /S /Q "!gmadDestPath!"
+rd /S /Q "!gmadRevDest!"
+
 del "!gmadNameLOG!"
 del "!gmadNameGIT!"
+
+cd /d !gmadBasePath!
