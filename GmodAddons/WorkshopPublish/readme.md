@@ -1,23 +1,33 @@
 ### Description
-This batch is designed for a global solution regardin Garry's mod
-addons synchronizing with the steam workshop. It resides here so
-I will change in only one place if I need to udate the publish algorithm.
+[This][ref-bat-sp] [batch][ref-use-bs] is designed for a global solution regarding [Garry's mod][ref-gam-gm]
+addons synchronizing with the steam workshop and GitHub. It resides here so
+I will change in only one place if I need to update the publish algorithm.
 
 ### Install
 This does not need to get installed. Works, therefore it exists.
 
 ### How to use
-Drag and drop an addon folder onto the batch icon
+Drag and drop an addon folder onto the [`workshop_publish.bat`][ref-bat-sp] [batch][ref-use-bs] icon
 
 ### How it works
- * Configuration: The file `.workshop` resides inside the addon folder and defines
-    what should be extracted, combined, matched to whch steam ID
-  1. `WSID`: Sheam workshop ID. When missing the addon is automatically
+ * Configuration: The file [`.workshop`][ref-dot-ws] resides inside the addon folder and defines
+    what should be extracted, combined, matched to which steam ID
+  1. `WSID`: Steam workshop ID. When missing the addon is automatically
     created and the ID is assigned. Write it down to this file
-  2. `REPO`: This key contain the actual name in the github repository. Mandatory!
-  2. `ADDN`: This key is used for the internal indexinf of `data/.../tools`. Mandatory!
+  2. `REPO`: This key contain the actual name in the GitHub repository. Mandatory!
+  2. `ADDN`: This key is used for the internal indexing of `data/.../tools`. Mandatory!
   4. `DATA`: This contains a list of directories that included in `*.gma`
- * Copy-exclusion: The file `exclude_copy.txt` is used to tell `xcopy` what to skip
-  when geating the `*.gma` file. When one is found in `data/.../tools/workshop` the
+ * Copy-exclusion: The file [`exclude_copy.txt`][ref-ext-cp] is used to tell `xcopy` what to skip
+  when generating the `*.gma` file. When one is found in `data/.../tools/workshop` the
   batch uses it instead as it is local for the repository
+
+### Why use it
+I am an automation engineer and I prefer to automate everything to have more
+personal time for myself. I am a person who values his time very much.
+
+[ref-bat-sp]: https://github.com/dvdvideo1234/WindowsBatches/blob/master/GmodAddons/WorkshopPublish/workshop_publish.bat
+[ref-dot-ws]: https://github.com/dvdvideo1234/WindowsBatches/blob/master/GmodAddons/WorkshopPublish/.workshop
+[ref-ext-cp]: https://github.com/dvdvideo1234/WindowsBatches/blob/master/GmodAddons/WorkshopPublish/exclude_copy.txt
+[ref-gam-gm]: https://store.steampowered.com/app/4000/Garrys_Mod/
+[ref-use-bs]: https://en.wikibooks.org/wiki/Windows_Batch_Scripting
 
