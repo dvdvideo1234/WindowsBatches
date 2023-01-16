@@ -4,16 +4,26 @@ setlocal EnableDelayedExpansion
 
 set "gitUpFolder=%1"
 set "gitUpCurren=%~dp0"
-set "gitUpGitExe=%GIT_HOME%\bin\git.exe"
+set "gitUpFileLg=%gitUpCurren%\status.log"
+set "gitTortoise=C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe"
+  
+if exist "!gitUpFileLg!" del !gitUpFileLg!
 
-cd /d !gitUpFolder!
+cd /d "!gitUpFolder!"
 
 for /D %%a in (.\*) do (
-  echo ------- Updating repository [%%a] -------
-  echo.
-  cd %%a
-  if exist ".git\" ( call "!gitUpGitExe!" pull )
-  cd /d !gitUpFolder!
+  cd "%%a"
+  if exist ".git\" (
+    echo Processing repository: [%%a]
+    call "!gitTortoise!" /command:pull^
+                         /path:"!gitUpFolder!\%%a"^
+                         /closeonend:2>>!gitUpFileLg! && (
+      echo [V] Updating repository: [%%a]>>!gitUpFileLg!
+    ) || (
+      echo [X] Updating repository: [%%a]>>!gitUpFileLg!
+    ) 
+  )
+  cd /d "!gitUpFolder!"
 )
 
 timeout 500
