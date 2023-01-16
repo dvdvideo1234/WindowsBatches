@@ -17,7 +17,7 @@ I am an automation engineer and I prefer to automate everything to have more
 personal time for myself. I am a person who values his time very much, so that
 I attempt to apply this to my daily life.
 
-[ref-bat-sp]: https://github.com/dvdvideo1234/WindowsBatches/blob/master/GmodAddons/WorkshopPublish/UpdateRepos.bat
+[ref-bat-sp]: https://github.com/dvdvideo1234/WindowsBatches/blob/master/GmodAddons/UpdateRepos/UpdateRepos.bat
 [ref-gam-gm]: https://store.steampowered.com/app/4000/Garrys_Mod/
 [ref-use-bs]: https://en.wikibooks.org/wiki/Windows_Batch_Scripting
 [ref-dec-ph]: https://newlearningonline.com/new-learning/chapter-7/committed-knowledge-the-modern-past/descartes-i-think-therefore-i-am
