@@ -1,5 +1,3 @@
-Sdfs
-
 ### Description
 [This][ref-bat-sp] [batch][ref-use-bs] is designed for a global solution regarding [Garry's mod][ref-gam-gm]
 addons synchronizing with the steam workshop and GitHub. It resides here so
