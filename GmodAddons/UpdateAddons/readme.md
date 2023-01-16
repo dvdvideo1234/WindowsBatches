@@ -1,5 +1,5 @@
 ### Description
-This is designed to sout trough your [Garry's mod][ref-gam-gm] addons folder and update every
+This is designed to scout through your [Garry's mod][ref-gam-gm] addons folder and update every
 git repository there. It is detected using the existing configuration
 `.git` folder that contains repo information
 
