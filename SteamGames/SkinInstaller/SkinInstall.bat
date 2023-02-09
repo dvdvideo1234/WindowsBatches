@@ -1,9 +1,9 @@
 @echo off
 
-set "SteamAppPWD=%~dp0"
-set "SteamAppBAT=%~nx0"
-set "SteamAppNAM=Pixelvision2"
 set "SteamAppPth="
+set "SteamAppPWD=%1"
+set "SteamAppNAM=%~n1"
+set "SteamAppBAT=%~nx0"
 set "SteamAppPID=HKCU\Software\Valve\Steam\ActiveProcess"
 
 for /F "Tokens=1,2*" %%A in ('reg query %SteamAppPID%') do (
@@ -18,10 +18,11 @@ call :steamGetPathDLL "%SteamAppPth%"
 :: Navigate to skins folder
 set "SteamAppPth=%SteamAppPth%Skins"
 
+echo NAM: %SteamAppNAM%
 echo SRC: %SteamAppPWD%
 echo DST: %SteamAppPth%
 
-timeout 10
+timeout 100
 
 cd /D "%SteamAppPth%"
 
