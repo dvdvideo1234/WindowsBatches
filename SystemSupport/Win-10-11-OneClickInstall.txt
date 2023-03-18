@@ -14,7 +14,3 @@ type in run MRT for virus scan
 format e: /fs:NTFS
 
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-
-type in CMD sfc /scannow
-
-type in CMD DISM /Online /Cleanup-image /Restorehealth
