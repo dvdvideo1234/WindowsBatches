@@ -1,5 +1,7 @@
 @echo off
 
+call powershell -file "CurrentPackages.ps1"
+
 for /F "delims==" %%k in ('dir *.ps1 /b /s') do (
   echo Running: %%k...
   call powershell -file "%%k"
