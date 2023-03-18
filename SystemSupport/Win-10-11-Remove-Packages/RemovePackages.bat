@@ -6,5 +6,3 @@ for /F "delims==" %%k in ('dir *.ps1 /b /s') do (
 )
 
 timeout 300
-
-
