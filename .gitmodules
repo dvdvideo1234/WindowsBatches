@@ -7,3 +7,6 @@
 [submodule "BrowserCashe/SwapAdd"]
 	path = BrowserCashe/SwapAdd
 	url = git@github.com:LTRData/swapadd.git
+[submodule "SystemSupport/Win-10-11-Utilities"]
+	path = SystemSupport/Win-10-11-Utilities
+	url = git@github.com:ChrisTitusTech/winutil.git
