@@ -1,8 +1,10 @@
 @echo off
 
-call powershell -ExecutionPolicy Bypass -file "CurrentPackages.ps1"
+set "removePath=%~dp0"
 
-for /F "delims==" %%k in ('dir *.ps1 /b /s') do (
+call powershell -ExecutionPolicy Bypass -file "%removePath%CurrentPackages.ps1"
+
+for /F "delims==" %%k in ('dir %removePath%*.ps1 /b /s') do (
   echo Running: %%k...
   call powershell  -ExecutionPolicy Bypass -file "%%k"
 )
