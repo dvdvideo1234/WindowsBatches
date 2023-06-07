@@ -1,9 +1,0 @@
-Processing addons has started! 
-ONLY: 0 
-SKIP: 0 
-CHECK: dir F:\GIT\WindowsBatches\GmodExtractGMA\DATA\*.gma /b /s 
-ADDON BASE: F:\GIT\WindowsBatches\GmodExtractGMA\DATA\sw_base.gma 
-ADDON DIRE: F:\GIT\WindowsBatches\GmodExtractGMA\DATA\sw_base.gma 
-Delete: F:\GIT\WindowsBatches\GmodExtractGMA\sw_base 
-Start: 05.01.2023 £. 17:18:25.99 
-End  : 05.01.2023 £. 17:18:26.57 
