@@ -36,18 +36,24 @@ del /f /q %OutPath%*.log
 
 echo Processing addons has started^^! >> %OutPath%process.log
 
-for %%i in %OnlyAddons% do (
-  set /A OnlyAddonsCount=!OnlyAddonsCount!+1
+for /F "delims=" %%a in (only.txt) do (
+   set /A "OnlyAddonsCount=!OnlyAddonsCount! + 1"
+   set OnlyAddons[!OnlyAddonsCount!]=%%a
+   echo ONLY: %%a
 )
 
-for %%j in %SkipAddons% do (
-  set /A SkipAddonsCount=!SkipAddonsCount!+1
+echo ONLY: %OnlyAddonsCount%
+
+for /F "delims=" %%a in (skip.txt) do (
+   set /A "SkipAddonsCount=!SkipAddonsCount! + 1"
+   set SkipAddons[!SkipAddonsCount!]=%%a
+   echo SKIP: %%a
 )
+
+echo SKIP: %SkipAddonsCount%
 
 echo GBIN: %BinPath% >> %OutPath%process.log
 echo SORS: %SrcPath% >> %OutPath%process.log
-echo ONLY: %OnlyAddonsCount% >> %OutPath%process.log
-echo SKIP: %SkipAddonsCount% >> %OutPath%process.log
 
 echo CHECK: dir !SrcPath!\*.!FileExt! /b /s >> %OutPath%process.log
 
@@ -61,15 +67,14 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
   
   echo ADDON [!CurrCount! of !FileCount!][!PrComplete!]: %%~nxk
   
-  set /A OnlyAddonsMatch=0
   set /A SkipAddonsMatch=0
   if !SkipAddonsCount! GTR 0 (
-    for %%j in %SkipAddons% do (
-      call .src\Contain.bat %%k %%j
-
+    for /L %%j in (1,1,!SkipAddonsCount!) do (
+      call .src\Contain.bat "%%k" "!SkipAddons[%%j]!"
       echo K: %%k >> !OutPath!process.log
-      echo K: %%j >> !OutPath!process.log
-
+      echo J: !SkipAddons[%%j]! >> !OutPath!process.log
+      echo E: !ERRORLEVEL! >> !OutPath!process.log
+      
       if !ERRORLEVEL! EQU 1 (
         echo ADDON SKIP: %%k >> !OutPath!process.log
         set /A SkipAddonsMatch=!SkipAddonsMatch!+1
@@ -78,9 +83,12 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
   )
 
   if !OnlyAddonsCount! GTR 0 (
-    for %%i in %OnlyAddons% do (
-      call .src\Contain.bat %%k %%i
-
+    for /L %%i in (1,1,!OnlyAddonsCount!) do (
+      call .src\Contain.bat "%%k" "!OnlyAddons[%%i]!"
+      echo K: %%k >> !OutPath!process.log
+      echo I: !OnlyAddons[%%i]! >> !OutPath!process.log
+      echo E: !ERRORLEVEL! >> !OutPath!process.log
+      
       if !ERRORLEVEL! EQU 1 (
         if !SkipAddonsMatch! EQU 0 (
           echo ADDON ONLY: %%k >> !OutPath!process.log

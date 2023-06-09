@@ -1,5 +1,5 @@
 ### Description
-This section us used for configuring various [steam][ref-steam] applications
+This section is used for configuring various [steam][ref-steam] applications
 that are installed on a drive different than `C:\`, but requite files
 or directories from the [steam][ref-steam] app installation. They fix the most
 common problems of applications not running due to being located on

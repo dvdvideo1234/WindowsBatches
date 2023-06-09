@@ -1,0 +1,2 @@
+process - copy.gma
+process.gma
