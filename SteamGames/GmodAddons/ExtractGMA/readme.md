@@ -1,13 +1,17 @@
 # Automated GMAD extractor
 --------------------------------------------------------
 ### Description
-This `Windows` batch project is designed to extract your server addons autoamtically from the `*.gma` archves of your `..common/GarrysMod/garrysmod/addons` folder.
+This [`Windows`][ref-win] [batch][ref-bat] project is designed to extract your server addons autoamtically
+from the [`*.gma`][ref-gma] archves of your `..common/GarrysMod/garrysmod/addons` folder.
 
 ### Installation
-Clone this repository to a folder of preference, then grab the files `ExportGMA.bat` and `Processor.bat` and place them into the `addons` folder of the game.
+Installation is not needed. You have two optoions:
+1. Drag a folder over the `ExportGMA.bat` and wait for the ectraction
+2. Drag a file over the `ExtractSingle.bat` and wait for the ectraction
 
 ### How it works
-The only file that you must edit to fit your needs is `ExportGMA.bat`. Setup it using the described features below. The file `Processor.bat` is a core functionality. Do _**not**_ touch it. The primary GMA exporter calls the processor, which handles the internal paths used in Garry's `gmad.exe` addon extractor inside the `bin` folder of Garry's mod.
+The only file that you must edit to fit your needs is `ExportGMA.bat`. Setup it using the described features below.
+The primary GMA exporter calls the processor, which handles the internal paths used in Garry's `gmad.exe` addon extractor inside the `bin` folder of Garry's mod.
     
 ### Features
   - You can select which addons to extract by setting the `OnlyAddons` array. Leave it empty if you want to extract all the files in the `addons` folder.
@@ -24,3 +28,7 @@ The only file that you must edit to fit your needs is `ExportGMA.bat`. Setup it 
 [![](https://img.youtube.com/vi/PGxDcOWdCOE/1.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
 [![](https://img.youtube.com/vi/PGxDcOWdCOE/2.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
 [![](https://img.youtube.com/vi/PGxDcOWdCOE/3.jpg)](http://www.youtube.com/watch?v=PGxDcOWdCOE "")
+
+[ref-win]: https://www.microsoft.com/en-us/windows
+[ref-bat]: https://en.wikipedia.org/wiki/Batch_file
+[ref-gma]: https://fileinfo.com/extension/gma

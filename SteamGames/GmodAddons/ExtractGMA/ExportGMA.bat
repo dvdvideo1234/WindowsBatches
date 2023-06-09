@@ -6,16 +6,9 @@ setlocal EnableDelayedExpansion
 
 :: The user configures the following
 
-set "BinPath=%GMOD_HOME%\bin"
 set "SrcPath=%1"
 set OnlyAddons=()
 set SkipAddons=()
-
-if "%SrcPath%" EQU "" (
-  set "SrcPath=%GMOD_HOME%\garrysmod\addons"
-  echo Source path empty^^!
-  echo Default to: !SrcPath!
-)
 
 :: The rest of the file is automatic
 
@@ -27,10 +20,17 @@ set "OutPath=%~dp0"
 set "OnlyAddonsCount=0"
 set "SkipAddonsCount=0"
 set "StartTime=%date% %time%"
+set "BinPath=%GMOD_HOME%\bin"
 
-for /f %%i in ('call Count.bat !SrcPath!') do set FileCount=%%i
+if "%SrcPath%" EQU "" (
+  set "SrcPath=%GMOD_HOME%\garrysmod\addons"
+  echo Source path empty^^!
+  echo Default to: !SrcPath!
+)
 
-echo Total [*.!FileExt! ] files found: !FileCount!^^!
+for /f %%i in ('call .src\Count.bat !SrcPath! !FileExt!') do set FileCount=%%i
+
+echo Total [*.!FileExt!] files found: !FileCount!^^!
 
 del /f /q %OutPath%*.log
 
@@ -56,14 +56,16 @@ echo Press ENTER to continue with the extraction^^!
 timeout 100
 
 for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
-  set /a "CurrCount=!CurrCount!+1"
-  set /a "PrComplete=(!CurrCount! * 100) / !FileCount!"
-  echo ADDON[!CurrCount! of !FileCount!][!PrComplete!]: %%k
+  call .src\Increment.bat !CurrCount! CurrCount
+  call .src\Percent.bat !CurrCount! !FileCount! PrComplete
+  
+  echo ADDON [!CurrCount! of !FileCount!][!PrComplete!]: %%~nxk
+  
   set /A OnlyAddonsMatch=0
   set /A SkipAddonsMatch=0
   if !SkipAddonsCount! GTR 0 (
     for %%j in %SkipAddons% do (
-      call Contain.bat %%k %%j
+      call .src\Contain.bat %%k %%j
 
       echo K: %%k >> !OutPath!process.log
       echo K: %%j >> !OutPath!process.log
@@ -77,19 +79,19 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
 
   if !OnlyAddonsCount! GTR 0 (
     for %%i in %OnlyAddons% do (
-      call Contain.bat %%k %%i
+      call .src\Contain.bat %%k %%i
 
       if !ERRORLEVEL! EQU 1 (
         if !SkipAddonsMatch! EQU 0 (
           echo ADDON ONLY: %%k >> !OutPath!process.log
-          call Processor !BinPath! %%k !OutPath!
+          call .src\Processor !BinPath! %%k !OutPath!
         )
       )
     )
   ) else (
     if !SkipAddonsMatch! EQU 0 (
       echo ADDON DIRE: %%k >> !OutPath!process.log
-      call Processor !BinPath! %%k !OutPath!
+      call .src\Processor !BinPath! %%k !OutPath!
     )
   )
 )

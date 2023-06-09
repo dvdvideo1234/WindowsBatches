@@ -1,4 +1,5 @@
 @echo off
+
 setlocal enabledelayedexpansion
 
 :: The location of the script ( Do not change )
@@ -15,6 +16,7 @@ mkdir "!gma_ext_path!!gma_ext_dirf!"
 
 echo Extracting...
 
-call %GMOD_HOME%\bin\gmad.exe extract -file "!gma_ext_file!" -out "!gma_ext_path!!gma_ext_dirf!"
+call .src\Processor %GMOD_HOME%\bin !gma_ext_file! !gma_ext_path!!gma_ext_dirf!
 
-timeout 10
+timeout 100
+
