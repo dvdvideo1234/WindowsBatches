@@ -1,8 +1,0 @@
-REGEDIT4
-[HKEY_CLASSES_ROOT\Magnet]
-@="URL:magnet Protocol"
-"URL Protocol"=""
-[HKEY_CLASSES_ROOT\Magnet\shell]
-[HKEY_CLASSES_ROOT\Magnet\shell\open]
-[HKEY_CLASSES_ROOT\Magnet\shell\open\command]
-@="\"C:\\Users\\DVD\\AppData\\Roaming\\uTorrent\\uTorrent.exe\" \"%1\""
