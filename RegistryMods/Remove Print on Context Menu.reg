@@ -1,0 +1,49 @@
+Windows Registry Editor Version 5.00
+
+;--------
+;-------- Remove "Print" from context menu for image files
+;--------
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\print]
+
+
+;-------- 
+;-------- Remove Print From common text-based files
+;-------- 
+[-HKEY_CLASSES_ROOT\SystemFileAssociations\text\shell\print]
+[-HKEY_CLASSES_ROOT\batfile\shell\print]
+[-HKEY_CLASSES_ROOT\cmdfile\shell\print]
+[-HKEY_CLASSES_ROOT\docfile\shell\print]
+[-HKEY_CLASSES_ROOT\fonfile\shell\print]
+[-HKEY_CLASSES_ROOT\htmlfile\shell\print]
+[-HKEY_CLASSES_ROOT\inffile\shell\print]
+[-HKEY_CLASSES_ROOT\inifile\shell\print]
+[-HKEY_CLASSES_ROOT\JSEFile\shell\print]
+[-HKEY_CLASSES_ROOT\JSFile\shell\print]
+[-HKEY_CLASSES_ROOT\MSInfo.Document\shell\print]
+[-HKEY_CLASSES_ROOT\otffile\shell\print]
+[-HKEY_CLASSES_ROOT\pfmfile\shell\print]
+[-HKEY_CLASSES_ROOT\regfile\shell\print]
+[-HKEY_CLASSES_ROOT\rtffile\shell\print]
+[-HKEY_CLASSES_ROOT\ttcfile\shell\print]
+[-HKEY_CLASSES_ROOT\ttffile\shell\print]
+[-HKEY_CLASSES_ROOT\txtfile\shell\print]
+[-HKEY_CLASSES_ROOT\VBEFile\shell\print]
+[-HKEY_CLASSES_ROOT\VBSFile\shell\print]
+[-HKEY_CLASSES_ROOT\Wordpad.Document.1\shell\print]
+[-HKEY_CLASSES_ROOT\WPEDoc\shell\print]
+[-HKEY_CLASSES_ROOT\WPSDoc\shell\print]
+[-HKEY_CLASSES_ROOT\wrifile\shell\print]
+[-HKEY_CLASSES_ROOT\WSFFile\shell\print]
+
+;-------- 
+;-------- Remove Print From Internet Shortcut
+;-------- 
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\InternetShortcut\shell\print]
+
+;-------- 
+;-------- Remove Print From Acrobat-/Foxit-registered .pdf files
+;-------- 
+[-HKEY_CLASSES_ROOT\AcroExch.Document.7\shell\print]
+[-HKEY_CLASSES_ROOT\FoxitReader.Document\shell\print]
+
+

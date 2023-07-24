@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"IgnoreRemoteKeyboardLayout"=dword:00000001
+
+[-HKEY_USERS\.DEFAULT\Keyboard Layout\Preload]
+
+[HKEY_USERS\.DEFAULT\Keyboard Layout\Preload]
+"2"="00000402"
+"1"="00000409"

@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: November 5th 2016
+; Tutorial: http://www.tenforums.com/tutorials/69012-bsod-automatic-restart-enable-disable-windows-10-a.html
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl]
+"AutoReboot"=dword:00000001

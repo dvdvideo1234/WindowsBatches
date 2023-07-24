@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit\Favorites]
+"VARIABLES"="HKEY_CURRENT_USER\\Environment"
+
+[HKEY_CURRENT_USER\Environment]
+"PYTHON_HOME"="D:\\Programs\\Python"
+"IMGMAG_HOME"="C:\\Program Files\\ImageMagick-HDRI"
+"FFMPG_HOME"="D:\\Programs\\FFmpeg"
+"ZIP7_HOME"="D:\\Programs\\7-Zip"
+"MING_HOME"="D:\\Programs\\CodeBlocks\\MinGW"
+"GIT_HOME"="C:\\Program Files\\Git"
+"LUA_HOME"="D:\\Programs\\Lua\\lua"
+"GMOD_HOME"="D:\\Games\\Steam\\steamapps\\common\\GarrysMod"
+"UBUNTU_ROOT"="C:\\Users\\DVD\\AppData\\Local\\Packages\\CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc\\LocalState"
