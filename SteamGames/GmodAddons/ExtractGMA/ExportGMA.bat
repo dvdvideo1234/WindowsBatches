@@ -16,11 +16,17 @@ set /a "FileCount=0"
 set /a "CurrCount=0"
 set /a "PrComplete=0"
 set "FileExt=gma"
-set "OutPath=%~dp0"
+set "CurPath=%~dp0"
 set "OnlyAddonsCount=0"
 set "SkipAddonsCount=0"
 set "StartTime=%date% %time%"
 set "BinPath=%GMOD_HOME%\bin"
+
+:: Destination path
+set "OutPath=%CurPath%\OUTPUT"
+
+:: Log file path
+set "LogPath=%OutPath%\process.log"
 
 if "%SrcPath%" EQU "" (
   set "SrcPath=%GMOD_HOME%\garrysmod\addons"
@@ -28,13 +34,13 @@ if "%SrcPath%" EQU "" (
   echo Default to: !SrcPath!
 )
 
-for /f %%i in ('call .src\Count.bat !SrcPath! !FileExt!') do set FileCount=%%i
+for /f %%i in ('call .src\Count.bat "!SrcPath!" !FileExt!') do set FileCount=%%i
 
 echo Total [*.!FileExt!] files found: !FileCount!^^!
 
-del /f /q %OutPath%*.log
+del /f /q %LogPath%
 
-echo Processing addons has started^^! >> %OutPath%process.log
+echo Processing addons has started^^! >> %LogPath%
 
 for /F "delims=" %%a in (only.txt) do (
    set /A "OnlyAddonsCount=!OnlyAddonsCount! + 1"
@@ -52,10 +58,10 @@ for /F "delims=" %%a in (skip.txt) do (
 
 echo SKIP: %SkipAddonsCount%
 
-echo GBIN: %BinPath% >> %OutPath%process.log
-echo SORS: %SrcPath% >> %OutPath%process.log
+echo GBIN: %BinPath% >> %LogPath%
+echo SORS: %SrcPath% >> %LogPath%
 
-echo CHECK: dir !SrcPath!\*.!FileExt! /b /s >> %OutPath%process.log
+echo CHECK: dir !SrcPath!\*.!FileExt! /b /s >> %LogPath%
 
 echo Press ENTER to continue with the extraction^^!
 
@@ -71,34 +77,36 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
   if !SkipAddonsCount! GTR 0 (
     for /L %%j in (1,1,!SkipAddonsCount!) do (
       call .src\Contain.bat "%%k" "!SkipAddons[%%j]!"
-      echo K: %%k >> !OutPath!process.log
-      echo J: !SkipAddons[%%j]! >> !OutPath!process.log
-      echo E: !ERRORLEVEL! >> !OutPath!process.log
+      echo K: %%k >> !LogPath!
+      echo J: !SkipAddons[%%j]! >> !LogPath!
+      echo E: !ERRORLEVEL! >> !LogPath!
       
       if !ERRORLEVEL! EQU 1 (
-        echo ADDON SKIP: %%k >> !OutPath!process.log
+        echo ADDON SKIP: %%k >> !LogPath!
         set /A SkipAddonsMatch=!SkipAddonsMatch!+1
       )
     )
   )
 
+  echo Blah: !SkipAddonsMatch!
+
   if !OnlyAddonsCount! GTR 0 (
     for /L %%i in (1,1,!OnlyAddonsCount!) do (
       call .src\Contain.bat "%%k" "!OnlyAddons[%%i]!"
-      echo K: %%k >> !OutPath!process.log
-      echo I: !OnlyAddons[%%i]! >> !OutPath!process.log
-      echo E: !ERRORLEVEL! >> !OutPath!process.log
+      echo K: %%k >> !LogPath!
+      echo I: !OnlyAddons[%%i]! >> !LogPath!
+      echo E: !ERRORLEVEL! >> !LogPath!
       
       if !ERRORLEVEL! EQU 1 (
         if !SkipAddonsMatch! EQU 0 (
-          echo ADDON ONLY: %%k >> !OutPath!process.log
+          echo ADDON ONLY: %%k >> !LogPath!
           call .src\Processor !BinPath! %%k !OutPath!
         )
       )
     )
   ) else (
     if !SkipAddonsMatch! EQU 0 (
-      echo ADDON DIRE: %%k >> !OutPath!process.log
+      echo ADDON DIRE: %%k >> !LogPath!
       call .src\Processor !BinPath! %%k !OutPath!
     )
   )
@@ -106,5 +114,5 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
 
 timeout 100
 
-echo TBEGIN: %StartTime% >> %OutPath%process.log
-echo FINISH: %date% %time% >> %OutPath%process.log
+echo TBEGIN: %StartTime% >> %LogPath%
+echo FINISH: %date% %time% >> %LogPath%
