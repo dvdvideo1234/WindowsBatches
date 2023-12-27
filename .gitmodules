@@ -13,3 +13,6 @@
 [submodule "SystemSupport/Win-10-11-BloatyNosy"]
 	path = SystemSupport/Win-10-11-BloatyNosy
 	url = git@github.com:builtbybel/BloatyNosy.git
+[submodule "SystemSupport/Win-10-11-Open-Shell"]
+	path = SystemSupport/Win-10-11-Open-Shell
+	url = git@github.com:Open-Shell/Open-Shell-Menu.git
