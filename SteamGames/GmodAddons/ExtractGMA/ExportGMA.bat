@@ -88,8 +88,6 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
     )
   )
 
-  echo Blah: !SkipAddonsMatch!
-
   if !OnlyAddonsCount! GTR 0 (
     for /L %%i in (1,1,!OnlyAddonsCount!) do (
       call .src\Contain.bat "%%k" "!OnlyAddons[%%i]!"
