@@ -1,19 +1,20 @@
 @echo off
 
+set "REG_SCPVER=HKLM\software\microsoft\windows NT\CurrentVersion"
 set "REG_SCPKEY=HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SystemCertificates\SPC"
 set "REG_SPCFAV=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit\Favorites"
 
 set "OS_VERSION=Microsoft"
 
-for /F "usebackq tokens=3,4,5" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v ProductName`) do (
+for /F "usebackq tokens=3,4,5" %%i in (`REG QUERY "%REG_SCPVER%" /v ProductName`) do (
   set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
 )
 
-for /F "usebackq tokens=3" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentVersion`) do (
+for /F "usebackq tokens=3" %%i in (`REG QUERY "%REG_SCPVER%" /v CurrentVersion`) do (
   set "OS_VERSION=%OS_VERSION% %%i"
 )
 
-for /F "usebackq tokens=3" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentBuild`) do (
+for /F "usebackq tokens=3" %%i in (`REG QUERY "%REG_SCPVER%" /v CurrentBuild`) do (
   set "OS_VERSION=%OS_VERSION%.%%i"
 )
 
