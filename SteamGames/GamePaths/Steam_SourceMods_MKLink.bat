@@ -1,18 +1,21 @@
 @echo off
 
 set "OS_VERSION=Microsoft"
+set "REG_SCPVER=HKLM\software\microsoft\windows NT\CurrentVersion"
 
-for /F "usebackq tokens=3,4,5" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v ProductName`) do (
+for /F "usebackq tokens=3,4,5" %%i in (`REG QUERY "%REG_SCPVER%" /v ProductName`) do (
   set "OS_VERSION=%OS_VERSION% %%i %%j %%k"
 )
 
-for /F "usebackq tokens=3" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentVersion`) do (
+for /F "usebackq tokens=3" %%i in (`REG QUERY "%REG_SCPVER%" /v CurrentVersion`) do (
   set "OS_VERSION=%OS_VERSION% %%i"
 )
 
-for /F "usebackq tokens=3" %%i in (`REG QUERY "hklm\software\microsoft\windows NT\CurrentVersion" /v CurrentBuild`) do (
+for /F "usebackq tokens=3" %%i in (`REG QUERY "%REG_SCPVER%" /v CurrentBuild`) do (
   set "OS_VERSION=%OS_VERSION%.%%i"
 )
+
+echo Version: %OS_VERSION%
 
 net session >nul 2>nul
 if %ERRORLEVEL% NEQ 0 (
@@ -20,15 +23,23 @@ if %ERRORLEVEL% NEQ 0 (
   goto end-script
 )
 
-echo Version: %OS_VERSION%
-
 set "SteamAppPWD=%~dp0"
 set "SteamAppPth="
 set "SteamAppMod="
 set "SteamAppOut=%1"
 set "SteamAppNam=sourcemods"
+set "SteamAppReg=HKCU\SOFTWARE\Valve\Steam"
 
-for /F "Tokens=1,2*" %%A in ('reg query HKCU\SOFTWARE\Valve\Steam') do (
+REG QUERY %SteamAppReg% >NUL 2>NUL && (
+  goto body-script
+) || (
+  echo Steam application is not installed. Running this is pointless!
+  goto end-script
+)
+
+:body-script:
+
+for /F "Tokens=1,2*" %%A in (`reg query "%SteamAppReg%"`) do (
     If "%%A" equ "ModInstallPath" set "SteamAppMod=%%C"
     If "%%A" equ "SteamPath" set "SteamAppPth=%%C")
 
@@ -44,7 +55,7 @@ if /I "%SteamAppConfirm%" EQU "y" (
 
 set "SteamAppSom=%SteamAppPth%\steamapps\%SteamAppNam%"
 
-if exist %1 (
+if exist "%1" (
   if /I "%SteamAppConfirm%" EQU "Y" (
     dir /b /s /a "%SteamAppSom%" | findstr .>nul && (
       echo Origin not empty: "%SteamAppSom%"
@@ -65,3 +76,5 @@ if exist %1 (
 )
 
 cd /d %SteamAppPWD%
+
+:end-script:
