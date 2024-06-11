@@ -16,7 +16,7 @@ for /F "usebackq tokens=3" %%i in (`REG QUERY "hklm\software\microsoft\windows N
 
 net session >nul 2>nul
 if %ERRORLEVEL% NEQ 0 (
-  echo Run the script as administrator to apply the registry changes!
+  echo Run the script as administrator to move sourcemods!
   goto end-script
 )
 
@@ -42,19 +42,26 @@ if /I "%SteamAppConfirm%" EQU "y" (
   set "SteamAppConfirm=Y"
 )
 
-echo [%SteamAppOut%]
+set "SteamAppSom=%SteamAppPth%\steamapps\%SteamAppNam%"
 
 if exist %1 (
   if /I "%SteamAppConfirm%" EQU "Y" (
-    call cd /d "%SteamAppPth%\steamapps"
-    call rmdir %SteamAppNam%
-    call mklink /J %SteamAppNam% %1
-    echo Steam MKLink created for: "%SteamAppPth%\steamapps\%SteamAppNam%"!
+    dir /b /s /a "%SteamAppSom%" | findstr .>nul && (
+      echo Origin not empty: "%SteamAppSom%"
+      echo Please move the source mods folder to the new location first!
+    ) || (
+      call cd /d "%SteamAppPth%\steamapps"
+      call rmdir %SteamAppNam%
+      call mklink /J %SteamAppNam% %1
+      echo Steam MKLink created for: "%SteamAppSom%"
+      echo Steam MKLink destination: "%1"
+    )
   ) else (
     echo Nothing was changed!
   )
 ) else (
-  echo Please provide mods folder to link to!
+  echo Destination invalid: "%1"
+  echo Please provide valid source mods folder to link to!
 )
 
 cd /d %SteamAppPWD%
