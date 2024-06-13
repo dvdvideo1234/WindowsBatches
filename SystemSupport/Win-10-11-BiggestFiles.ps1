@@ -19,5 +19,5 @@ Get-ChildItem -Recurse -Force -ErrorAction Continue 2>&1 | %{
   }
 } |
   sort -descending -property length |
-  Select-Object FullName, @{Name="Size";Expression={Format-FileSize($_.Length)}} |
+  Select-Object @{Name="Size";Expression={Format-FileSize($_.Length)}}, FullName |
   select -first 50
