@@ -16,3 +16,6 @@
 [submodule "SystemSupport/Win-10-11-Open-Shell"]
 	path = SystemSupport/Win-10-11-Open-Shell
 	url = git@github.com:Open-Shell/Open-Shell-Menu.git
+[submodule "HEIC-Format/HeicConverter"]
+	path = HEIC-Format/HeicConverter
+	url = https://github.com/saschiwy/HeicConverter
