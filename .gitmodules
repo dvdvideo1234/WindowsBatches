@@ -18,4 +18,7 @@
 	url = git@github.com:Open-Shell/Open-Shell-Menu.git
 [submodule "HEIC-Format/HeicConverter"]
 	path = HEIC-Format/HeicConverter
-	url = https://github.com/saschiwy/HeicConverter
+	url = git@github.com:saschiwy/HeicConverter.git
+[submodule "SystemSupport/Win-10-11-UnattendedWinstall"]
+	path = SystemSupport/Win-10-11-UnattendedWinstall
+	url = git@github.com:memstechtips/UnattendedWinstall.git
