@@ -8,6 +8,10 @@ Function Format-FileSize() {
     Else                   {""}
 }
 
+$count=$args[0]
+
+if($count -eq $null) { $count = 30 }
+
 Get-ChildItem -Recurse -Force -ErrorAction Continue 2>&1 | %{
   if($_ -is [System.Management.Automation.ErrorRecord]){
     # if this is an error, print the exception message directly to the screen
@@ -19,5 +23,5 @@ Get-ChildItem -Recurse -Force -ErrorAction Continue 2>&1 | %{
   }
 } |
   sort -descending -property length |
-  Select-Object @{Name="Size";Expression={Format-FileSize($_.Length)}}, FullName |
-  select -first 50
+  Select-Object @{Name="Size";Expression={Format-FileSize($_.Length)}}, LastWriteTime, FullName |
+  select -first $count
