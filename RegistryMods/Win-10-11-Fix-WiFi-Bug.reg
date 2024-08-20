@@ -1,7 +1,21 @@
 Windows Registry Editor Version 5.00
 
+; Fix for WIN11 22H2 RADIUS WiFi not working
+
+; Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\RasMan\PPP\EAP\13
+; Create DWORD key TlsVersion with value 0xFC0
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\RasMan\PPP\EAP\13]
+"TlsVersion"=dword:00000fc0
+
+; Navigate to HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+; Set LsaCfgFlags to 0
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard]
 "LsaCfgFlags"=dword:00000000
+
+; Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+; Set LsaCfgFlags to 0
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]
 "LsaCfgFlags"=dword:00000000
