@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+; Created by: DVD
+; Created on: 2024-09-12
+
+[HKEY_CLASSES_ROOT\Folder\shell\pintohome]
+"AppliesTo"="NOT System.ParsingName:=\"::{645FF040-5081-101B-9F08-00AA002F954E}\""
+
+[HKEY_CLASSES_ROOT\Directory\ShellEx\ContextMenuHandlers\PintoStartScreen]
+@="{470C0EBD-5D73-4d58-9CED-E91E22E23282}"
+[-HKEY_CLASSES_ROOT\Folder\ShellEx\ContextMenuHandlers\PintoStartScreen]
