@@ -3,7 +3,7 @@
 setlocal EnableDelayedExpansion
 
 :: Manual
-set "framesOut=out"
+set "framesOut=out_f"
 set "framesWait=N"
 
 :: Automatic ( Dont touch )

@@ -22,13 +22,13 @@ setlocal EnableDelayedExpansion
 
 :: Manual FFMpeg
 
-set "waifuFFMpg=D:\FFmpeg\bin"
+set "waifuFFMpg=D:\Programs\FFmpeg\bin"
 set "waifuFFCom=0"
 set "waifuQualy=100"
 
 :: Manual Waifu2X
 
-set "waifuBase=D:\waifu2x-ncnn-vulkan"
+set "waifuBase=D:\Programs\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
 set "waifuNoise=1"
@@ -44,6 +44,8 @@ set "waifuConv=%2"
 set "waifuWait=%3"
 set "waifuCurr=%~dp0"
 set "waifuExtIMG=%~x1"
+set "waifuExtOUT=.jpg"
+set "waifuFrmOUT=-update true -frames:v 1 -map 0:v:0"
 
 cd /d %waifuCurr%
 
@@ -55,19 +57,21 @@ if not defined waifuWait (
 )
 
 if not defined waifuConv (
-  echo Undefined using [1]^^!
+  echo Undefined count... Using [1]^^!
   set /a "waifuConv=1"
 )
 
 if /I !waifuConv! LEQ 0 (
-  echo Mismatch using [1]^^!
+  echo Mismatch count... Using [1]^^!
   set /a "waifuConv=1"
 ) else (
-  echo Arithmetic using [!waifuConv!]^^!
+  echo Arithmetic count... Using [!waifuConv!]^^!
   set /a "waifuConv=!waifuConv!"
 )
 
 if %waifuConv% EQU 1 (
+  echo From: %waifuFile%
+  echo Dest: out%waifuExtIMG%
   if %waifuScale% EQU 1 (
     call copy /v /y "%waifuFile%" "out%waifuExtIMG%" >nul || (
       echo Data copy failed at iteration [0]^^!
@@ -90,10 +94,9 @@ if %waifuConv% EQU 1 (
     exit /B 1
   )
   if defined waifuFFMpg (
-    echo %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-    call %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
-      call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtIMG%
-      echo.
+    echo %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% %waifuCurr%%waifuTemp%\1_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1
+    call %waifuFFMpg%\ffmpeg.exe -y -i %waifuCurr%%waifuTemp%\1%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% %waifuCurr%%waifuTemp%\1_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1 && (
+      call :waifuGetRatio %waifuCurr%%waifuTemp%\1%waifuExtIMG% %waifuCurr%%waifuTemp%\1_f%waifuExtOUT%
       echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
     ) || (
       echo FFMpeg failed at iteration [!waifuCnt1!]!
@@ -102,7 +105,6 @@ if %waifuConv% EQU 1 (
   )
 
   for /l %%k in (2, 1, %waifuConv%) do (
-    echo.
     echo From: !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG%
     echo Dest: !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG%
     call %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1 || (
@@ -110,10 +112,9 @@ if %waifuConv% EQU 1 (
       exit /B 1
     )
     if defined waifuFFMpg (
-      echo %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%  1>> %waifuLogs% 2>>&1
-      call %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
-        call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtIMG%
-        echo.
+      echo %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1
+      call %waifuFFMpg%\ffmpeg.exe -y -i !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1 && (
+        call :waifuGetRatio !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% !waifuCurr!!waifuTemp!\!waifuCnt2!_f%waifuExtOUT%
         echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
       ) || (
         echo FFMpeg failed at iteration [!waifuCnt1!]!
@@ -128,10 +129,9 @@ if %waifuConv% EQU 1 (
 )
 
 if defined waifuFFMpg (
-  echo %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1
-  call %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% out_f%waifuExtIMG% 1>> %waifuLogs% 2>>&1 && (
-    call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtIMG%
-    echo.
+  echo %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% out_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1
+  call %waifuFFMpg%\ffmpeg.exe -y -i out%waifuExtIMG% -compression_level %waifuFFCom% -quality %waifuQualy% %waifuFrmOUT% out_f%waifuExtOUT% 1>> %waifuLogs% 2>>&1 && (
+    call :waifuGetRatio out%waifuExtIMG% out_f%waifuExtOUT%
     echo FFMpeg... Output size is !waifuRatio!%% of input size^^!
   ) || (
     echo FFMpeg failed at final iteration^^!
