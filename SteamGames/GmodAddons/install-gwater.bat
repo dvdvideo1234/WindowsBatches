@@ -12,12 +12,25 @@ for /F "Tokens=1,2*" %%A in ('reg query HKCU\SOFTWARE\Valve\Steam') do (
 
 set "SteamAppPth=!SteamAppPth:/=\!"
 
-echo Detected PWD: !SteamAppPth!
-echo Detected GMD: !SteamAppExe!
-
 if "!SteamAppExe!" equ "" (
-  echo Gmod HOME missing... Exit
-  goto EOF
+  set "SteamAppTmp="
+  echo Extracting GMOD_HOME from libraries...
+  echo Using: !SteamAppPth!\steamapps\libraryfolders.vdf
+  cd /d "!SteamAppPth!\steamapps\"
+  for /F "tokens=1,2 delims=" %%i in (libraryfolders.vdf) do (
+    echo.%%i | FINDSTR /I "path">Nul && (
+      set "SteamAppTmp=%%i"
+    )
+    echo.%%i | FINDSTR /I "4000">Nul && (
+      set "SteamAppExe=!SteamAppTmp!"
+      set "SteamAppExe=!SteamAppExe:path=!"
+      set "SteamAppExe=!SteamAppExe:"=!"
+      set "SteamAppExe=!SteamAppExe:\\=\!"
+      for /f "usebackq tokens=*" %%a in (`echo !SteamAppExe!`) do set SteamAppExe=%%a
+      set "SteamAppExe=!SteamAppExe!\steamapps\common\GarrysMod"
+    )
+  )
+  cd /d "!SteamAppPWD!"
 )
 
 if exist "module.zip" (
@@ -34,6 +47,14 @@ if exist "*.dll" (
   echo Clearing DLLs...
   call del *.dll
 )
+
+if not exist "!SteamAppExe!" (
+  echo Game main directory does not exist...
+  goto :EOF
+)
+
+echo Detected PWD: !SteamAppPth!
+echo Detected GMD: !SteamAppExe!
 
 timeout 100
 
