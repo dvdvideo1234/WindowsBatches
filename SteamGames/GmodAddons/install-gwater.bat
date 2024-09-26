@@ -4,13 +4,17 @@ SetLocal EnableDelayedExpansion
 
 set "SteamAppURL=https://github.com/meetric1/GWater-V3/releases/download/1.4/GWater_Modules.zip"
 set "SteamAppPWD=%~dp0"
-set "SteamAppExe=!GMOD_HOME!"
+set "SteamAppExe=%1"
 set "SteamAppPth="
 
 for /F "Tokens=1,2*" %%A in ('reg query HKCU\SOFTWARE\Valve\Steam') do (
     If "%%A" equ "SteamPath" set "SteamAppPth=%%C")
 
 set "SteamAppPth=!SteamAppPth:/=\!"
+
+if "!SteamAppExe!" equ "" (
+  set "SteamAppExe=!GMOD_HOME!"
+)
 
 if "!SteamAppExe!" equ "" (
   set "SteamAppTmp="
@@ -50,6 +54,7 @@ if exist "*.dll" (
 
 if not exist "!SteamAppExe!" (
   echo Game main directory does not exist...
+  echo Path: !SteamAppExe!
   goto :EOF
 )
 
