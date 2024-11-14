@@ -32,8 +32,9 @@ set "waifuBase=D:\Programs\waifu2x-ncnn-vulkan"
 set "waifuExec=waifu2x-ncnn-vulkan"
 set "waifuTemp=TEMP"
 set "waifuNoise=1"
-set "waifuScale=8"
+set "waifuScale=4"
 set "waifuTile=256"
+set "waifuOutFmt=jpg"
 set "waifuModel=cunet"
 set "waifuGPUID=0"
 
@@ -78,7 +79,7 @@ if %waifuConv% EQU 1 (
       exit /B 1
     )
   ) else (
-    call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
+    call %waifuBase%\%waifuExec%.exe -v -f %waifuOutFmt% -i %waifuFile% -o out%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
       echo Upscaler failed at iteration [0]^^!
       exit /B 1
     )
@@ -89,7 +90,7 @@ if %waifuConv% EQU 1 (
   set /a "waifuCnt1=1"
   set /a "waifuCnt2=2"
 
-  call %waifuBase%\%waifuExec%.exe -v -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
+  call %waifuBase%\%waifuExec%.exe -v -f %waifuOutFmt% -i %waifuFile% -o %waifuCurr%%waifuTemp%\1%waifuExtIMG% -m models-%waifuModel% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1> %waifuLogs% 2>>&1 || (
     echo Upscaler failed at iteration [!waifuCnt1!]^^!
     exit /B 1
   )
@@ -107,7 +108,7 @@ if %waifuConv% EQU 1 (
   for /l %%k in (2, 1, %waifuConv%) do (
     echo From: !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG%
     echo Dest: !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG%
-    call %waifuBase%\%waifuExec%.exe -v -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1 || (
+    call %waifuBase%\%waifuExec%.exe -v -f %waifuOutFmt% -i !waifuCurr!!waifuTemp!\!waifuCnt1!%waifuExtIMG% -m models-%waifuModel% -o !waifuCurr!!waifuTemp!\!waifuCnt2!%waifuExtIMG% -n %waifuNoise% -s %waifuScale% -t %waifuTile% -g %waifuGPUID% 1>> %waifuLogs% 2>>&1 || (
       echo Upscaler failed at iteration [!waifuCnt1!]^^!
       exit /B 1
     )

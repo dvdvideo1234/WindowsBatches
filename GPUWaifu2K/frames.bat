@@ -4,9 +4,11 @@ setlocal EnableDelayedExpansion
 
 :: Manual
 set "framesOut=out_f"
+set "framesExt=.jpg"
 set "framesWait=N"
 
 :: Automatic ( Dont touch )
+set "framesLogs=frames.log"
 set "framesCurr=%~dp0"
 set "framesBase=%1"
 set "framesConv=%2"
@@ -39,29 +41,43 @@ if /I !framesConv! LEQ 0 (
 
 timeout 45
 
+echo Process has started [%DATE% %TIME%]>>%framesLogs%
+
 if not exist !framesFold! mkdir !framesFold!
 
 for /F "delims=" %%a in ('dir "!framesBase!\*.*" /b /s') do (
   set "var=%%a"
-  call :frameGetExtension !var!
   call :framesGetFile !var!
-  call copy /v /y "!var!" "!framesFile!" >nul
+  echo Prepare sors: !var!>>%framesLogs%
+  echo Prepare dest: !framesFile!>>%framesLogs%
+  call copy /v /y "!var!" "!framesFile!">>%framesLogs%
   call convert.bat !framesFile! !framesConv! !framesWait! >nul && (
-    echo Success: !var!
+    echo Convert success: !var!
   ) || (
-    echo Abort convert: [!var!]^^!
+    echo Failure: [!var!]^^!
     exit /B 1
   )
-  call copy /v /y "!framesOut!!framesExt!" "!framesFold!\!framesFile!" >nul || (
-    echo Abort extract: [!var!]^^!
+  call :frameGetName !framesFile!
+  call :frameGetExtension !framesOut!!framesExt!
+  echo Store sors: !framesOut!!framesExt!>>%framesLogs%
+  echo Store dest: !framesFold!\!framesName!!framesExt!>>%framesLogs%
+  call copy /v /y "!framesOut!!framesExt!" "!framesFold!\!framesName!!framesExt!">>%framesLogs% || (
+    echo Store failure: [!var!]^^!
     exit /B 2
   )
-  call del "!framesFile!" >nul
+  call del "!framesFile!">>%framesLogs%
 )
 
 call del out*.* >nul
 
+echo Process has ended [%DATE% %TIME%]>>%framesLogs%
+
 :: Functions
+
+goto :eof
+
+:frameGetName
+set "framesName=%~n1"
 
 goto :eof
 
