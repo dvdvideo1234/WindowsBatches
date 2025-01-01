@@ -13,3 +13,4 @@ Windows Registry Editor Version 5.00
 "LUA_HOME"="D:\\Programs\\Lua\\lua"
 "GMOD_HOME"="D:\\Games\\Steam\\steamapps\\common\\GarrysMod"
 "UBUNTU_ROOT"="C:\\Users\\DVD\\AppData\\Local\\Packages\\CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc\\LocalState"
+"BOOST_ROOT"="C:\\Custom\\LibBoost"
