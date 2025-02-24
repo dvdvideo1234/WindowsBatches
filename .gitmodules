@@ -22,3 +22,6 @@
 [submodule "SystemSupport/Win-10-11-UnattendedWinstall"]
 	path = SystemSupport/Win-10-11-UnattendedWinstall
 	url = git@github.com:memstechtips/UnattendedWinstall.git
+[submodule "SteamGames/Overcooked2/OvercookedTool"]
+	path = SteamGames/Overcooked2/OvercookedTool
+	url = git@github.com:hadeutscher/OvercookedTool.git
