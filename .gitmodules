@@ -25,3 +25,6 @@
 [submodule "SteamGames/Overcooked2/OvercookedTool"]
 	path = SteamGames/Overcooked2/OvercookedTool
 	url = git@github.com:hadeutscher/OvercookedTool.git
+[submodule "SteamGames/Overcooked2/UnityIdentifier"]
+	path = SteamGames/Overcooked2/UnityIdentifier
+	url = git@github.com:LinnielDW/UnityDeviceUniqueIdentifierHarness.git
