@@ -55,7 +55,7 @@ if /I "%WSL_UPDATE%" EQU "Y" (
   call dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
   call Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
   :: Install WSL
-  call wsl.exe --install
+  call wsl.exe --install --no-distribution
   :: List available
   call wsl.exe --list --online
   :: Pick destribution
