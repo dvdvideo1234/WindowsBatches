@@ -26,10 +26,3 @@ if "%RUNMODE%" EQU "wmic" (
     start "" "%RUNPATH%"
   )
 )
-
-
-
-
-
-
-
