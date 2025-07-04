@@ -28,3 +28,6 @@
 [submodule "SteamGames/Overcooked2/UnityIdentifier"]
 	path = SteamGames/Overcooked2/UnityIdentifier
 	url = git@github.com:LinnielDW/UnityDeviceUniqueIdentifierHarness.git
+[submodule "SystemSupport/Microsoft-Activation-Scripts"]
+	path = SystemSupport/Microsoft-Activation-Scripts
+	url = git@github.com:massgravel/Microsoft-Activation-Scripts.git
