@@ -31,3 +31,6 @@
 [submodule "SystemSupport/Microsoft-Activation-Scripts"]
 	path = SystemSupport/Win-10-11-MAS
 	url = git@github.com:massgravel/Microsoft-Activation-Scripts.git
+[submodule "SystemSupport/Win-11-Nano-Toolkit"]
+	path = SystemSupport/Win-11-Nano-Toolkit
+	url = git@github.com:nano11-dev/Nano11Toolkit.git
