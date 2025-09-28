@@ -14,6 +14,8 @@ call sfc /scannow
 
 call sfc /scannow
 
+call chkdsk /F /V /R C:
+
 timeout 300
 
 exit 0
