@@ -10,6 +10,10 @@ call DISM /Online /Cleanup-image /Restorehealth
 
 call sfc /scannow
 
+call sfc /scannow
+
+call sfc /scannow
+
 timeout 300
 
 exit 0
