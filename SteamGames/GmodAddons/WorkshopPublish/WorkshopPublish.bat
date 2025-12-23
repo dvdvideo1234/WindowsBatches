@@ -37,7 +37,7 @@ if not defined gmadRevPath (
 
   :: Replace double slashes with single slashes
   set "gmadRevPath=!gmadRevPath:\\=\%!
-  
+
   :: Remove the last slash when present
   if !gmadRevPath:~-1!==\ set gmadRevPath=!gmadRevPath:~0,-1!
 
@@ -50,11 +50,11 @@ cd /d !gmadRevPath!
 
 if not defined gmadBinPath (
   set "gmadLibPath=!gmadRevPath!"
-  
+
   echo Searching for game binary via addon^^!
-      
+
   for /L %%I in (1, 1, 4) do (
-  
+
     :: Swap the slashes for windows
     set "gmadLibPath=!gmadLibPath:/=\!"
 
@@ -62,12 +62,12 @@ if not defined gmadBinPath (
     set "gmadLibPath=!gmadLibPath:\\=\%!
 
     :: Remove the last slash when present
-    if !gmadLibPath:~-1!==\ set gmadLibPath=!gmadLibPath:~0,-1!  
-  
+    if !gmadLibPath:~-1!==\ set gmadLibPath=!gmadLibPath:~0,-1!
+
     :: Trim the leading and the trailing spaces
     for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
     set gmadLibPath=!gmadLibPath!
-  
+
     :: They the current addon path
     if exist "!gmadLibPath!\gmod.exe" (
       echo [V] Binary addon: !gmadLibPath!
@@ -76,7 +76,7 @@ if not defined gmadBinPath (
     ) else (
       echo [X] Binary addon: !gmadLibPath!
     )
-    
+
     :: Remove `/<ADDON_FOLDER>`
     for %%A in ("!gmadLibPath!") do set gmadLibPath=%%~dpA
   )
@@ -90,7 +90,7 @@ if not defined gmadBinPath (
   :: Retrieve steam DLL install location
   for /F "Tokens=1,2*" %%A in ('reg query !gmadSteamPID!') do (
       If "%%A" equ "SteamClientDll" set "gmadSteamPath=%%C")
-  
+
   :: Replace slashes for windows
   set "gmadSteamPath=!gmadSteamPath:/=\!"
 
@@ -105,23 +105,23 @@ if not defined gmadBinPath (
     echo.%%A| FIND /I "path">Nul && (
       :: Rewrite the content in the variable
       set "gmadLibPath=%%A"
-      
+
       :: Swap the slashes for windows
       set "gmadLibPath=!gmadLibPath:/=\!"
-      
+
       :: Replace "path" substring
       set "gmadLibPath=!gmadLibPath:"path"= %!
-      
+
       :: Replace all double quotes with spaces
       set "gmadLibPath=!gmadLibPath:"= %!
-      
+
       :: Replace double slashes with single slashes
       set "gmadLibPath=!gmadLibPath:\\=\%!
-      
+
       :: Trim the leading and the trailing spaces
       for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
       set gmadLibPath=!gmadLibPath!
-      
+
       :: Search for GMOD executable and mark the library as active
       if exist "!gmadLibPath!\!gmadAppPath!\gmod.exe" (
         echo [V] Binary library: !gmadLibPath!
