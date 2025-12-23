@@ -1,4 +1,4 @@
-WSID:2011328556
-REPO:PhysPropertiesAdv
-ADDN:physprop_adv
+WSID:1234567890
+REPO:TestAddon
+ADDN:test_addon
 DATA:(lua resource)

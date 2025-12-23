@@ -26,60 +26,124 @@ set "gmadCopyEXC=exclude_copy.txt"
 set "gmadAppPath=steamapps\common\GarrysMod"
 set "gmadSteamPID=HKCU\Software\Valve\Steam\ActiveProcess"
 
+echo %gmadBasePath%
+
+:: Revision path defaults to current path
+if not defined gmadRevPath (
+  echo Repository path not provided^^!
+
+  :: Swap the slashes for windows
+  set "gmadRevPath=!gmadBasePath:/=\!"
+
+  :: Replace double slashes with single slashes
+  set "gmadRevPath=!gmadRevPath:\\=\%!
+  
+  :: Remove the last slash when present
+  if !gmadRevPath:~-1!==\ set gmadRevPath=!gmadRevPath:~0,-1!
+
+  echo [X] Addon path: [!gmadRevPath!]^^!
+) else (
+  echo [V] Addon path: [!gmadRevPath!]^^!
+)
+
 cd /d !gmadRevPath!
 
-:: Retrieve steam DLL install location
-for /F "Tokens=1,2*" %%A in ('reg query %gmadSteamPID%') do (
-    If "%%A" equ "SteamClientDll" set "gmadSteamPath=%%C")
-    
-:: Replace slashes for windows
-set "gmadSteamPath=%gmadSteamPath:/=\%"
-
-:: Extract path from the DLL registy entries
-for %%A in ("%gmadSteamPath%") do set gmadSteamPath=%%~dpA
-
-echo Steam client path: [%gmadSteamPath%]^^!
-
-echo Searching for GMOD installation across all libraries:
-
-for /F "usebackq tokens=*" %%A in ("%gmadSteamPath%config\libraryfolders.vdf") do (
-  echo.%%A| FIND /I "path">Nul && (
-    :: Rewrite the content in the variable
-    set "gmadLibPath=%%A"
-    
+if not defined gmadBinPath (
+  set "gmadLibPath=!gmadRevPath!"
+  
+  echo Searching for game binary via addon^^!
+      
+  for /L %%I in (1, 1, 4) do (
+  
     :: Swap the slashes for windows
     set "gmadLibPath=!gmadLibPath:/=\!"
-    
-    :: Replace "path" substring
-    set "gmadLibPath=!gmadLibPath:"path"= %!
-    
-    :: Replace all double quotes with spaces
-    set "gmadLibPath=!gmadLibPath:"= %!
-    
+
     :: Replace double slashes with single slashes
     set "gmadLibPath=!gmadLibPath:\\=\%!
-    
+
+    :: Remove the last slash when present
+    if !gmadLibPath:~-1!==\ set gmadLibPath=!gmadLibPath:~0,-1!  
+  
     :: Trim the leading and the trailing spaces
     for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
     set gmadLibPath=!gmadLibPath!
-    
-    :: Search for GMOD executable and mark the library as active
-    if exist "!gmadLibPath!\!gmadAppPath!\gmod.exe" (
-      echo [V] !gmadLibPath!
-      set "gmadBinPath=!gmadLibPath!\!gmadAppPath!\bin"
+  
+    :: They the current addon path
+    if exist "!gmadLibPath!\gmod.exe" (
+      echo [V] Binary addon: !gmadLibPath!
+      set "gmadBinPath=!gmadLibPath!\bin"
+      goto :BIN_ADDON
     ) else (
-      echo [X] !gmadLibPath!
+      echo [X] Binary addon: !gmadLibPath!
+    )
+    
+    :: Remove `/<ADDON_FOLDER>`
+    for %%A in ("!gmadLibPath!") do set gmadLibPath=%%~dpA
+  )
+)
+
+:BIN_ADDON
+
+if not defined gmadBinPath (
+  echo Searching for game binary via library^^!
+
+  :: Retrieve steam DLL install location
+  for /F "Tokens=1,2*" %%A in ('reg query !gmadSteamPID!') do (
+      If "%%A" equ "SteamClientDll" set "gmadSteamPath=%%C")
+  
+  :: Replace slashes for windows
+  set "gmadSteamPath=!gmadSteamPath:/=\!"
+
+  :: Extract path from the DLL registy entries
+  for %%A in ("!gmadSteamPath!") do set gmadSteamPath=%%~dpA
+
+  echo Steam client path: [!gmadSteamPath!]^^!
+
+  echo Searching for GMOD installation across all libraries:
+
+  for /F "usebackq tokens=*" %%A in ("!gmadSteamPath!config\libraryfolders.vdf") do (
+    echo.%%A| FIND /I "path">Nul && (
+      :: Rewrite the content in the variable
+      set "gmadLibPath=%%A"
+      
+      :: Swap the slashes for windows
+      set "gmadLibPath=!gmadLibPath:/=\!"
+      
+      :: Replace "path" substring
+      set "gmadLibPath=!gmadLibPath:"path"= %!
+      
+      :: Replace all double quotes with spaces
+      set "gmadLibPath=!gmadLibPath:"= %!
+      
+      :: Replace double slashes with single slashes
+      set "gmadLibPath=!gmadLibPath:\\=\%!
+      
+      :: Trim the leading and the trailing spaces
+      for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
+      set gmadLibPath=!gmadLibPath!
+      
+      :: Search for GMOD executable and mark the library as active
+      if exist "!gmadLibPath!\!gmadAppPath!\gmod.exe" (
+        echo [V] Binary library: !gmadLibPath!
+        set "gmadBinPath=!gmadLibPath!\!gmadAppPath!\bin"
+        goto :BIN_LIBRARY
+      ) else (
+        echo [X] Binary library: !gmadLibPath!
+      )
     )
   )
 )
 
-echo Game isntance path: [!gmadLibPath!\!gmadAppPath!]^^!
+:BIN_LIBRARY
+
+echo Game binary path: [!gmadBinPath!]^^!
 
 if not exist "!gmadRevDesc!" (
   echo Publish description required [!gmadRevDesc!]^^!
   echo Path: !gmadRevDesc!
 )
 
+:: Extract the information from the workshop conf file
 for /f "tokens=1,2 delims=:" %%i in (!gmadRevDesc!) do (
   :: Extract workshop ID
   if "%%i" EQU "WSID" (
@@ -103,9 +167,12 @@ for /f "tokens=1,2 delims=:" %%i in (!gmadRevDesc!) do (
   )
 )
 
+:: Repository name is not defined
 if not defined gmadName (
   echo Please define the [REPO] parameter in [!gmadRevDesc!]^^!
   echo Path: !gmadRevPath!\!gmadRevDesc!
+  timeout 100
+  goto :EOF
 )
 
 title Addon !gmadName! updater/publisher
@@ -113,6 +180,8 @@ title Addon !gmadName! updater/publisher
 if not defined gmadNameItem (
   echo Please define the [ADDN] parameter in [!gmadRevDesc!]^^!
   echo Path: !gmadRevPath!\!gmadRevDesc!
+  timeout 100
+  goto :EOF
 )
 
 set "gmadCommits=https://github.com/dvdvideo1234/!gmadName!/commit/"
@@ -120,7 +189,6 @@ set "gmadRevTools=data\!gmadNameItem!\tools"
 
 echo Press Crtl+C to terminate^^!
 echo Press a key if you do not want to wait^^!
-echo Rinning in: !gmadRevPath!
 echo Npp Find --\h{1,}\n-- replace --\n-- in dos format before commit^^!
 echo Extracting repository source contents^^!
 if exist "!gmadNameLOG!" del "!gmadNameLOG!"
@@ -129,26 +197,32 @@ if exist "!gmadRevDest!" rd /S /Q "!gmadRevDest!"
 
 timeout 10
 
-if not exist "!gmadRevPath!\!gmadRevTools!\workshop\!gmadCopyEXC!" (
-  echo Utilizing the global copy exclude^^!
-  echo Exclude: !gmadBasePath!!gmadCopyEXC!
-  set "gmadCopyEXC=!gmadBasePath!!gmadCopyEXC!"
-) else (
+if exist "!gmadRevPath!\!gmadRevTools!\workshop\!gmadCopyEXC!" (
   echo Utilizing the local copy exclude^^!
   echo Exclude: !gmadRevTools!\workshop\!gmadCopyEXC!
   set "gmadCopyEXC=!gmadRevTools!\workshop\!gmadCopyEXC!"
+) else (
+  echo Utilizing the global copy exclude^^!
+  echo Exclude: !gmadBasePath!!gmadCopyEXC!
+  set "gmadCopyEXC=!gmadBasePath!!gmadCopyEXC!"
 )
 
 md "!gmadRevDest!\!gmadName!" >> !gmadNameLOG!
-for %%i in %gmadDirs% do ( :: Keep percent instead exclamation mark here
-  echo Exporting addon content: %%i
-  call xcopy "!gmadRevPath!\%%i" "!gmadRevDest!\!gmadName!\%%i" /EXCLUDE:!gmadCopyEXC! /E /C /I /F /R /Y >> !gmadNameLOG!
+
+:: Keep percent instead exclamation mark here
+for %%i in %gmadDirs% do (
+  if exist "!gmadRevPath!\%%i" (
+    echo [V] Addon content: %%i
+    call xcopy "!gmadRevPath!\%%i" "!gmadRevDest!\!gmadName!\%%i" /EXCLUDE:!gmadCopyEXC! /E /C /I /F /R /Y >> !gmadNameLOG!
+  ) else (
+    echo [X] Addon content: %%i
+  )
 )
 
-echo Create the addon.json file^^!
+echo Create the [addon.json] file^^!
 call copy "!gmadRevTools!\workshop\addon.json" "!gmadRevDest!\!gmadName!\addon.json" >> !gmadNameLOG!
 
-echo Create the addon.gma file^^!
+echo Create the [addon.gma] file^^!
 call "!gmadBinPath!\gmad.exe" create -folder "!gmadRevDest!\!gmadName!" -out "!gmadRevDest!\!gmadName!.gma" >> !gmadNameLOG!
 
 echo Obtain the latest repository commit log^^!
