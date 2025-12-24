@@ -1,0 +1,38 @@
+Windows Registry Editor Version 5.00
+
+; Created by:Shawn Brink
+; Created on: August 13, 2016
+; Updated on: January 26, 2021
+; Tutorial: https://www.tenforums.com/tutorials/60175-open-powershell-window-here-context-menu-add-windows-10-a.html
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell]
+@="@shell32.dll,-8508"
+"Extended"=-
+"Icon"="powershell.exe"
+"NoWorkingDirectory"=""
+"ShowBasedOnVelocityId"=dword:00639bc8
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command]
+@="powershell.exe -noexit -command Set-Location -literalPath '%V'"
+
+[HKEY_CLASSES_ROOT\Directory\shell\Powershell]
+@="@shell32.dll,-8508"
+"Extended"=-
+"Icon"="powershell.exe"
+"NoWorkingDirectory"=""
+"ShowBasedOnVelocityId"=dword:00639bc8
+
+[HKEY_CLASSES_ROOT\Directory\shell\Powershell\command]
+@="powershell.exe -noexit -command Set-Location -literalPath '%V'"
+
+[HKEY_CLASSES_ROOT\Drive\shell\Powershell]
+@="@shell32.dll,-8508"
+"Extended"=-
+"Icon"="powershell.exe"
+"NoWorkingDirectory"=""
+"ShowBasedOnVelocityId"=dword:00639bc8
+
+[HKEY_CLASSES_ROOT\Drive\shell\Powershell\command]
+@="powershell.exe -noexit -command Set-Location -literalPath '%V'"
+
+[-HKEY_CLASSES_ROOT\LibraryFolder\Background\shell\PowerShell]
