@@ -2,19 +2,21 @@
 
 echo Restoring system health...
 
-call DISM /Online /Cleanup-Image /CheckHealth
+call %SystemRoot%\system32\Dism.exe /Online /Cleanup-Image /CheckHealth
 
-call DISM /Online /Cleanup-Image /ScanHealth
+call %SystemRoot%\system32\Dism.exe /Online /Cleanup-Image /ScanHealth
 
-call DISM /Online /Cleanup-image /Restorehealth
+call %SystemRoot%\system32\Dism.exe /Online /Cleanup-image /Restorehealth
 
-call sfc /scannow
+call %SystemRoot%\system32\sfc.exe /scannow
 
-call sfc /scannow
+call %SystemRoot%\system32\sfc.exe /scannow
 
-call sfc /scannow
+call %SystemRoot%\system32\sfc.exe /scannow
 
-call chkdsk /F /V /R C:
+call %SystemRoot%\system32\verifier.exe
+
+call %SystemRoot%\system32\chkdsk.exe /F /V /R C:
 
 timeout 300
 
