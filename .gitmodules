@@ -34,3 +34,9 @@
 [submodule "SystemSupport/Win-11-Nano-Toolkit"]
 	path = SystemSupport/Win-11-Nano-Toolkit
 	url = git@github.com:nano11-dev/Nano11Toolkit.git
+[submodule "SystemSupport/Win-11-Beard-Scripts"]
+	path = SystemSupport/Win-11-Beard-Scripts
+	url = git@github.com:TheBeardofKnowledge/Scripts-from-my-videos.git
+[submodule "SystemSupport/Win-11-Tiny-Builder"]
+	path = SystemSupport/Win-11-Tiny-Builder
+	url = git@github.com:ntdevlabs/tiny11builder.git
