@@ -14,23 +14,48 @@ $imgDefp=$(Get-Location)
 
 if(!$imgPath)
 {
-  for ($i = 0; $i -lt $imgExtn.Length; $i++) {
-    
+  Write-Output "Empty [?]: $($imgDefo)"
+  
+  for ($i = 0; $i -lt $imgExtn.Length; $i++)
+  {
     $imgPath = "$($imgDefp)\$($imgDefo)$($imgExtn[$i])"
     
     if(Test-Path $imgPath)
     {
-      Write-Output "Auto [V]: $($imgPath)"
+      Write-Output "Empty [V]: $($imgPath)"
       break
     }
     else
     {
-      Write-Output "Auto [X]: $($imgPath)"
+      Write-Output "Empty [X]: $($imgPath)"
     }
   }
 }
-
-$imgPath = Resolve-Path $imgPath
+else
+{
+  $imgTemp = $([System.IO.Path]::GetExtension($imgPath))
+  
+  if(!$imgTemp)
+  {
+    Write-Output "Name [?]: $($imgPath)"
+    
+    for ($i = 0; $i -lt $imgExtn.Length; $i++)
+    {
+      $imgTemp = "$($imgPath)$($imgExtn[$i])"
+      
+      if(Test-Path $imgTemp)
+      {
+        $imgPath = "$($imgTemp)"
+        Write-Output "Name [V]: $($imgTemp)"
+        break
+      }
+      else
+      {
+        Write-Output "Name [X]: $($imgTemp)"
+      }
+    }
+  }
+}
 
 if(!$imgPath)
 {
@@ -40,6 +65,8 @@ if(!$imgPath)
 
 if(Test-Path $imgPath)
 {
+  $imgPath = Resolve-Path $imgPath
+  
   Write-Output "Wallpaper [V]: $($imgPath)"
 }
 else
