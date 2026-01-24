@@ -222,7 +222,7 @@ for %%i in %gmadDirs% do (
 echo Create the [addon.json] file^^!
 call copy "!gmadRevTools!\workshop\addon.json" "!gmadRevDest!\!gmadName!\addon.json" >> !gmadNameLOG!
 
-echo Create the [addon.gma] file^^!
+echo Create the [!gmadName!.gma] file^^!
 call "!gmadBinPath!\gmad.exe" create -folder "!gmadRevDest!\!gmadName!" -out "!gmadRevDest!\!gmadName!.gma" >> !gmadNameLOG!
 
 echo Obtain the latest repository commit log^^!
