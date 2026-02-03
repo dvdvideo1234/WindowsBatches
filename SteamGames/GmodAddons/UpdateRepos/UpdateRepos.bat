@@ -2,8 +2,7 @@
 
 setlocal EnableDelayedExpansion
 
-:: set "gitUpFolder=%1"
-set "gitUpFolder=I:\SteamLibrary\steamapps\common\GarrysMod\garrysmod\addons"
+set "gitUpFolder=%1"
 set "gitUpCurren=%~dp0"
 set "gitUpFileLg=%gitUpCurren%\status.log"
 set "gitTortoise=C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe"
