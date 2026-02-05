@@ -1,23 +1,16 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
-:: ===================== Logging =====================
-set "LOGDIR=%TEMP%\CleanupLogs"
-if not exist "%LOGDIR%" mkdir "%LOGDIR%"
+:: Logging 
+set "LOGDIR=%~dp0"
 
-set "LOGFILE=%LOGDIR%\cleanup_%DATE:~-4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%.log"
-set "LOGFILE=%LOGFILE: =0%"
+set "LOGFILE=%LOGDIR%\cleanup.log"
 
-echo ====================================== >> "%LOGFILE%"
 echo Cleanup started: %DATE% %TIME% >> "%LOGFILE%"
-echo ====================================== >> "%LOGFILE%"
 
 echo Cleanup started...
-echo Log file:
-echo "%LOGFILE%"
-echo.
+echo Log file: "%LOGFILE%"
 
-:: ===================== Functions =====================
 :: Function to get free space in bytes for a drive
 :: Usage: call :GetFreeSpace C
 :GetFreeSpace
@@ -28,18 +21,18 @@ for /f "tokens=3" %%F in ('dir "%DRIVE%\" ^| find "bytes free"') do (
 echo Drive %DRIVE% free bytes: !FREESPACE! >> "%LOGFILE%"
 goto :eof
 
-:: ===================== Disk space BEFORE =====================
+:: Disk space BEFORE 
 echo Disk space BEFORE cleanup: >> "%LOGFILE%"
 call :GetFreeSpace C
 
-:: ===================== Resolve paths =====================
+:: Resolve paths 
 set "USERTEMP=%TEMP%"
 set "WINTEMP=%SystemRoot%\Temp"
 set "PREFETCH=%SystemRoot%\Prefetch"
 set "WU_CACHE=%SystemRoot%\SoftwareDistribution\Download"
 set "ICONCACHE=%LocalAppData%\IconCache.db"
 
-:: ===================== User TEMP =====================
+:: User TEMP 
 echo Cleaning user TEMP...
 echo [User TEMP] "%USERTEMP%" >> "%LOGFILE%"
 if exist "%USERTEMP%" (
@@ -47,7 +40,7 @@ if exist "%USERTEMP%" (
     for /d %%D in ("%USERTEMP%\*") do rd /s /q "%%D" >> "%LOGFILE%" 2>&1
 )
 
-:: ===================== Windows TEMP =====================
+:: Windows TEMP 
 echo Cleaning Windows TEMP...
 echo [Windows TEMP] "%WINTEMP%" >> "%LOGFILE%"
 if exist "%WINTEMP%" (
@@ -55,14 +48,14 @@ if exist "%WINTEMP%" (
     for /d %%D in ("%WINTEMP%\*") do rd /s /q "%%D" >> "%LOGFILE%" 2>&1
 )
 
-:: ===================== Prefetch =====================
+:: Prefetch 
 echo Cleaning Prefetch...
 echo [Prefetch] "%PREFETCH%" >> "%LOGFILE%"
 if exist "%PREFETCH%" (
     del /f /q "%PREFETCH%\*" >> "%LOGFILE%" 2>&1
 )
 
-:: ===================== Windows Update cache =====================
+:: Windows Update cache 
 echo Cleaning Windows Update cache...
 echo [Windows Update Cache] >> "%LOGFILE%"
 net stop wuauserv >> "%LOGFILE%" 2>&1
@@ -71,7 +64,7 @@ if exist "%WU_CACHE%" (
 )
 net start wuauserv >> "%LOGFILE%" 2>&1
 
-:: ===================== Recycle Bin cleanup =====================
+:: Recycle Bin cleanup 
 echo Cleaning Recycle Bin...
 echo [Recycle Bin] >> "%LOGFILE%"
 for %%D in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
@@ -80,7 +73,7 @@ for %%D in (C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
     )
 )
 
-:: ===================== Icon cache cleanup =====================
+:: Icon cache cleanup 
 echo Resetting icon cache...
 echo [Icon Cache] >> "%LOGFILE%"
 taskkill /f /im explorer.exe >> "%LOGFILE%" 2>&1
@@ -91,18 +84,11 @@ del /f /q "%LocalAppData%\Microsoft\Windows\Explorer\iconcache*" >> "%LOGFILE%" 
 
 start explorer.exe
 
-:: ===================== Disk space AFTER =====================
+:: Disk space AFTER 
 echo Disk space AFTER cleanup: >> "%LOGFILE%"
 call :GetFreeSpace C
 
-:: ===================== Finish =====================
-echo ====================================== >> "%LOGFILE%"
+:: Finish 
 echo Cleanup finished: %DATE% %TIME% >> "%LOGFILE%"
-echo ====================================== >> "%LOGFILE%"
 
-echo.
-echo Cleanup completed successfully.
-echo Log saved to:
-echo "%LOGFILE%"
-echo.
 pause
