@@ -16,6 +16,10 @@ call %SystemRoot%\system32\sfc.exe /scannow
 
 call %SystemRoot%\system32\verifier.exe
 
+call %SystemRoot%\system32\sigverif.exe
+
+call %SystemRoot%\system32\dxdiag.exe
+
 call %SystemRoot%\system32\chkdsk.exe /F /V /R C:
 
 timeout 300
