@@ -5,7 +5,7 @@ if exist "%~f3\%~n2\" rd /S /Q "%~f3\%~n2\"
 
 echo EXFILE: [%~f2]
 echo BINDIR: [%~f1]
-call "%~f1\gmad.exe" extract -file "%~f2" -out "%~f3\%~n2" >> "%~f3\process.log"
+call "%~f1\gmad.exe" extract -file "%~f2" -out "%~f3\%~n2" >> "%4"
 
 echo "AddonInfo"> %~f3\%~n2\addon.txt
 echo {>> %~f3\%~n2\addon.txt

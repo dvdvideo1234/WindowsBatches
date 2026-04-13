@@ -61,7 +61,7 @@ echo SKIP: %SkipAddonsCount%
 echo GBIN: %BinPath% >> %LogPath%
 echo SORS: %SrcPath% >> %LogPath%
 
-echo CHECK: dir !SrcPath!\*.!FileExt! /b /s >> %LogPath%
+echo CHCK: dir !SrcPath!\*.!FileExt! /b /s >> %LogPath%
 
 echo Press ENTER to continue with the extraction^^!
 
