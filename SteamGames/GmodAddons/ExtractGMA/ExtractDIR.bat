@@ -18,7 +18,6 @@ set "BinPath="
 set /a "FileCount=0"
 set /a "CurrCount=0"
 set /a "PrComplete=0"
-set "FileExt=gma"
 set "CurPath=%~dp0"
 set "OnlyAddonsCount=0"
 set "SkipAddonsCount=0"
@@ -40,8 +39,9 @@ if "%SrcPath%" EQU "" (
   echo Default to: !SrcPath!
 )
 
+:: Get files count
+set "FileExt=gma"
 for /f %%i in ('call .src\Count.bat "!SrcPath!" !FileExt!') do set FileCount=%%i
-
 echo Total [*.!FileExt!] files found: !FileCount!^^!
 
 echo BASE: !CurPath!
@@ -65,7 +65,7 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
   echo ADDON [!CurrCount! of !FileCount!][!PrComplete!]: %%~nxk
   echo ADDON [!CurrCount! of !FileCount!][!PrComplete!]: %%~nxk >> %LogPath%
   
-  call .src\Processor !BinPath! %%k !OutPath! !LogPath!
+  call .src\Processor !BinPath! %%k !OutPath! !LogPath! !FileExt!-!CurrCount!
 )
 
 echo TBEGIN: %StartTime% >> %LogPath%

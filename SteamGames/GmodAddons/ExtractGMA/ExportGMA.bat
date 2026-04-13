@@ -26,7 +26,7 @@ set "BinPath=%GMOD_HOME%\bin"
 set "OutPath=%CurPath%\OUTPUT"
 
 :: Log file path
-set "LogPath=%OutPath%\process.log"
+set "LogPath=process.log"
 
 if "%SrcPath%" EQU "" (
   set "SrcPath=%GMOD_HOME%\garrysmod\addons"
