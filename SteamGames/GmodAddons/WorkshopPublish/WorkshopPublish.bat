@@ -237,8 +237,13 @@ call "!gmadPathGIT!" log -1 >> !gmadNameGIT!
 
 if exist .gitmodules (
   call echo. >> !gmadNameGIT!
-  call echo Submodule status: >> !gmadNameGIT!
-  call "%GIT_HOME%\bin\git.exe" submodule status --recursive >> !gmadNameGIT! 
+
+  echo Submodules: >> "!gmadNameGIT!"
+  for /f "usebackq tokens=1,2*" %%A in (`"!gmadPathGIT!" submodule status --recursive`) do (
+    echo ------------------------------------------ >> "!gmadNameGIT!"
+    echo Hash: %%A >> "!gmadNameGIT!"
+    echo Path: %%B >> "!gmadNameGIT!"
+  )
 )
 
 call "%WINDIR%\System32\notepad.exe" "!gmadNameGIT!"
