@@ -26,7 +26,7 @@ set "gmadCopyEXC=exclude_copy.txt"
 set "gmadAppPath=steamapps\common\GarrysMod"
 set "gmadSteamPID=HKCU\Software\Valve\Steam\ActiveProcess"
 
-echo %gmadBasePath%
+echo Base: %gmadBasePath%
 
 :: Revision path defaults to current path
 if not defined gmadRevPath (
@@ -49,92 +49,9 @@ if not defined gmadRevPath (
 cd /d !gmadRevPath!
 
 if not defined gmadBinPath (
-  set "gmadLibPath=!gmadRevPath!"
-
-  echo Searching for game binary via addon^^!
-
-  for /L %%I in (1, 1, 4) do (
-
-    :: Swap the slashes for windows
-    set "gmadLibPath=!gmadLibPath:/=\!"
-
-    :: Replace double slashes with single slashes
-    set "gmadLibPath=!gmadLibPath:\\=\%!
-
-    :: Remove the last slash when present
-    if !gmadLibPath:~-1!==\ set gmadLibPath=!gmadLibPath:~0,-1!
-
-    :: Trim the leading and the trailing spaces
-    for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
-    set gmadLibPath=!gmadLibPath!
-
-    :: They the current addon path
-    if exist "!gmadLibPath!\gmod.exe" (
-      echo [V] Binary addon: !gmadLibPath!
-      set "gmadBinPath=!gmadLibPath!\bin"
-      goto :BIN_ADDON
-    ) else (
-      echo [X] Binary addon: !gmadLibPath!
-    )
-
-    :: Remove `/<ADDON_FOLDER>`
-    for %%A in ("!gmadLibPath!") do set gmadLibPath=%%~dpA
-  )
+  echo Game binary is empty!
+  call !gmadBasePath!..\.src\GamePath.bat gmadBinPath
 )
-
-:BIN_ADDON
-
-if not defined gmadBinPath (
-  echo Searching for game binary via library^^!
-
-  :: Retrieve steam DLL install location
-  for /F "Tokens=1,2*" %%A in ('reg query !gmadSteamPID!') do (
-      If "%%A" equ "SteamClientDll" set "gmadSteamPath=%%C")
-
-  :: Replace slashes for windows
-  set "gmadSteamPath=!gmadSteamPath:/=\!"
-
-  :: Extract path from the DLL registy entries
-  for %%A in ("!gmadSteamPath!") do set gmadSteamPath=%%~dpA
-
-  echo Steam client path: [!gmadSteamPath!]^^!
-
-  echo Searching for GMOD installation across all libraries:
-
-  for /F "usebackq tokens=*" %%A in ("!gmadSteamPath!config\libraryfolders.vdf") do (
-    echo.%%A| FIND /I "path">Nul && (
-      :: Rewrite the content in the variable
-      set "gmadLibPath=%%A"
-
-      :: Swap the slashes for windows
-      set "gmadLibPath=!gmadLibPath:/=\!"
-
-      :: Replace "path" substring
-      set "gmadLibPath=!gmadLibPath:"path"= %!
-
-      :: Replace all double quotes with spaces
-      set "gmadLibPath=!gmadLibPath:"= %!
-
-      :: Replace double slashes with single slashes
-      set "gmadLibPath=!gmadLibPath:\\=\%!
-
-      :: Trim the leading and the trailing spaces
-      for /f "tokens=*" %%Z in ("!gmadLibPath!") do set gmadLibPath=%%~dpnxZ
-      set gmadLibPath=!gmadLibPath!
-
-      :: Search for GMOD executable and mark the library as active
-      if exist "!gmadLibPath!\!gmadAppPath!\gmod.exe" (
-        echo [V] Binary library: !gmadLibPath!
-        set "gmadBinPath=!gmadLibPath!\!gmadAppPath!\bin"
-        goto :BIN_LIBRARY
-      ) else (
-        echo [X] Binary library: !gmadLibPath!
-      )
-    )
-  )
-)
-
-:BIN_LIBRARY
 
 echo Game binary path: [!gmadBinPath!]^^!
 

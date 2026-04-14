@@ -34,7 +34,7 @@ if "%SrcPath%" EQU "" (
   echo Default to: !SrcPath!
 )
 
-for /f %%i in ('call .src\Count.bat "!SrcPath!" !FileExt!') do set FileCount=%%i
+for /f %%i in ('call !CurPath!..\.src\Count.bat "!SrcPath!" !FileExt!') do set FileCount=%%i
 
 echo Total [*.!FileExt!] files found: !FileCount!^^!
 
@@ -68,15 +68,15 @@ echo Press ENTER to continue with the extraction^^!
 timeout 100
 
 for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
-  call .src\Increment.bat !CurrCount! CurrCount
-  call .src\Percent.bat !CurrCount! !FileCount! PrComplete
+  call !CurPath!..\.src\Increment.bat !CurrCount! CurrCount
+  call !CurPath!..\.src\Percent.bat !CurrCount! !FileCount! PrComplete
   
   echo ADDON [!CurrCount! of !FileCount!][!PrComplete!]: %%~nxk
   
   set /A SkipAddonsMatch=0
   if !SkipAddonsCount! GTR 0 (
     for /L %%j in (1,1,!SkipAddonsCount!) do (
-      call .src\Contain.bat "%%k" "!SkipAddons[%%j]!"
+      call !CurPath!..\.src\Contain.bat "%%k" "!SkipAddons[%%j]!"
       echo K: %%k >> !LogPath!
       echo J: !SkipAddons[%%j]! >> !LogPath!
       echo E: !ERRORLEVEL! >> !LogPath!
@@ -90,7 +90,7 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
 
   if !OnlyAddonsCount! GTR 0 (
     for /L %%i in (1,1,!OnlyAddonsCount!) do (
-      call .src\Contain.bat "%%k" "!OnlyAddons[%%i]!"
+      call !CurPath!..\.src\Contain.bat "%%k" "!OnlyAddons[%%i]!"
       echo K: %%k >> !LogPath!
       echo I: !OnlyAddons[%%i]! >> !LogPath!
       echo E: !ERRORLEVEL! >> !LogPath!
@@ -98,14 +98,14 @@ for /F "delims==" %%k in ('dir !SrcPath!\*.!FileExt! /b /s') do (
       if !ERRORLEVEL! EQU 1 (
         if !SkipAddonsMatch! EQU 0 (
           echo ADDON ONLY: %%k >> !LogPath!
-          call .src\Processor !BinPath! %%k !OutPath!
+          call !CurPath!..\.src\Processor !BinPath! %%k !OutPath!
         )
       )
     )
   ) else (
     if !SkipAddonsMatch! EQU 0 (
       echo ADDON DIRE: %%k >> !LogPath!
-      call .src\Processor !BinPath! %%k !OutPath!
+      call !CurPath!..\.src\Processor !BinPath! %%k !OutPath!
     )
   )
 )

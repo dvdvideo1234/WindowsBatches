@@ -28,7 +28,7 @@ if not exist "!gma_ext_path!OUTPUT" mkdir "!gma_ext_path!OUTPUT"
 
 echo Extracting...
 
-call "!gma_ext_path!.src\Processor" %GMOD_HOME%\bin "!gma_ext_file!" "!gma_ext_path!OUTPUT"
+call "!gma_ext_path!..\.src\Processor" %GMOD_HOME%\bin "!gma_ext_file!" "!gma_ext_path!OUTPUT"
 
 if /I "%gma_ext_inpu%" EQU ".bin" (
   echo Binary extension clear [!gma_ext_dirf!.bin]
