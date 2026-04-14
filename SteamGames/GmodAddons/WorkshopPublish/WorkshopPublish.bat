@@ -235,6 +235,12 @@ call echo. >> !gmadNameGIT!
 
 call "!gmadPathGIT!" log -1 >> !gmadNameGIT!
 
+if exist .gitmodules (
+  call echo. >> !gmadNameGIT!
+  call echo Submodule status: >> !gmadNameGIT!
+  call "%GIT_HOME%\bin\git.exe" submodule status --recursive >> !gmadNameGIT! 
+)
+
 call "%WINDIR%\System32\notepad.exe" "!gmadNameGIT!"
 
 timeout 10
