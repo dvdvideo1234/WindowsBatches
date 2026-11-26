@@ -16,10 +16,12 @@ if "!procDest!" EQU "" (
 echo DELETE: [!procDump!\!procDest!]
 if exist "!procDump!\!procDest!\" rd /S /Q "!procDump!\!procDest!\"
 
+echo FIBASE: [!procBase!] >> "!procLogs!"
 echo DTDUMP: [!procDump!] >> "!procLogs!"
+echo DTDEST: [!procDest!] >> "!procLogs!"
 echo BINDIR: [!procGmad!] >> "!procLogs!"
 echo EXFILE: [!procFile!] >> "!procLogs!"
-echo FIBASE: [!procBase!] >> "!procLogs!"
+
 call "!procGmad!\gmad.exe" extract -file "!procFile!" -out "!procDump!\!procDest!" >> "!procLogs!"
 
 echo "AddonInfo"> !procDump!\!procDest!\addon.txt

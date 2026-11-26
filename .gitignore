@@ -1,6 +1,12 @@
 /GPUWaifu2K/Data
-/SteamGames/GmodAddons/ExtractGMA/SOURCE
-/SteamGames/GmodAddons/ExtractGMA/OUTPUT
 /GPUWaifu2K/waifu.log
 /GPUWaifu2K/frames.log
+/GPUWaifu2K/TEMP
+/GPUWaifu2K/walls
+/SteamGames/GmodAddons/ExtractGMA/SOURCE
+/SteamGames/GmodAddons/ExtractGMA/OUTPUT
+/SteamGames/GmodAddons/ExtractGMA/BACKUP
 /SteamGames/GmodAddons/UpdateRepos/status.log
+/SteamGames/GmodAddons/ExtractGMA/*.gma
+/SteamGames/GmodAddons/ExtractGMA/*.bin
+/SystemSupport/*.log
