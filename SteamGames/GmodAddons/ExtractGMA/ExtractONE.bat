@@ -34,6 +34,16 @@ if /I "%gma_ext_inpu%" EQU ".bin" (
         echo Renamed ["%%~fF"] to ["!gma_ext_name!.gma"]
     )
   )
+) else if /I "%gma_ext_inpu%" EQU ".gma" (
+  echo Gmad extension... [!gma_ext_name!.gma]
+  cd "!gma_ext_path!OUTPUT"
+  if exist "!gma_ext_name!" rmdir /s /q "!gma_ext_name!"
+  if not exist "!gma_ext_name!" mkdir "!gma_ext_name!"
+  call copy /v /y "!gma_ext_file!" "!gma_ext_path!OUTPUT\!gma_ext_name!"
+) else (
+  echo Unsupported extension... [!gma_ext_inpu!]
+  timeout 1000
+  exit 0
 )
 
 echo Extracting... ["!gma_ext_path!OUTPUT\!gma_ext_name!\!gma_ext_name!.gma"]
