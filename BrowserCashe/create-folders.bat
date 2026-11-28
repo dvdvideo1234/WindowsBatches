@@ -1,13 +1,13 @@
-:: Switch drive folder
+rem Switch drive folder
 cd /d "%1"
 
-:: Populate root
+rem Populate root
 if not exist "TEMP" mkdir "TEMP"
 
-:: Populate one drive
+rem Populate one drive
 if not exist "ONEDRIVE" mkdir "ONEDRIVE"
 
-:: Populate cache for browsers
+rem Populate cache for browsers
 if not exist "CACHEFILES" mkdir "CACHEFILES"
 cd "CACHEFILES"
 

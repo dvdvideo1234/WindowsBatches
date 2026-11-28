@@ -1,16 +1,16 @@
-:: Hard reset the HEAD: git push origin +<NEW_HEAD_COMMIT_HASH>:master
-:: 6af74344a888bdf9fbb35d887c3f77691820a50e
-:: git push origin +6af74344a888bdf9fbb35d887c3f77691820a50e:master
-:: cd /e
-:: cd Documents/Lua-Projs/SVN/TrackAssemblyTool_GIT_master
+rem Hard reset the HEAD: git push origin +<NEW_HEAD_COMMIT_HASH>:master
+rem 6af74344a888bdf9fbb35d887c3f77691820a50e
+rem git push origin +6af74344a888bdf9fbb35d887c3f77691820a50e:master
+rem cd /e
+rem cd Documents/Lua-Projs/SVN/TrackAssemblyTool_GIT_master
 
 @echo off
 
 setlocal EnableDelayedExpansion
 
-:: Leave the variable `gmadID` empty if you need to create the addon for the first time
-:: Fill up the variable with addon workshop ID if you need to update it in the workshop
-:: This file must be located in garrysmod/addons/<your_addon>/WorkshopPublish.bat
+rem Leave the variable `gmadID` empty if you need to create the addon for the first time
+rem Fill up the variable with addon workshop ID if you need to update it in the workshop
+rem This file must be located in garrysmod/addons/<your_addon>/WorkshopPublish.bat
 
 set gmadGitHEAD=
 set gmadRevPath=%~dp0
@@ -26,7 +26,7 @@ set gmadLogs=
 set gmadCRLF=^
 
 
-:: Ne new line is actually needed when escaped
+rem Ne new line is actually needed when escaped
 
 
 title Addon %gmadName% updater/publisher
@@ -37,7 +37,7 @@ echo Rinning in %gmadRevPath%.
 echo Npp Find --\h{1,}\n-- replace --\n-- in dos format before commit !
 echo.
 
-:: Extract repository source contents
+rem Extract repository source contents
 
 rd /S /Q !gmadRevPath!Workshop
 del !gmadRevPath!!gmadNameLOG!
@@ -53,11 +53,11 @@ for %%i in %gmadDirs% do (
 copy !gmadRevPath!data\workshop\addon.json !gmadRevPath!Workshop\!gmadName!\addon.json
 call !gmadBinPath!\gmad.exe create -folder "!gmadRevPath!Workshop\!gmadName!" -out "!gmadRevPath!Workshop\!gmadName!.gma"
 
-:: Obtain the latest commit hash from the repository
+rem Obtain the latest commit hash from the repository
 !gmadPathGIT!\git.exe rev-parse HEAD>!gmadNameLOG!
 set /p gmadGitHEAD=<!gmadNameLOG!
 
-:: Obtain the log message from the latest revision
+rem Obtain the log message from the latest revision
 echo !gmadTime!>!gmadNameLOG!
 echo.>>!gmadNameLOG!
 echo !gmadCommits!!gmadGitHEAD!>>!gmadNameLOG!
@@ -74,7 +74,7 @@ for /f "delims=" %%i in ('type !gmadNameLOG!') do (
   )
 )
 
-:: Publish if ID is available or create if it is not. 
+rem Publish if ID is available or create if it is not. 
 
 echo .
 echo .
@@ -92,7 +92,7 @@ IF DEFINED gmadID (
   call !gmadBinPath!\gmpublish.exe create -addon "!gmadRevPath!Workshop\!gmadName!.gma" -icon "!gmadRevPath!data\pictures\icon.jpg"
 )
 
-:: Tell the user we are done and clean-up the directory
+rem Tell the user we are done and clean-up the directory
 
 echo.
 rd /S /Q !gmadRevPath!Workshop
@@ -101,7 +101,7 @@ echo !gmadName! Published !
 echo.
 timeout 500
 
-:: Give a chance to copy the logs
+rem Give a chance to copy the logs
 del !gmadRevPath!!gmadNameLOG!
 
 exit 0

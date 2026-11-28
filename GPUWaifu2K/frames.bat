@@ -2,12 +2,12 @@
 
 setlocal EnableDelayedExpansion
 
-:: Manual
+rem Manual
 set "framesOut=out_f"
 set "framesExt=.jpg"
 set "framesWait=N"
 
-:: Automatic ( Dont touch )
+rem Automatic ( Dont touch )
 set "framesLogs=frames.log"
 set "framesCurr=%~dp0"
 set "framesBase=%1"
@@ -72,7 +72,7 @@ call del out*.* >nul
 
 echo Process has ended [%DATE% %TIME%]>>%framesLogs%
 
-:: Functions
+rem Functions
 
 goto :eof
 

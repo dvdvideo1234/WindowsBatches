@@ -8,8 +8,8 @@ set "overDest=crypt"
 set "overBase=%~dp0"
 set "overTool=OvercookedTool"
 
-:: .\OvercookedTool.exe decrypt C:\Users\Foo\AppData\LocalLow\Team17\Overcooked2\12345678912345679\Meta_SaveFile.save C:\Temp\Meta_SaveFile.json 12345678912345679
-:: .\OvercookedTool.exe encrypt C:\Temp\Meta_SaveFile.json C:\Users\Foo\AppData\LocalLow\Team17\Overcooked2\Saves\987654321987654321\Meta_SaveFile.save 987654321987654321
+rem .\OvercookedTool.exe decrypt C:\Users\Foo\AppData\LocalLow\Team17\Overcooked2\12345678912345679\Meta_SaveFile.save C:\Temp\Meta_SaveFile.json 12345678912345679
+rem .\OvercookedTool.exe encrypt C:\Temp\Meta_SaveFile.json C:\Users\Foo\AppData\LocalLow\Team17\Overcooked2\Saves\987654321987654321\Meta_SaveFile.save 987654321987654321
 
 if exist "!overBase!\!overDest!" rd /S /Q "!overBase!\!overDest!"
 

@@ -1,16 +1,16 @@
 @echo off
 
-:: Enable delayed expression for use of aritmetic stuff
+rem Enable delayed expression for use of aritmetic stuff
 
 setlocal EnableDelayedExpansion
 
-:: The user configures the following
+rem The user configures the following
 
 set "SrcPath=%1"
 set OnlyAddons=()
 set SkipAddons=()
 
-:: The rest of the file is automatic
+rem The rest of the file is automatic
 
 set /a "FileCount=0"
 set /a "CurrCount=0"
@@ -22,10 +22,10 @@ set "SkipAddonsCount=0"
 set "StartTime=%date% %time%"
 set "BinPath=%GMOD_HOME%\bin"
 
-:: Destination path
+rem Destination path
 set "OutPath=%CurPath%\OUTPUT"
 
-:: Log file path
+rem Log file path
 set "LogPath=process.log"
 
 if "%SrcPath%" EQU "" (

@@ -1,11 +1,11 @@
-:: Clone the repo in your addons folder then run this file
+rem Clone the repo in your addons folder then run this file
 
 @echo off
 
 set "joymodMainDir=Joystick"
 set "joymodInstall=%~dp0"
 
-:: Clean install parameter
+rem Clean install parameter
 
 set /p joymodClean="Perform clean install [y/N] ? "
 
@@ -25,7 +25,7 @@ if /I "%joymodClean%" EQU "y" (
 if not exist "lua" mkdir lua
 if not exist "lua\bin" mkdir lua\bin
 
-:: Copy files relative to base /garrysmod/ folder
+rem Copy files relative to base /garrysmod/ folder
 
 xcopy /v /y "%joymodInstall%lua\bin\*.dll" "lua\bin"
 xcopy /v /y /s "%joymodInstall%addons" "addons"

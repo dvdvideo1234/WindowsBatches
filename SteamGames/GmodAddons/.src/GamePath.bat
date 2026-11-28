@@ -1,6 +1,6 @@
 @echo off
 
-:: Enable delayed expression for use of aritmetic stuff
+rem Enable delayed expression for use of aritmetic stuff
 
 setlocal EnableDelayedExpansion
 
@@ -17,20 +17,20 @@ if not defined gmadBinPath (
 
   for /L %%I in (1, 1, 4) do (
 
-    :: Swap the slashes for windows
+    rem Swap the slashes for windows
     set "gmodLibPath=!gmodLibPath:/=\!"
 
-    :: Replace double slashes with single slashes
+    rem Replace double slashes with single slashes
     set "gmodLibPath=!gmodLibPath:\\=\%!
 
-    :: Remove the last slash when present
+    rem Remove the last slash when present
     if !gmodLibPath:~-1!==\ set gmodLibPath=!gmodLibPath:~0,-1!
 
-    :: Trim the leading and the trailing spaces
+    rem Trim the leading and the trailing spaces
     for /f "tokens=*" %%Z in ("!gmodLibPath!") do set gmodLibPath=%%~dpnxZ
     set gmodLibPath=!gmodLibPath!
 
-    :: They the current addon path
+    rem They the current addon path
     if exist "!gmodLibPath!\gmod.exe" (
       echo [V] Binary addon: !gmodLibPath!
       set "gmodBinPath=!gmodLibPath!\bin"
@@ -40,7 +40,7 @@ if not defined gmadBinPath (
       set "gmodBinPath="
     )
 
-    :: Remove `/<ADDON_FOLDER>`
+    rem Remove `/<ADDON_FOLDER>`
     for %%A in ("!gmodLibPath!") do set gmodLibPath=%%~dpA
   )
 )
@@ -52,16 +52,16 @@ if %ERRORLEVEL% equ 0 (
   if not defined gmodBinPath (
     echo Searching for game binary via library^^!
 
-    :: Retrieve steam DLL install location
+    rem Retrieve steam DLL install location
     for /F "Tokens=1,2*" %%A in ('reg query !gmodSteamPID!') do (
       If "%%A" equ "SteamClientDll" set "gmodSteamPath=%%C")
     
     echo Steam path: !gmodSteamPath!
     
-    :: Replace slashes for windows
+    rem Replace slashes for windows
     set "gmodSteamPath=!gmodSteamPath:/=\!"
 
-    :: Extract path from the DLL registy entries
+    rem Extract path from the DLL registy entries
     for %%A in ("!gmodSteamPath!") do set gmodSteamPath=%%~dpA
 
     echo Steam client path: [!gmodSteamPath!]^^!
@@ -70,26 +70,26 @@ if %ERRORLEVEL% equ 0 (
 
     for /F "usebackq tokens=*" %%A in ("!gmodSteamPath!config\libraryfolders.vdf") do (
       echo.%%A| FIND /I "path">Nul && (
-        :: Rewrite the content in the variable
+        rem Rewrite the content in the variable
         set "gmodLibPath=%%A"
 
-        :: Swap the slashes for windows
+        rem Swap the slashes for windows
         set "gmodLibPath=!gmodLibPath:/=\!"
 
-        :: Replace "path" substring
+        rem Replace "path" substring
         set "gmodLibPath=!gmodLibPath:"path"= %!
 
-        :: Replace all double quotes with spaces
+        rem Replace all double quotes with spaces
         set "gmodLibPath=!gmodLibPath:"= %!
 
-        :: Replace double slashes with single slashes
+        rem Replace double slashes with single slashes
         set "gmodLibPath=!gmodLibPath:\\=\%!
 
-        :: Trim the leading and the trailing spaces
+        rem Trim the leading and the trailing spaces
         for /f "tokens=*" %%Z in ("!gmodLibPath!") do set gmodLibPath=%%~dpnxZ
         set gmodLibPath=!gmodLibPath!
 
-        :: Search for GMOD executable and mark the library as active
+        rem Search for GMOD executable and mark the library as active
         if exist "!gmodLibPath!\!gmodAppPath!\gmod.exe" (
           echo [V] Binary library: !gmodLibPath!
           set "gmodBinPath=!gmodLibPath!\!gmodAppPath!\bin"
@@ -108,5 +108,5 @@ if %ERRORLEVEL% equ 0 (
 :BIN_LIBRARY
 echo [B] Result: !gmodBinPath!
 
-:: Tunnel the value out of the SETLOCAL scope
+rem Tunnel the value out of the SETLOCAL scope
 endlocal & set "%~1=%gmodBinPath%"

@@ -13,7 +13,7 @@ if "!procDest!" EQU "" (
   set "procDest=!procBase!"
 )
 
-echo DELETE: [!procDump!\!procDest!]
+echo DELETE: [!procDump!\!procDest!] >> "!procLogs!"
 if exist "!procDump!\!procDest!\" rd /S /Q "!procDump!\!procDest!\"
 
 echo FIBASE: [!procBase!] >> "!procLogs!"

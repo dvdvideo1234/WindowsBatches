@@ -1,5 +1,5 @@
-:: config.bat update 4020
-:: setlocal EnableExtensions EnableDelayedExpansion
+rem config.bat update 4020
+rem setlocal EnableExtensions EnableDelayedExpansion
 
 @echo off
 
@@ -9,7 +9,7 @@ set SCMDLOGFILE=%SCMDPATH%steamcmd.log
 
 echo This script manages SteamCMD dedicated server
 
-:: Refresh stuff regarding the installation
+rem Refresh stuff regarding the installation
 if exist steamcmd.zip (
   del steamcmd.zip
 )
@@ -22,7 +22,7 @@ if exist %SCMDLOGFILE% (
   del %SCMDLOGFILE%
 )
 
-:: Remove some folders
+rem Remove some folders
 rd /S /Q logs
 rd /S /Q package
 
@@ -54,7 +54,7 @@ if not defined %SCMDAPPID% (
   if not defined %SCMDAPPID% (
     echo No application ID proveded. Better luck next time!
     timeout 10
-   :: exit 0
+   rem exit 0
   )
 )
 echo "AppID: <%SCMDAPPID%>"
@@ -62,7 +62,7 @@ echo "AppID: <%SCMDAPPID%>"
 if "%SCMDLOGIN%"=="" (
   echo You can not pass this point without login !
   timeout 50
- :: exit 0
+ rem exit 0
 )
 
 

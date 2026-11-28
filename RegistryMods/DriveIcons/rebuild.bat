@@ -1,7 +1,7 @@
-:: Created by: Shawn Brink
-:: Created on: April 27, 2015
-:: Updated on January 25, 2024
-:: Tutorial: https://www.tenforums.com/tutorials/5645-rebuild-icon-cache-windows-10-a.html
+rem Created by: Shawn Brink
+rem Created on: April 27, 2015
+rem Updated on January 25, 2024
+rem Tutorial: https://www.tenforums.com/tutorials/5645-rebuild-icon-cache-windows-10-a.html
 
 
 @echo off

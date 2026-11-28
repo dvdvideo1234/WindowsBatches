@@ -9,13 +9,13 @@ set "SteamAppPID=HKCU\Software\Valve\Steam\ActiveProcess"
 for /F "Tokens=1,2*" %%A in ('reg query %SteamAppPID%') do (
     If "%%A" equ "SteamClientDll" set "SteamAppPth=%%C")
 
-:: Replace slashes for windows
+rem Replace slashes for windows
 set "SteamAppPth=%SteamAppPth:/=\%"
 
-:: Extract DLL path
+rem Extract DLL path
 call :steamGetPathDLL "%SteamAppPth%"
 
-:: Navigate to skins folder
+rem Navigate to skins folder
 set "SteamAppPth=%SteamAppPth%Skins"
 
 echo NAM: %SteamAppNAM%
@@ -39,7 +39,7 @@ del /S /Q "%SteamAppBAT%"
 
 cd /D "%SteamAppPWD%"
 
-:: Functions
+rem Functions
 
 goto :eof
 

@@ -20,7 +20,7 @@ for /F "usebackq tokens=3" %%i in (`REG query "hklm\software\microsoft\windows N
 echo %OS_VERSION%
 echo Please run the script as administrator to apply the registry changes!
 
-:: Provide a value for the registry
+rem Provide a value for the registry
 
 set /p REG_CHANGE="Enable WScript Host [y/N] ? "
 
@@ -44,7 +44,7 @@ if /I "!REG_CHANGE!" EQU "Y" (
   )
 )
 
-:: Write the value set ON
+rem Write the value set ON
 
 set /p REG_CHANGE="Apply registry changes [y/N] ? "
 

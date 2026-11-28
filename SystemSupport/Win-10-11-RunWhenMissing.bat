@@ -4,9 +4,9 @@ set "RUNMODE=%1"
 set "RUNPROG=%2"
 set "RUNPATH=%3"
 
-:: Win-10-11-RunWhenMissing.bat tasklist caffeine64.exe "C:\Programs\Caffeine\caffeine64.exe"
+rem Win-10-11-RunWhenMissing.bat tasklist caffeine64.exe "C:\Programs\Caffeine\caffeine64.exe"
 
-:: Check if the process is running and capture the output
+rem Check if the process is running and capture the output
 if "%RUNMODE%" EQU "tasklist" (
   tasklist /FI "IMAGENAME eq %RUNPROG%" /FO LIST 2>NUL | find /I "%RUNPROG%" >NUL
   if %ERRORLEVEL% EQU 0 (

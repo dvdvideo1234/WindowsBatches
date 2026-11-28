@@ -1,8 +1,8 @@
-:: Hard reset the HEAD: git push origin +<NEW_HEAD_COMMIT_HASH>:master
-:: 6af74344a888bdf9fbb35d887c3f77691820a50e
-:: git push origin +6af74344a888bdf9fbb35d887c3f77691820a50e:master
-:: cd /e
-:: cd Documents/Lua-Projs/SVN/TrackAssemblyTool_GIT_master
+rem Hard reset the HEAD: git push origin +<NEW_HEAD_COMMIT_HASH>:master
+rem 6af74344a888bdf9fbb35d887c3f77691820a50e
+rem git push origin +6af74344a888bdf9fbb35d887c3f77691820a50e:master
+rem cd /e
+rem cd Documents/Lua-Projs/SVN/TrackAssemblyTool_GIT_master
 
 @echo off
 
@@ -28,17 +28,17 @@ set "gmadSteamPID=HKCU\Software\Valve\Steam\ActiveProcess"
 
 echo Base: %gmadBasePath%
 
-:: Revision path defaults to current path
+rem Revision path defaults to current path
 if not defined gmadRevPath (
   echo Repository path not provided^^!
 
-  :: Swap the slashes for windows
+  rem Swap the slashes for windows
   set "gmadRevPath=!gmadBasePath:/=\!"
 
-  :: Replace double slashes with single slashes
+  rem Replace double slashes with single slashes
   set "gmadRevPath=!gmadRevPath:\\=\%!
 
-  :: Remove the last slash when present
+  rem Remove the last slash when present
   if !gmadRevPath:~-1!==\ set gmadRevPath=!gmadRevPath:~0,-1!
 
   echo [X] Addon path: [!gmadRevPath!]^^!
@@ -60,31 +60,31 @@ if not exist "!gmadRevDesc!" (
   echo Path: !gmadRevDesc!
 )
 
-:: Extract the information from the workshop conf file
+rem Extract the information from the workshop conf file
 for /f "tokens=1,2 delims=:" %%i in (!gmadRevDesc!) do (
-  :: Extract workshop ID
+  rem Extract workshop ID
   if "%%i" EQU "WSID" (
     set "gmadID=%%j"
     echo Extracting setting [%%i][%%j]
   )
-  :: Extract repository name in github
+  rem Extract repository name in github
   if "%%i" EQU "REPO" (
     set "gmadName=%%j"
     echo Extracting setting [%%i][%%j]
   )
-  :: Extract addon name
+  rem Extract addon name
   if "%%i" EQU "ADDN" (
     set "gmadNameItem=%%j"
     echo Extracting setting [%%i][%%j]
   )
-  :: Define what is to be extracted
+  rem Define what is to be extracted
   if "%%i" EQU "DATA" (
     set "gmadDirs=%%j"
     echo Extracting setting [%%i][%%j]
   )
 )
 
-:: Repository name is not defined
+rem Repository name is not defined
 if not defined gmadName (
   echo Please define the [REPO] parameter in [!gmadRevDesc!]^^!
   echo Path: !gmadRevPath!\!gmadRevDesc!
@@ -126,7 +126,7 @@ if exist "!gmadRevPath!\!gmadRevTools!\workshop\!gmadCopyEXC!" (
 
 md "!gmadRevDest!\!gmadName!" >> !gmadNameLOG!
 
-:: Keep percent instead exclamation mark here
+rem Keep percent instead exclamation mark here
 for %%i in %gmadDirs% do (
   if exist "!gmadRevPath!\%%i" (
     echo [V] Addon content: %%i

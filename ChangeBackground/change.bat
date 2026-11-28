@@ -1,4 +1,4 @@
-:: https://ss64.com/nt/if.html
+rem https://ss64.com/nt/if.html
 
 @echo off
 
@@ -54,7 +54,7 @@ if not [!changeExtn!] EQU [.jpg] (
 
 cd /d "C:\Windows\System32"
 
-:: Setup C:\Windows\System32\oobe\info\backgrounds
+rem Setup C:\Windows\System32\oobe\info\backgrounds
 
 if not exist "oobe" mkdir "oobe"
 if not exist "oobe\info" mkdir "oobe\info"

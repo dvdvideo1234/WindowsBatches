@@ -1,5 +1,5 @@
 @(echo off% <#%) &title ToggleGamebar - properly [updated 2022.08.16]
-set "0=%~f0"&set 1=%*&powershell -nop -win 1 -c iex ([io.file]::ReadAllText($env:0)) &exit /b ||#>)[1]
+set "0=%~f0"&set 1=%*&powershell -nop -win 1 -c iex ([io.file]remReadAllText($env:0)) &exit /b ||#>)[1]
 ## wrap script
 sp 'HKCU:\Volatile Environment' 'ToggleGamebar' @'
 
@@ -16,13 +16,13 @@ if ($env:1 -ne 6 -and $env:1 -ne 7) {
 sp 'HKCU:\Software\Microsoft\Windows\CurrentVersion\GameDVR' AppCaptureEnabled ($env:1-6) -Type Dword -Force -ea 0
 
 ## relaunch as Admin passing cmdline args
-$script='-nop -c & {$env:1='+$env:1+';iex((gp Registry::HKEY_Users\S-1-5-21*\Volatile* ToggleGamebar -ea 0)[0].ToggleGamebar)}'
+$script='-nop -c & {$env:1='+$env:1+';iex((gp RegistryremHKEY_Users\S-1-5-21*\Volatile* ToggleGamebar -ea 0)[0].ToggleGamebar)}'
 $null=fltmc;if($LASTEXITCODE -gt 0){start powershell -args $script -verb runas -win 1; break}
 
 function reg_own { param ( $key, $recurse='', $user='S-1-5-32-544', $owner='', $acc='Allow', $perm='FullControl', [switch]$list )
   $D1=[uri].module.gettype('System.Diagnostics.Process')."GetM`ember"('SetPrivilege',42)[0]; $u=$user; $o=$owner; $p=524288
   'SeSecurityPrivilege','SeTakeOwnershipPrivilege','SeBackupPrivilege','SeRestorePrivilege' |% {$D1.Invoke($null, @("$_",2))}
-  $reg=$key-split':?\\',2; $key=$reg-join'\'; $HK=gi -lit Registry::$($reg[0]) -force; $re=$recurse; $in=(1,0)[$re-eq'Inherit']
+  $reg=$key-split':?\\',2; $key=$reg-join'\'; $HK=gi -lit Registryrem$($reg[0]) -force; $re=$recurse; $in=(1,0)[$re-eq'Inherit']
   $own=$o-eq''; if($own){$o=$u}; $sid=[Security.Principal.SecurityIdentifier]; $w='S-1-1-0',$u,$o |% {new-object $sid($_)}
   $r=($w[0],$p,1,0,0),($w[1],$perm,1,0,$acc) |% {new-object Security.AccessControl.RegistryAccessRule($_)}; function _own($k,$l) {
   $t=$HK.OpenSubKey($k,2,'TakeOwnership'); if($t) { try {$n=$t.GetAccessControl(4)} catch {$n=$HK.GetAccessControl(4)}
@@ -54,5 +54,5 @@ if (test-path $key) {
 'GameBar','GamebarPresenceWriter','GameBarFTServer' |foreach {kill -Force -Name $_ -ea 0}
 
 ## execute script
-'@ -Force -ea 0; iex((gp Registry::HKEY_Users\S-1-5-21*\Volatile* ToggleGamebar -ea 0)[0].ToggleGamebar)
+'@ -Force -ea 0; iex((gp RegistryremHKEY_Users\S-1-5-21*\Volatile* ToggleGamebar -ea 0)[0].ToggleGamebar)
 #-_-# hybrid script, can be pasted directly into powershell console

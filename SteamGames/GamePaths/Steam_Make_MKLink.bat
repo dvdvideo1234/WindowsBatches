@@ -10,8 +10,8 @@ for /F "Tokens=1,2*" %%A in ('reg query HKCU\SOFTWARE\Valve\Steam') do (
 
 echo Steam MKLink created for %SteamAppPth%
 
-:: cd "<GameFolder>”
-:: mklink "steam.exe" "<SteamFolder>\steam.exe"
+rem cd "<GameFolder>”
+rem mklink "steam.exe" "<SteamFolder>\steam.exe"
 
 cd /d "%SteamAppPWD%"
 mklink "steam.exe" "%SteamAppExe%"

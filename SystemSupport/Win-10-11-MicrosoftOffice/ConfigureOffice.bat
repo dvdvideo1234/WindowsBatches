@@ -10,18 +10,18 @@ call %windir%\system32\cmd.exe /c "start microsoft-edge:https://www.microsoft.co
 
 timeout 5000
 
-:: Office Installation
-:: cd c:\office
-:: setup.exe /download config.xml
-:: setup.exe /configure config.xml
-:: 
-:: ACTIVATION 
-::
-:: KMS Server (Backup)
-:: kms.03k.org
-:: kms8.MSGuides.com
-:: kms9.MSGuides.com
+rem Office Installation
+rem cd c:\office
+rem setup.exe /download config.xml
+rem setup.exe /configure config.xml
+rem 
+rem ACTIVATION 
+rem
+rem KMS Server (Backup)
+rem kms.03k.org
+rem kms8.MSGuides.com
+rem kms9.MSGuides.com
 
-:: cscript ospp.vbs /sethst:kms.03k.org
-:: cscript ospp.vbs /act
-:: cscript ospp.vbs /dhistorykms
+rem cscript ospp.vbs /sethst:kms.03k.org
+rem cscript ospp.vbs /act
+rem cscript ospp.vbs /dhistorykms

@@ -2,9 +2,9 @@
 
 setlocal enableDelayedExpansion
 
-:: Requires
-:: 1. https://github.com/BtbN/FFmpeg-Builds/releases
-:: 2. https://imagemagick.org/index.php
+rem Requires
+rem 1. https://github.com/BtbN/FFmpeg-Builds/releases
+rem 2. https://imagemagick.org/index.php
 
 set "icoFFMPEG=%FFMPG_HOME%\bin"
 set "icoMAGIC=%IMGMAG_HOME%"
@@ -42,12 +42,12 @@ for /L %%i in (0,1,7) do (
   set "icoSets=!icoSets! !icoSizes[%%i]!!icoEXT!"
 )
 
-:: Convert PNG-s to an icon
+rem Convert PNG-s to an icon
 cd /d !icoCURR!%icoTEMP%
 call "!icoMAGIC!\convert.exe" !icoSets! -colors 256 !icoNAME!.ico
 cd !icoCURR!
 
-:: Generate autorun
+rem Generate autorun
 if not exist %icoNAME% mkdir %icoNAME%
 cd !icoCURR!%icoNAME%
 
@@ -60,7 +60,7 @@ echo icon = drive.ico >> autorun.inf
 
 cd /d !icoCURR!
 
-:: Functions
+rem Functions
 
 goto :eof
 

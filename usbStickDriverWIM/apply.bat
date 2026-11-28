@@ -1,7 +1,7 @@
-:: dism /cleanup-wim
-:: dism /get-mountedwiminfo
-:: Imagex /unmount %dismDIRM%
-:: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WIMMount\Mounted Images\
+rem dism /cleanup-wim
+rem dism /get-mountedwiminfo
+rem Imagex /unmount %dismDIRM%
+rem HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WIMMount\Mounted Images\
 
 @echo off
 
@@ -19,10 +19,10 @@ echo F|xcopy "%dismPath%%dismFile%.wim" "%dismPath%Backup/%dismFile%$%dismTime%.
 call dism /mount-wim /wimfile:%dismPath%%dismFile%.wim /index:%dismID% /mountdir:%dismDIRM%
 call dism /image:%dismDIRM% /add-driver:"%dismPath%Drivers" /recurse
 call dism /unmount-wim /mountdir:%dismDIRM% /commit
-::call dism /unmount-wim /mountdir:%dismDIRM% /discard
+remcall dism /unmount-wim /mountdir:%dismDIRM% /discard
 
 
-:: rmdir %dismDIRM% /s /q
+rem rmdir %dismDIRM% /s /q
 echo Remove mount: %dismDIRM%
 
 timeout 500

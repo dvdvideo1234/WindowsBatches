@@ -1,8 +1,8 @@
 @echo off
 
-:: Installation cashe
-:: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
-:: HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
+rem Installation cashe
+rem HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+rem HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
 
-:: For current user
-:: HKEY_CURRENT_USER\Software\Microsoft\Installer\Products
+rem For current user
+rem HKEY_CURRENT_USER\Software\Microsoft\Installer\Products

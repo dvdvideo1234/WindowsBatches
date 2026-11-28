@@ -30,7 +30,7 @@ if /I "%DISM_BOOL%" EQU "Y" (
 
   call %SystemRoot%\system32\dxdiag.exe
 
-  :: Update or unstall WSL
+  rem Update or unstall WSL
   set /p "DISM_BOOL=Deep volume check [y/N]: "
   if /I "%DISM_BOOL%" EQU "y" (
     set "DISM_BOOL=Y"
